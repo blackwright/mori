@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Head from 'next/head'
+import { Stars } from 'components/stars';
 
-export default function Home() {
-  return (
-    <h1>mori</h1>
-  )
-}
+const Home: React.FC = () => {
+  return <Stars />;
+};
+
+export default Home;
