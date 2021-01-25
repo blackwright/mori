@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useFrame } from 'react-three-fiber';
 import { Points, Clock, Color, BufferAttribute } from 'three';
-import { usePauseOnHide } from 'utils/react';
+import { usePauseOnHide } from 'utils/three';
 import { starVertexShader } from '../shaders/star.vertex';
 import { starFragmentShader } from '../shaders/star.fragment';
 
@@ -29,6 +29,7 @@ export const StarsPointCloud: React.FC<Props> = ({ count }) => {
 
       alphas[i / 3] = Math.random();
       alphas[i / 3 + 1] = Math.random();
+
       alphas[i / 3 + 2] = Math.random();
     }
 

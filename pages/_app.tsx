@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import * as React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
@@ -7,6 +8,10 @@ const GlobalStyle = createGlobalStyle`
   *::before,
   *::after {
     box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
   }
 
   html,
@@ -92,6 +97,13 @@ const GlobalStyle = createGlobalStyle`
 export default function MyApp({ Component, pageProps }) {
   return (
     <>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro"
+          rel="stylesheet"
+          type="text/css"
+        />
+      </Head>
       <GlobalStyle />
       <Component {...pageProps} />
     </>

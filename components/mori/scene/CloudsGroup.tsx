@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useThree, useFrame } from 'react-three-fiber';
 import { Group, Clock } from 'three';
-import { usePauseOnHide } from 'utils/react';
+import { usePauseOnHide } from 'utils/three';
 import { Cloud } from './Cloud';
 import cloud from './assets/cloud.png';
 import smoke from './assets/smoke.png';
