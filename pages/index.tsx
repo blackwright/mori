@@ -1,8 +1,4 @@
 import * as React from 'react';
-import { Stars } from 'components/stars';
+import { Mori } from 'components/mori';
 
-const Home: React.FC = () => {
-  return <Stars />;
-};
-
-export default Home;
+export default Mori;

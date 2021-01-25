@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Canvas } from 'react-three-fiber';
 import { Scene } from './scene';
 
-export const Stars: React.FC = () => {
+export const Mori: React.FC = () => {
   if (typeof window === 'undefined') {
     return null;
   }

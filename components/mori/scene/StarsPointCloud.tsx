@@ -54,6 +54,7 @@ export const StarsPointCloud: React.FC<Props> = ({ count }) => {
 
     pointsRef.current.rotateX(0.001 * delta);
     pointsRef.current.rotateY(0.025 * delta);
+    pointsRef.current.rotateZ(0.005 * delta);
 
     const attributeAlphas = alphasRef.current.array as Float32Array;
 
