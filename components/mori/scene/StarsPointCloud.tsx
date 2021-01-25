@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useFrame } from 'react-three-fiber';
-import { Points, Clock, Color, BufferAttribute } from 'three';
+import { useThree, useFrame } from 'react-three-fiber';
+import { Points, Color, BufferAttribute } from 'three';
 import { usePauseOnHide } from 'utils/three';
 import { starVertexShader } from '../shaders/star.vertex';
 import { starFragmentShader } from '../shaders/star.fragment';
@@ -10,11 +10,11 @@ type Props = {
 };
 
 export const StarsPointCloud: React.FC<Props> = ({ count }) => {
+  const { clock } = useThree();
+
   const pointsRef = React.useRef<Points>(null);
 
   const alphasRef = React.useRef<BufferAttribute>(null);
-
-  const clock = React.useMemo(() => new Clock(), []);
 
   usePauseOnHide(clock);
 
@@ -50,9 +50,7 @@ export const StarsPointCloud: React.FC<Props> = ({ count }) => {
   //   self.needsUpdate = true;
   // }, []);
 
-  useFrame(() => {
-    const delta = clock.getDelta();
-
+  useFrame((state, delta) => {
     pointsRef.current.rotateX(0.001 * delta);
     pointsRef.current.rotateY(0.025 * delta);
     pointsRef.current.rotateZ(0.005 * delta);

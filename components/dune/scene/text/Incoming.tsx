@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, BufferGeometry, ShaderMaterial } from 'three';
+import { BufferGeometry, ShaderMaterial } from 'three';
 import { useUpdate, useFrame } from 'react-three-fiber';
 import { incomingShader } from './shaders';
 import type { BufferAttributes } from './types';
@@ -17,8 +17,6 @@ export const Incoming: React.FC<Props> = ({
   maxVisibleTime,
   onComplete
 }) => {
-  const clock = React.useMemo(() => new Clock(), []);
-
   const hasCompletedRef = React.useRef(false);
 
   React.useEffect(() => {
@@ -39,7 +37,6 @@ export const Incoming: React.FC<Props> = ({
   const materialRef = useUpdate<ShaderMaterial>(
     (material) => {
       material.uniforms.u_time.value = 0.0;
-      clock.start();
     },
     [attributes]
   );
@@ -48,9 +45,9 @@ export const Incoming: React.FC<Props> = ({
     incomingDelay
   ]);
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (materialRef.current) {
-      materialRef.current.uniforms.u_time.value += clock.getDelta();
+      materialRef.current.uniforms.u_time.value += delta;
 
       if (
         materialRef.current.uniforms.u_time.value >

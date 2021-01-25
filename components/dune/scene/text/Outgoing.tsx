@@ -1,5 +1,4 @@
 import React from 'react';
-import { Clock } from 'three';
 import { useUpdate, useFrame } from 'react-three-fiber';
 import { outgoingShader } from './shaders';
 import type { BufferAttributes } from './types';
@@ -9,8 +8,6 @@ type Props = {
 };
 
 export const Outgoing: React.FC<Props> = ({ attributes }) => {
-  const clock = React.useMemo(() => new Clock(), []);
-
   const geometryRef = useUpdate<THREE.BufferGeometry>(
     (geometry) => {
       const [position, visibleTime, color] = attributes;
@@ -25,14 +22,13 @@ export const Outgoing: React.FC<Props> = ({ attributes }) => {
   const materialRef = useUpdate<THREE.ShaderMaterial>(
     (material) => {
       material.uniforms.u_time.value = 0.0;
-      clock.start();
     },
     [attributes]
   );
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (materialRef.current) {
-      materialRef.current.uniforms.u_time.value += clock.getDelta();
+      materialRef.current.uniforms.u_time.value += delta;
     }
   });
 

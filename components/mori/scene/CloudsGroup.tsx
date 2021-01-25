@@ -11,17 +11,13 @@ type Props = {
 };
 
 export const CloudsGroup: React.FC<Props> = ({ count }) => {
-  const { camera } = useThree();
+  const { camera, clock } = useThree();
 
   const groupRef = React.useRef<Group>(null);
 
-  const clock = React.useMemo(() => new Clock(), []);
-
   usePauseOnHide(clock);
 
-  useFrame(() => {
-    const delta = clock.getDelta();
-
+  useFrame((state, delta) => {
     groupRef.current.rotateX(0.025 * delta);
     groupRef.current.rotateY(0.05 * delta);
     groupRef.current.rotateZ(0.003 * delta);
