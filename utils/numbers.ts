@@ -26,6 +26,23 @@ export function clampNumberRange(
   return clamp(mappedValue, [output[0], output[1]]);
 }
 
-export function lerp(value1: number, value2: number, delta: number) {
-  return value1 * (1 - delta) + value2 * delta;
+export function modulo(number1: number, number2: number): number {
+  return ((number1 % number2) + number2) % number2;
+}
+
+export function isInteger(number: number) {
+  return modulo(number, 1) === 0;
+}
+
+export function randomNumberBetween(
+  min: number,
+  max: number,
+  decimalPrecision = 1
+) {
+  if (isInteger(min) && isInteger(max)) {
+    return min + Math.floor(Math.random() * (max - min));
+  }
+
+  const randomFloat = min + Math.random() * (max - min);
+  return Number(randomFloat.toPrecision(decimalPrecision));
 }

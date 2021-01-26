@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { debounced } from 'utils';
 
 export function mergeRefs<T>(
   refs: Array<React.Ref<T> | null | undefined>
@@ -14,4 +15,17 @@ export function mergeRefs<T>(
         }
       });
   };
+}
+
+export function useDebouncedResize(
+  fn: React.EffectCallback,
+  deps?: React.DependencyList
+) {
+  React.useEffect(() => {
+    fn();
+    const debouncedFn = debounced(fn);
+
+    window.addEventListener('resize', debouncedFn);
+    return () => window.removeEventListener('resize', debouncedFn);
+  }, deps);
 }

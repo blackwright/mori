@@ -1,7 +1,6 @@
 import React from 'react';
 import { Geometry, MathUtils, Vector3, Color } from 'three';
 import { useThree, useUpdate, useFrame } from 'react-three-fiber';
-import { lerp } from 'utils/numbers';
 import { getParticleCount } from './utils';
 
 type Props = {
@@ -58,7 +57,7 @@ export const Wind: React.FC<Props> = ({ isRendering }) => {
 
   useFrame(() => {
     if (pointsRef.current) {
-      const newRotationDiff = lerp(
+      const newRotationDiff = MathUtils.lerp(
         rotationDiffRef.current,
         isRendering ? 1.0 : 0.1,
         isRendering ? 0.1 : 0.05
