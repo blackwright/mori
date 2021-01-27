@@ -3,7 +3,8 @@ import { Building } from './building';
 import { randomNumberBetween } from 'utils/numbers';
 import { getRandomColor } from '../utils';
 
-const LAYER_OVERLAY_COLOR = 'rgba(65, 35, 66, 0.6)';
+const BACKGROUND_COLOR = '#08080a';
+const LAYER_OVERLAY_COLOR = 'rgba(33, 33, 33, 0.3)';
 
 const MAX_BUILDING_HEIGHT_RATIO = 0.95;
 const MIN_BUILDING_HEIGHT_RATIO = 0.3;
@@ -11,7 +12,7 @@ const MIN_BUILDING_WIDTH_RATIO = 0.08;
 const MAX_BUILDING_WIDTH_RATIO = 0.15;
 const MIN_BUILDING_GAP_RATIO = 0.02;
 const MAX_BUILDING_GAP_RATIO = 0.05;
-const NUMBER_OF_LAYERS = 3;
+const NUMBER_OF_LAYERS = 4;
 
 export class City extends Renderer {
   private layers: Building[][] = [];
@@ -81,10 +82,13 @@ export class City extends Renderer {
 
     const { ctx, canvasWidth, canvasHeight, layers } = this;
 
+    ctx.fillStyle = BACKGROUND_COLOR;
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
     for (let i = 0; i < layers.length; i++) {
       const currentLayer = layers[i];
 
-      if (i === layers.length - 1) {
+      if (i > 0) {
         currentLayer.forEach((building) => building.generateLights());
       }
 

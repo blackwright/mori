@@ -1,12 +1,12 @@
 import { randomNumberBetween } from 'utils/numbers';
 
-const LIGHT_COLOR = 'rgb(255, 255, 255)';
+const LIGHT_COLOR = 'rgb(225, 225, 225)';
 const MIN_LIGHT_HEIGHT_RATIO = 0.02;
 const MAX_LIGHT_HEIGHT_RATIO = 0.03;
-const MIN_LIGHTS_PER_FLOOR = 2;
-const MAX_LIGHTS_PER_FLOOR = 6;
-const MIN_GAP_WIDTH_RATIO = 0.01;
-const MAX_GAP_WIDTH_RATIO = 0.05;
+const MIN_LIGHTS_PER_FLOOR = 4;
+const MAX_LIGHTS_PER_FLOOR = 8;
+const MIN_GAP_WIDTH_RATIO = 0.04;
+const MAX_GAP_WIDTH_RATIO = 0.08;
 const MIN_LIGHT_PADDING_RATIO = 0.01;
 const MAX_LIGHT_PADDING_RATIO = 0.03;
 const MIN_BUILDING_X_PADDING_RATIO = 0.05;

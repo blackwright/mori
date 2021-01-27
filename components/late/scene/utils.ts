@@ -68,18 +68,19 @@ export function radiansBetween(
 }
 
 const colors = [
-  '#F6CD61',
-  '#801336',
-  '#FDFBD4',
-  '#685D79',
-  '#EF4648',
-  '#9BD7D1',
-  '#F3CD8C',
-  '#EFCA58',
-  '#2E9975',
-  '#7EA1E5',
-  '#CC5285',
-  '#B6CEC7'
+  '#006E71',
+  '#005D6B',
+  '#003F55',
+  '#372804',
+  '#221208',
+  '#6D5741',
+  '#351B05',
+  '#492C0A',
+  '#BE5B0E',
+  '#761300',
+  '#995503',
+  '#451401',
+  '#3A1905'
 ];
 
 export function getRandomColor() {

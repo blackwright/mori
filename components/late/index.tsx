@@ -1,10 +1,12 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 import { City } from './scene/city';
 import { Rainfall } from './scene/rain';
 import { Home, Cat } from './scene/home';
 import { useDebouncedResize } from 'utils/react';
 import { randomNumberBetween } from 'utils/numbers';
+import { useAnimations } from './animations';
 
 export const Late: React.FC = () => {
   const animationFrameId = React.useRef<number>(null);
@@ -15,9 +17,11 @@ export const Late: React.FC = () => {
   useDebouncedResize(() => {
     const cityCanvas = cityCanvasRef.current;
 
-    const createCity = (width: number, height: number, dpi: number) => {
-      cityCanvas.width = width * dpi;
-      cityCanvas.height = height * dpi;
+    const createCity = () => {
+      const { innerWidth, innerHeight, devicePixelRatio } = window;
+
+      cityCanvas.width = innerWidth * devicePixelRatio;
+      cityCanvas.height = innerHeight * devicePixelRatio;
 
       const ctx = cityCanvas.getContext('2d');
       const city = new City(ctx);
@@ -25,9 +29,7 @@ export const Late: React.FC = () => {
       city.render();
     };
 
-    const { innerWidth, innerHeight, devicePixelRatio } = window;
-
-    createCity(innerWidth, innerHeight, devicePixelRatio);
+    createCity();
   }, []);
 
   const rainCanvasRef = React.useRef<HTMLCanvasElement>(null);
@@ -36,9 +38,11 @@ export const Late: React.FC = () => {
   useDebouncedResize(() => {
     const rainCanvas = rainCanvasRef.current;
 
-    const createRain = (width: number, height: number, dpi: number) => {
-      rainCanvas.width = width * dpi;
-      rainCanvas.height = height * dpi;
+    const createRain = () => {
+      const { innerWidth, innerHeight, devicePixelRatio } = window;
+
+      rainCanvas.width = innerWidth * devicePixelRatio;
+      rainCanvas.height = innerHeight * devicePixelRatio;
 
       const ctx = rainCanvas.getContext('2d');
 
@@ -51,14 +55,12 @@ export const Late: React.FC = () => {
       } else {
         rainfall = rainfallRef.current;
 
-        rainfall.canvasWidth = width * dpi;
-        rainfall.canvasHeight = height * dpi;
+        rainfall.canvasWidth = innerWidth * devicePixelRatio;
+        rainfall.canvasHeight = innerHeight * devicePixelRatio;
       }
     };
 
-    const { innerWidth, innerHeight, devicePixelRatio } = window;
-
-    createRain(innerWidth, innerHeight, devicePixelRatio);
+    createRain();
 
     return () => {
       if (rainfallRef.current) {
@@ -74,9 +76,11 @@ export const Late: React.FC = () => {
   useDebouncedResize(() => {
     const homeCanvas = homeCanvasRef.current;
 
-    const createHome = (width: number, height: number, dpi: number) => {
-      homeCanvas.width = width * dpi;
-      homeCanvas.height = height * dpi;
+    const { innerWidth, innerHeight, devicePixelRatio } = window;
+
+    const createHome = () => {
+      homeCanvas.width = innerWidth * devicePixelRatio;
+      homeCanvas.height = innerHeight * devicePixelRatio;
 
       const ctx = homeCanvas.getContext('2d');
 
@@ -91,9 +95,7 @@ export const Late: React.FC = () => {
       );
     };
 
-    const { innerWidth, innerHeight, devicePixelRatio } = window;
-
-    createHome(innerWidth, innerHeight, devicePixelRatio);
+    createHome();
   }, []);
 
   const catCanvasRef = React.useRef<HTMLCanvasElement>(null);
@@ -102,9 +104,11 @@ export const Late: React.FC = () => {
   useDebouncedResize(() => {
     const catCanvas = catCanvasRef.current;
 
-    const adoptCat = (width: number, height: number, dpi: number) => {
-      catCanvas.width = width * dpi;
-      catCanvas.height = height * dpi;
+    const { innerWidth, innerHeight, devicePixelRatio } = window;
+
+    const adoptCat = () => {
+      catCanvas.width = innerWidth * devicePixelRatio;
+      catCanvas.height = innerHeight * devicePixelRatio;
 
       const ctx = catCanvas.getContext('2d');
 
@@ -113,16 +117,29 @@ export const Late: React.FC = () => {
       cat.render();
     };
 
-    const { innerWidth, innerHeight, devicePixelRatio } = window;
-
-    adoptCat(innerWidth, innerHeight, devicePixelRatio);
+    adoptCat();
   }, []);
+
+  const {
+    grayscaleFlash,
+    outdoorFlash,
+    indoorFlash,
+    flashSequence
+  } = useAnimations();
 
   React.useEffect(() => {
     const rainfall = rainfallRef.current;
     const cat = catRef.current;
 
+    flashSequence();
+
     function animate() {
+      const lightningChance = randomNumberBetween(0, 500);
+
+      if (lightningChance === 0) {
+        flashSequence();
+      }
+
       const raindropsToAdd = randomNumberBetween(2, 8);
 
       for (let i = 0; i < raindropsToAdd; i++) {
@@ -150,27 +167,35 @@ export const Late: React.FC = () => {
   }, []);
 
   return (
-    <Wrapper>
+    <Wrapper animate={grayscaleFlash}>
       <Canvas ref={cityCanvasRef} />
+      <Light animate={outdoorFlash} />
       <Canvas ref={rainCanvasRef} />
       <Canvas ref={homeCanvasRef} />
       <Canvas ref={catCanvasRef} />
+      <Light animate={indoorFlash} />
     </Wrapper>
   );
 };
 
-const Wrapper = styled.main`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
-`;
-
-const Canvas = styled.canvas`
+const fullScreenStyle = css`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+`;
+
+const Wrapper = styled(motion.main)`
+  ${fullScreenStyle}
+  background: #171717;
+`;
+
+const Light = styled(motion.div)`
+  ${fullScreenStyle}
+  background-color: white;
+`;
+
+const Canvas = styled.canvas`
+  ${fullScreenStyle}
 `;
