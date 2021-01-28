@@ -27,8 +27,8 @@ export class Home extends Renderer {
     this.clock = new Clock(ctx);
   }
 
-  render() {
-    this.wall.render();
+  async render() {
+    await this.wall.render();
     this.window.render();
     this.dresser.render();
     this.pictures.render();

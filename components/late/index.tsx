@@ -91,7 +91,7 @@ export const Late: React.FC = () => {
       clockIntervalRef.current && window.clearTimeout(clockIntervalRef.current);
       clockIntervalRef.current = window.setInterval(
         () => home.clock.tick(),
-        1000
+        1_000
       );
     };
 
@@ -168,7 +168,7 @@ export const Late: React.FC = () => {
 
   return (
     <Wrapper animate={grayscaleFlash}>
-      <Canvas ref={cityCanvasRef} />
+      <CityCanvas ref={cityCanvasRef} />
       <Light animate={outdoorFlash} />
       <Canvas ref={rainCanvasRef} />
       <Canvas ref={homeCanvasRef} />
@@ -191,11 +191,15 @@ const Wrapper = styled(motion.main)`
   background: #171717;
 `;
 
+const Canvas = styled.canvas`
+  ${fullScreenStyle}
+`;
+
+const CityCanvas = styled(Canvas)`
+  filter: blur(2px);
+`;
+
 const Light = styled(motion.div)`
   ${fullScreenStyle}
   background-color: white;
-`;
-
-const Canvas = styled.canvas`
-  ${fullScreenStyle}
 `;
