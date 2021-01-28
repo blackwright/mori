@@ -46,8 +46,6 @@ export const Late: React.FC = () => {
 
       const ctx = rainCanvas.getContext('2d');
 
-      ctx.rotate(0.2);
-
       let rainfall = rainfallRef.current;
 
       if (rainfall == null) {
@@ -170,7 +168,7 @@ export const Late: React.FC = () => {
     <Wrapper animate={grayscaleFlash}>
       <CityCanvas ref={cityCanvasRef} />
       <Light animate={outdoorFlash} />
-      <Canvas ref={rainCanvasRef} />
+      <RainCanvas ref={rainCanvasRef} />
       <Canvas ref={homeCanvasRef} />
       <Canvas ref={catCanvasRef} />
       <Light animate={indoorFlash} />
@@ -197,6 +195,10 @@ const Canvas = styled.canvas`
 
 const CityCanvas = styled(Canvas)`
   filter: blur(2px);
+`;
+
+const RainCanvas = styled(Canvas)`
+  transform: rotate(15deg);
 `;
 
 const Light = styled(motion.div)`
