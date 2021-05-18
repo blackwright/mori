@@ -4,6 +4,9 @@ const withImages = require('next-images');
 module.exports = withPlugins([
   [withImages],
   {
+    future: {
+      webpack5: true
+    },
     async redirects() {
       return [
         {
