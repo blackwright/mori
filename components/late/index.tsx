@@ -187,6 +187,7 @@ const fullScreenStyle = css`
 const Wrapper = styled(motion.main)`
   ${fullScreenStyle}
   background: #171717;
+  overflow: hidden;
 `;
 
 const Canvas = styled.canvas`
