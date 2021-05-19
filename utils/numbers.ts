@@ -1,6 +1,6 @@
-type Clamp = [number, number];
+export type Clamp = [number, number];
 
-type ClampRanges = {
+export type ClampRanges = {
   input: Clamp;
   output: Clamp;
 };
