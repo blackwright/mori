@@ -192,15 +192,15 @@ export class Cat extends Renderer {
       nextTailAngle = -Math.PI / 2;
     }
 
-    if (!this.isWagging) {
-      this.tail();
-      return;
-    }
-
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
     this.head();
     this.body();
+
+    if (!this.isWagging) {
+      this.tail();
+      return;
+    }
 
     ctx.save();
     ctx.translate(x, tailY);
