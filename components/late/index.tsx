@@ -5,7 +5,6 @@ import { City } from './scene/city';
 import { Rainfall } from './scene/rain';
 import { Home, Cat } from './scene/home';
 import { useDebouncedResize } from 'utils/react';
-import { randomNumberBetween } from 'utils/numbers';
 import { useAnimations } from './animations';
 
 export const Late: React.FC = () => {
@@ -129,21 +128,8 @@ export const Late: React.FC = () => {
     const rainfall = rainfallRef.current;
     const cat = catRef.current;
 
-    flashSequence();
-
     function animate() {
-      const lightningChance = randomNumberBetween(0, 500);
-
-      if (lightningChance === 0) {
-        flashSequence();
-      }
-
-      const raindropsToAdd = randomNumberBetween(2, 8);
-
-      for (let i = 0; i < raindropsToAdd; i++) {
-        rainfall.add();
-      }
-
+      rainfall.add();
       rainfall.tick();
       cat.tick();
 
@@ -159,8 +145,11 @@ export const Late: React.FC = () => {
 
     animationFrameId.current = window.requestAnimationFrame(animate);
 
+    document.addEventListener('click', flashSequence);
+
     return () => {
       window.cancelAnimationFrame(animationFrameId.current);
+      document.removeEventListener('click', flashSequence);
     };
   }, []);
 
@@ -205,4 +194,5 @@ const RainCanvas = styled(Canvas)`
 const Light = styled(motion.div)`
   ${fullScreenStyle}
   background-color: white;
+  opacity: 0;
 `;
