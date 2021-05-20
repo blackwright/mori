@@ -4,7 +4,7 @@ export const OtherMemory = styled.button`
   color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.8);
   max-width: 200px;
-  padding: 8px 16px;
+  padding: 8px;
   margin: 0 4px;
   font-size: 12px;
   line-height: 14px;

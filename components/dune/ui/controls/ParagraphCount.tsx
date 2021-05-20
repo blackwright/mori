@@ -76,8 +76,8 @@ const Option = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 12px;
-  min-width: 36px;
+  padding: 8px;
+  min-width: 28px;
   font-size: 12px;
   line-height: 20px;
   text-transform: uppercase;
@@ -95,8 +95,8 @@ const Wrapper = styled.div<{ disabled?: boolean }>`
   color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.8);
   position: relative;
-  padding: 8px 12px;
-  min-width: 36px;
+  padding: 8px;
+  min-width: 28px;
   font-size: 12px;
   line-height: 14px;
   text-transform: uppercase;
