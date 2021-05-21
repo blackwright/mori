@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
 
 body {
   font-family: "Bodoni Moda", "Times New Roman", Times, serif;
+  overflow: hidden;
 }
 
 html,
@@ -70,6 +71,10 @@ button,
 textarea,
 select {
   font: inherit;
+}
+
+a {
+  text-decoration: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
