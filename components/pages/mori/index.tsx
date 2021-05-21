@@ -3,9 +3,8 @@ import { Canvas } from 'react-three-fiber';
 import { Scene } from './scene';
 
 export const Mori: React.FC = () => {
-  if (typeof window === 'undefined') {
-    return null;
-  }
+  const pixelRatio =
+    typeof window === 'undefined' ? undefined : window.devicePixelRatio;
 
   return (
     <Canvas
@@ -15,7 +14,7 @@ export const Mori: React.FC = () => {
         scroll: true,
         debounce: { scroll: 50, resize: 0 }
       }}
-      pixelRatio={window.devicePixelRatio}
+      pixelRatio={pixelRatio}
     >
       <color attach="background" args={[0, 0, 0.05]} />
       <Scene />

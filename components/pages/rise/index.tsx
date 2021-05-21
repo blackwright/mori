@@ -4,9 +4,8 @@ import { sRGBEncoding, ACESFilmicToneMapping } from 'three';
 import { Scene } from './scene';
 
 export const Rise: React.FC = () => {
-  if (typeof window === 'undefined') {
-    return null;
-  }
+  const pixelRatio =
+    typeof window === 'undefined' ? undefined : window.devicePixelRatio;
 
   return (
     <Canvas
@@ -20,7 +19,7 @@ export const Rise: React.FC = () => {
         scroll: true,
         debounce: { scroll: 50, resize: 0 }
       }}
-      pixelRatio={window.devicePixelRatio}
+      pixelRatio={pixelRatio}
       onCreated={({ gl }) => {
         gl.outputEncoding = sRGBEncoding;
         gl.toneMapping = ACESFilmicToneMapping;
