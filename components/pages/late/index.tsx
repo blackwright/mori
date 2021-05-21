@@ -85,7 +85,8 @@ export const Late: React.FC = () => {
       homeRef.current = home;
       home.render();
 
-      clockIntervalRef.current && window.clearTimeout(clockIntervalRef.current);
+      clockIntervalRef.current &&
+        window.clearInterval(clockIntervalRef.current);
       clockIntervalRef.current = window.setInterval(
         () => home.clock.tick(),
         1_000
@@ -117,14 +118,12 @@ export const Late: React.FC = () => {
     adoptCat();
   }, []);
 
-  const {
-    grayscaleFlash,
-    outdoorFlash,
-    indoorFlash,
-    flashSequence
-  } = useAnimations();
+  const { grayscaleFlash, outdoorFlash, indoorFlash, flashSequence } =
+    useAnimations();
 
   React.useEffect(() => {
+    flashSequence();
+
     const rainfall = rainfallRef.current;
     const cat = catRef.current;
 

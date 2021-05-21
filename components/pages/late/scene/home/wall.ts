@@ -13,8 +13,6 @@ export class Wall extends Renderer {
 
     const { ctx, canvasWidth, canvasHeight } = this;
 
-    ctx.filter = 'blur(3px)';
-
     ctx.fillStyle = '#010038';
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
