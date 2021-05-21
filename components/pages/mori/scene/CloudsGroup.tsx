@@ -29,7 +29,7 @@ export const CloudsGroup: React.FC<Props> = ({ count }) => {
 
   return (
     <group ref={groupRef}>
-      {new Array(count).fill(undefined).map(() => {
+      {new Array(count).fill(undefined).map((_, i) => {
         const asset = Math.random() < 0.5 ? cloud : smoke;
 
         const zPosition = Math.random() * 15 + 10;
@@ -38,7 +38,7 @@ export const CloudsGroup: React.FC<Props> = ({ count }) => {
         const y = Math.random() * 100 - 50;
         const z = Math.random() < 0.5 ? zPosition : -zPosition;
 
-        return <Cloud asset={asset} x={x} y={y} z={z} />;
+        return <Cloud key={i} asset={asset} x={x} y={y} z={z} />;
       })}
     </group>
   );
