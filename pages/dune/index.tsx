@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import * as React from 'react';
-import { Dune } from 'components/dune';
+import { Dune } from 'components/pages/dune';
 import type { NextPage } from 'next/types';
 
 const Page: NextPage = () => {

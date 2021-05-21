@@ -1,3 +1,3 @@
-import { Late } from 'components/late';
+import { Late } from 'components/pages/late';
 
 export default Late;

@@ -9,7 +9,7 @@ import { getRandomQuote } from './ui/generator/words';
 import { StyledBackground, InterfaceWrapper } from './styled';
 import type { NumberOfParagraphs } from './types';
 
-export const Dune: React.FC = () => {
+export const Dune = () => {
   const [count, setCount] = React.useState<NumberOfParagraphs>(1);
 
   const [text, setText] = React.useState(getRandomQuote());
@@ -56,9 +56,8 @@ export const Dune: React.FC = () => {
     setText(newText);
   };
 
-  if (typeof window === undefined) {
-    return null;
-  }
+  const pixelRatio =
+    typeof window === 'undefined' ? undefined : window.devicePixelRatio;
 
   return (
     <StyledBackground>
@@ -68,7 +67,7 @@ export const Dune: React.FC = () => {
           orthographic={true}
           camera={{ position: [0, 0, 1], far: 500 }}
           resize={{ scroll: true, debounce: { scroll: 50, resize: 0 } }}
-          pixelRatio={window.devicePixelRatio}
+          pixelRatio={pixelRatio}
         >
           <Scene
             position={position}

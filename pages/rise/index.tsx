@@ -1,3 +1,3 @@
-import { Rise } from 'components/rise';
+import { Rise } from 'components/pages/rise';
 
 export default Rise;
