@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
 type Props = {
@@ -35,7 +35,7 @@ export const Copy: React.FC<Props> = ({ text }) => {
     window.setTimeout(() => {
       setJustClickedCopy(false);
     }, 1_500);
-  }
+  };
 
   return (
     <Wrapper onClick={handleClickCopy}>
@@ -47,9 +47,7 @@ export const Copy: React.FC<Props> = ({ text }) => {
         viewBox="0 0 24 24"
         fill="#fff"
       >
-        <path
-          d={justClickedCopy ? tickedVectorPath : copyVectorPath}
-        />
+        <path d={justClickedCopy ? tickedVectorPath : copyVectorPath} />
       </svg>
     </Wrapper>
   );

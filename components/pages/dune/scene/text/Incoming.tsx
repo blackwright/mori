@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { BufferGeometry, ShaderMaterial } from 'three';
 import { useUpdate, useFrame } from 'react-three-fiber';
 import { incomingShader } from './shaders';
@@ -41,9 +41,10 @@ export const Incoming: React.FC<Props> = ({
     [attributes]
   );
 
-  const shader = React.useMemo(() => incomingShader(incomingDelay), [
-    incomingDelay
-  ]);
+  const shader = React.useMemo(
+    () => incomingShader(incomingDelay),
+    [incomingDelay]
+  );
 
   useFrame((state, delta) => {
     if (materialRef.current) {

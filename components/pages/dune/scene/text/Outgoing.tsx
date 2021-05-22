@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useUpdate, useFrame } from 'react-three-fiber';
 import { outgoingShader } from './shaders';
 import type { BufferAttributes } from './types';

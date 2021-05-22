@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Incoming } from './Incoming';
 import { Outgoing } from './Outgoing';
 import { createBufferAttributes } from './utils';
@@ -29,9 +29,8 @@ export const Text: React.FC<Props> = ({
 
   React.useEffect(() => {
     setState((prevState) => {
-      const { attributes: incoming, maxVisibleTime } = createBufferAttributes(
-        position
-      );
+      const { attributes: incoming, maxVisibleTime } =
+        createBufferAttributes(position);
 
       return {
         outgoing: prevState.incoming ? prevState.incoming : undefined,

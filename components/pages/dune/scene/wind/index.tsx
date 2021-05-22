@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Geometry, MathUtils, Vector3, Color } from 'three';
 import { useThree, useUpdate, useFrame } from 'react-three-fiber';
 import { getParticleCount } from './utils';
