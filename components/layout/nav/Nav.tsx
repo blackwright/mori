@@ -13,8 +13,19 @@ export const Nav: React.FC<Props> = ({ title }) => {
 
   const { pathname } = useRouter();
 
-  const handleClickMenuButton = () => {
+  const handleClickMenuButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     setIsNavOpen((prevIsMenuOpen) => !prevIsMenuOpen);
+  };
+
+  const handleNavigate = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    path: string
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    window.location.href = path;
   };
 
   return (
@@ -32,7 +43,10 @@ export const Nav: React.FC<Props> = ({ title }) => {
             .filter((route) => route.path !== pathname)
             .map((route) => (
               <Card key={route.path}>
-                <Link href={route.path}>
+                <Link
+                  href={route.path}
+                  onClick={(e) => handleNavigate(e, route.path)}
+                >
                   <Image src={route.img} layout="fill" objectFit="cover" />
                   <CardTitle>{route.title}</CardTitle>
                 </Link>
