@@ -1,3 +1,10 @@
+import { Layout } from 'components/layout';
 import { Late } from 'components/pages/late';
 
-export default Late;
+const Page = () => (
+  <Layout title="late">
+    <Late />
+  </Layout>
+);
+
+export default Page;

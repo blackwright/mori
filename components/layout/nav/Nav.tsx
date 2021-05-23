@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { routes } from './routes';
@@ -32,6 +33,7 @@ export const Nav: React.FC<Props> = ({ title }) => {
             .map((route) => (
               <Card key={route.path}>
                 <Link href={route.path}>
+                  <Image src={route.img} layout="fill" objectFit="cover" />
                   <CardTitle>{route.title}</CardTitle>
                 </Link>
               </Card>
@@ -121,15 +123,22 @@ const NavContainer = styled.nav`
 
 const Grid = styled.ul`
   display: grid;
-  grid-gap: 24px;
   max-width: 100vw;
 
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 901px) {
     grid-template-columns: repeat(2, 1fr);
   }
 `;
 
 const CardTitle = styled.h2`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   color: white;
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -138,17 +147,19 @@ const CardTitle = styled.h2`
 
 const Card = styled.li`
   position: relative;
-  height: 300px;
+  height: 200px;
   background: gray;
 
   :hover {
-    color: #333;
-    background: #ccc;
-
     ${CardTitle} {
       color: #333;
-      opacity: 1;
+      background: #ccc;
+      opacity: 0.95;
     }
+  }
+
+  @media screen and (min-width: 901px) {
+    height: 400px;
   }
 `;
 
