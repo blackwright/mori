@@ -14,12 +14,6 @@ export default function MyApp({ Component, pageProps }) {
           type="text/css"
         />
 
-        <link
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro"
-          rel="stylesheet"
-          type="text/css"
-        />
-
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
