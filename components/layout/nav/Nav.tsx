@@ -65,6 +65,7 @@ const Container = styled.div<{ isNavOpen: boolean }>(
   left: 0;
   width: 100vw;
   height: 100vh;
+  pointer-events: none;
 
   * {
     transition: all 150ms linear;
@@ -105,6 +106,7 @@ const Header = styled.header`
 `;
 
 const MenuButton = styled.button`
+  pointer-events: auto;
   cursor: pointer;
   font-family: Arial, sans-serif;
   width: 32px;
