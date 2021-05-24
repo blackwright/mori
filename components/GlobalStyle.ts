@@ -17,7 +17,7 @@ html,
 body,
 #__next,
 #__next > div {
-  min-height: 100vh;
+  height: 100%;
 }
 
 ul,

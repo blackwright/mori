@@ -64,7 +64,7 @@ const Container = styled.div<{ isNavOpen: boolean }>(
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   pointer-events: none;
 
   * {
@@ -128,7 +128,7 @@ const Cross = styled.div`
 const NavContainer = styled.nav`
   display: flex;
   width: 100vw;
-  height: calc(100vh - 64px);
+  height: calc(100% - 64px);
   flex-direction: column;
   flex-grow: 1;
 `;
