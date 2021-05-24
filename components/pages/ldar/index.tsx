@@ -41,9 +41,7 @@ export const LDaR = () => {
     <>
       <GlobalStyle />
       <Container>
-        <Handle animate={controls} onTap={pullHandleSequence}>
-          +
-        </Handle>
+        <Handle animate={controls} onTap={pullHandleSequence} />
 
         <SlotWindow>
           {state.characterGroups.map((characters, i) => (
@@ -79,21 +77,27 @@ const SlotWindow = styled.div`
 `;
 
 const Handle = styled(motion.button)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   background: transparent;
   color: white;
   border-radius: 50%;
-  font-family: Arial, sans-serif;
-  font-size: 3rem;
-  padding-top: 2px;
   cursor: pointer;
   outline: 0;
   border: 3px solid white;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   margin-bottom: 48px;
+
+  :after {
+    content: '+';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    font-family: Arial, sans-serif;
+    font-size: 8rem;
+    padding-top: 2px;
+  }
 `;
 
 const FontCredit = styled.a`
