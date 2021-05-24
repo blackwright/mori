@@ -83,10 +83,6 @@ const Container = styled.div<{ isNavOpen: boolean }>(
     transform: rotate(${isNavOpen ? '45deg' : '0deg'});
   }
 
-  ${NavContainer} {
-    overflow-y: ${isNavOpen ? 'auto' : 'hidden'};
-  }
-
   ${Grid} {
     opacity: ${isNavOpen ? 1 : 0};
     pointer-events: ${isNavOpen ? 'auto' : 'none'};
@@ -140,6 +136,7 @@ const NavContainer = styled.nav`
 const Grid = styled.ul`
   display: grid;
   max-width: 100vw;
+  overflow-y: auto;
 
   @media screen and (min-width: 901px) {
     grid-template-columns: repeat(2, 1fr);
