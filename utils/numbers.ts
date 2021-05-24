@@ -46,3 +46,16 @@ export function randomNumberBetween(
   const randomFloat = min + Math.random() * (max - min);
   return Number(randomFloat.toPrecision(decimalPrecision));
 }
+
+export function shuffle<T>(array: T[]): T[] {
+  const copy = [...array];
+
+  for (let i = array.length - 1; i >= 0; i--) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    const temp = copy[i];
+    copy[i] = copy[randomIndex];
+    copy[randomIndex] = temp;
+  }
+
+  return copy;
+}

@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
 body {
   font-family: "Bodoni Moda", "Times New Roman", Times, serif;
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 html,

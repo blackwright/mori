@@ -8,7 +8,6 @@ const Page = () => (
       <link
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro"
         rel="stylesheet"
-        type="text/css"
       />
     </Head>
     <Layout title="dune">

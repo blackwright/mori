@@ -24,5 +24,10 @@ export const routes: Route[] = [
     title: 'rise',
     path: '/rise',
     img: '/rise.jpg'
+  },
+  {
+    title: 'ld+r',
+    path: '/ldar',
+    img: '/ld+r.png'
   }
 ];

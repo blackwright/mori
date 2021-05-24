@@ -11,7 +11,6 @@ export default function MyApp({ Component, pageProps }) {
         <link
           href="https://fonts.googleapis.com/css?family=Bodoni+Moda"
           rel="stylesheet"
-          type="text/css"
         />
 
         <meta
