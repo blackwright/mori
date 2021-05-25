@@ -3,7 +3,7 @@ import { Mori } from 'components/pages/mori';
 
 const Page = () => {
   return (
-    <Layout title="mori">
+    <Layout title="Mori">
       <Mori />
     </Layout>
   );

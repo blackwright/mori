@@ -1,14 +1,32 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+@font-face {
+  font-family: 'Futura PT';
+  src: url('./fonts/futura-pt-book.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Bodoni';
+  src: url('./fonts/bodoni-webfont.woff') format('woff');
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Futura PT', Arial, sans-serif;
+}
+
 body {
-  font-family: "Bodoni Moda", "Times New Roman", Times, serif;
+  font-family: Bodoni, 'Times New Roman', Times, serif;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
 }

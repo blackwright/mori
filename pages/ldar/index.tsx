@@ -2,7 +2,7 @@ import { Layout } from 'components/layout';
 import { LDaR } from 'components/pages/ldar';
 
 const Page = () => (
-  <Layout title="ld+r">
+  <Layout title="LD+R">
     <LDaR />
   </Layout>
 );

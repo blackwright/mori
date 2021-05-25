@@ -47,7 +47,12 @@ export const Nav: React.FC<Props> = ({ title }) => {
                   href={route.path}
                   onClick={(e) => handleNavigate(e, route.path)}
                 >
-                  <Image src={route.img} layout="fill" objectFit="cover" />
+                  <Image
+                    src={route.img}
+                    layout="fill"
+                    objectFit="cover"
+                    loading="lazy"
+                  />
                   <CardTitle>{route.title}</CardTitle>
                 </Link>
               </Card>
@@ -109,18 +114,19 @@ const MenuButton = styled.button`
   height: 32px;
   border: 0;
   outline: 0;
-  background: lightgray;
+  background: #6d0e18;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const Title = styled.h1`
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 1rem;
+  line-height: 1.25rem;
 `;
 
 const Cross = styled.div`
+  color: #eee;
   font-size: 1.5rem;
   line-height: 2rem;
 `;
@@ -165,8 +171,8 @@ const Card = styled.li`
 
   :hover {
     ${CardTitle} {
-      color: #333;
-      background: #ccc;
+      color: #eee;
+      background: #6d0e18;
       opacity: 0.95;
     }
   }

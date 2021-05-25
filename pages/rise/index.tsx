@@ -2,7 +2,7 @@ import { Layout } from 'components/layout';
 import { Rise } from 'components/pages/rise';
 
 const Page = () => (
-  <Layout title="rise">
+  <Layout title="Rise">
     <Rise />
   </Layout>
 );

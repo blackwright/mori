@@ -25,7 +25,7 @@ export const ImageData: React.FC<Props> = ({ text, onChange }) => {
     if (canvasRef.current) {
       setWriter(
         new Writer(canvasRef.current, {
-          font: '16px "Bodoni Moda", "Times New Roman", serif',
+          font: '16px Bodoni, "Times New Roman", serif',
           maxFontSizeToFill: 77,
           textAlign: 'center',
           verticalAlign: 'middle',

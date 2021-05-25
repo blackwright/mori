@@ -34,7 +34,7 @@ export const Controls: React.FC<Props> = ({
 );
 
 const Wrapper = styled.div`
-  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-family: 'Futura PT', Arial, sans-serif;
   display: flex;
   align-items: stretch;
   justify-content: center;

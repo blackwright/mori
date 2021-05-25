@@ -6,28 +6,28 @@ type Route = {
 
 export const routes: Route[] = [
   {
-    title: 'mori',
+    title: 'Mori',
     path: '/mori',
-    img: '/mori.jpg'
+    img: '/thumbnails/mori.jpg'
   },
   {
-    title: 'late',
+    title: 'Late',
     path: '/late',
-    img: '/late.jpg'
+    img: '/thumbnails/late.jpg'
   },
   {
-    title: 'dune',
+    title: 'Dune',
     path: '/dune',
-    img: '/dune.png'
+    img: '/thumbnails/dune.png'
   },
   {
-    title: 'rise',
+    title: 'Rise',
     path: '/rise',
-    img: '/rise.jpg'
+    img: '/thumbnails/rise.jpg'
   },
   {
-    title: 'ld+r',
+    title: 'LD+R',
     path: '/ldar',
-    img: '/ld+r.png'
+    img: '/thumbnails/ld+r.png'
   }
 ];
