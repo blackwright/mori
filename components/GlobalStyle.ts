@@ -141,6 +141,10 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+}
+
 h1,
 h2,
 h3,
@@ -157,10 +161,13 @@ header a {
 }
 
 body {
+  color: rgba(255, 255, 255, 0.85);
   font-family: 'Roboto Slab', 'Times New Roman', Times, serif;
   overflow: hidden;
+  text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   background-color: #282c35;
+  scroll-behavior: smooth;
 }
 
 html,
@@ -208,13 +215,6 @@ a {
 
 header a {
   text-decoration: none;
-}
-
-body {
-  color: rgba(255, 255, 255, 0.85);
-  scroll-behavior: smooth;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
 }
 
 ul[class],
