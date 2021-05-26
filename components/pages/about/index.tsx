@@ -40,7 +40,7 @@ export const About: React.FC = () => {
           designer and illustrator
         </Link>{' '}
         before I learned how to code. I majored in illustration at the
-        Massachusetts College of Art of Design.
+        Massachusetts College of Art and Design.
       </Paragraph>
       <Paragraph mb={6}>
         Here's my <Link href="https://github.com/blackwright">GitHub</Link> and{' '}
