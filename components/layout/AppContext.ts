@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 
 type Context = {
   isNavOpen: boolean;
-  toggleNavOpen: () => void;
+  toggleNavOpen: (isOpen?: boolean) => void;
 };
 
 export const AppContext = createContext<Context>({

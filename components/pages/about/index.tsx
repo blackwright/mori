@@ -48,7 +48,7 @@ export const About: React.FC = () => {
       </Paragraph>
       <Paragraph>
         This site is a collection of{' '}
-        <Link href="javascript:void(0)" onClick={toggleNavOpen}>
+        <Link href="javascript:void(0)" onClick={() => toggleNavOpen(true)}>
           code experiments
         </Link>
         . You can view the{' '}
@@ -62,8 +62,3 @@ const Paragraph = styled(Typography).attrs({
   fontSize: '1.5rem',
   lineHeight: '2.25rem'
 })``;
-
-const Divider = styled.hr`
-  border-color: rgba(255, 255, 255, 0.6);
-  margin: 64px 0;
-`;

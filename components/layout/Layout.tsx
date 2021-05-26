@@ -10,9 +10,12 @@ type Props = {
 export const Layout: React.FC<Props> = ({ title, children }) => {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
 
-  const toggleNavOpen = React.useCallback(() => {
-    setIsNavOpen((prevOpen) => !prevOpen);
-  }, [setIsNavOpen]);
+  const toggleNavOpen = React.useCallback(
+    (isOpen?: boolean) => {
+      setIsNavOpen((prevOpen) => isOpen ?? !prevOpen);
+    },
+    [setIsNavOpen]
+  );
 
   return (
     <AppContext.Provider value={{ isNavOpen, toggleNavOpen }}>
