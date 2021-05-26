@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { motion, useAnimation } from 'framer-motion';
+import { Link } from 'components/shared';
 import { GlobalStyle } from './GlobalStyle';
 import { Slot } from './slot';
 import { shuffleCharacters } from './utils';
@@ -51,7 +52,11 @@ export const LDaR = () => {
           ))}
         </SlotWindow>
 
-        <FontCredit href="https://uxuihero.com/love-death-robots-free-fan-iconfont/">
+        <FontCredit
+          href="https://uxuihero.com/love-death-robots-free-fan-iconfont/"
+          fontSize="1rem"
+          p={4}
+        >
           Icons by Michael Chernayk + Ofer Ariel
         </FontCredit>
       </Container>
@@ -100,16 +105,8 @@ const Handle = styled(motion.button)`
   }
 `;
 
-const FontCredit = styled.a`
-  font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
-  color: white;
+const FontCredit = styled(Link)`
   position: absolute;
-  bottom: 24px;
-  right: 16px;
-  color: white;
-  text-decoration: underline;
-
-  @media screen and (min-width: 600px) {
-    right: 24px;
-  }
+  bottom: 0;
+  right: 0;
 `;
