@@ -2,13 +2,137 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 @font-face {
-  font-family: 'Futura PT';
-  src: url('./fonts/futura-pt-book.woff') format('woff');
+  font-family: 'Lato';
+  src: url('./fonts/Lato-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: 'Bodoni';
-  src: url('./fonts/bodoni-webfont.woff') format('woff');
+  font-family: 'Lato';
+  src: url('./fonts/Lato-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./fonts/Lato-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./fonts/Lato-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./fonts/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./fonts/Lato-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./fonts/Lato-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./fonts/Lato-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./fonts/Lato-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./fonts/Lato-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('./fonts/RobotoSlab-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('./fonts/RobotoSlab-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('./fonts/RobotoSlab-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('./fonts/RobotoSlab-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('./fonts/RobotoSlab-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('./fonts/RobotoSlab-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('./fonts/RobotoSlab-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('./fonts/RobotoSlab-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('./fonts/RobotoSlab-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
 }
 
 *,
@@ -21,14 +145,22 @@ h1,
 h2,
 h3,
 h4,
-h5 {
-  font-family: 'Futura PT', Arial, sans-serif;
+h5,
+header a {
+  font-family: 'Lato', Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  line-height: 1rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 1.25px;
 }
 
 body {
-  font-family: Bodoni, 'Times New Roman', Times, serif;
+  font-family: 'Roboto Slab', 'Times New Roman', Times, serif;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
+  background-color: #282c35;
 }
 
 html,
@@ -61,7 +193,25 @@ dd {
   margin: 0;
 }
 
+a {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+
+  :hover,
+  :visited,
+  :active,
+  :focus {
+    color: white;
+  }
+}
+
+header a {
+  text-decoration: none;
+}
+
 body {
+  color: rgba(255, 255, 255, 0.85);
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
@@ -70,10 +220,6 @@ body {
 ul[class],
 ol[class] {
   list-style: none;
-}
-
-a:not([class]) {
-  text-decoration-skip-ink: auto;
 }
 
 img {
@@ -90,10 +236,6 @@ button,
 textarea,
 select {
   font: inherit;
-}
-
-a {
-  text-decoration: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
