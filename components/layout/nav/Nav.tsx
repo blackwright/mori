@@ -44,7 +44,7 @@ export const Nav: React.FC<Props> = ({ title }) => {
         </Typography>
 
         <Box display="flex" alignItems="center">
-          <Typography as="a" href="/about" mr={3}>
+          <Typography as="a" href="/" mr={3}>
             About
           </Typography>
 

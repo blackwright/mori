@@ -6,15 +6,6 @@ module.exports = withPlugins([
   {
     future: {
       webpack5: true
-    },
-    async redirects() {
-      return [
-        {
-          source: '/',
-          destination: '/mori',
-          permanent: true
-        }
-      ];
     }
   }
 ]);
