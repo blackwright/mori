@@ -2,6 +2,8 @@ import * as React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { Box, Typography } from 'components/shared';
+import { AppContext } from '../AppContext';
 import { routes } from './routes';
 
 type Props = {
@@ -9,13 +11,13 @@ type Props = {
 };
 
 export const Nav: React.FC<Props> = ({ title }) => {
-  const [isNavOpen, setIsNavOpen] = React.useState(false);
-
   const { pathname } = useRouter();
+
+  const { isNavOpen, toggleNavOpen } = React.useContext(AppContext);
 
   const handleClickMenuButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    setIsNavOpen((prevIsMenuOpen) => !prevIsMenuOpen);
+    toggleNavOpen();
   };
 
   const handleNavigate = (
@@ -30,12 +32,27 @@ export const Nav: React.FC<Props> = ({ title }) => {
 
   return (
     <Container isNavOpen={isNavOpen}>
-      <Header>
-        <Title>{title}</Title>
-        <MenuButton onClick={handleClickMenuButton}>
-          <Cross>&#x2b;</Cross>
-        </MenuButton>
-      </Header>
+      <Box
+        as="header"
+        display="flex"
+        p={4}
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Typography as="h1" color="white">
+          {title}
+        </Typography>
+
+        <Box display="flex" alignItems="center">
+          <Typography as="a" href="/about" mr={3}>
+            About
+          </Typography>
+
+          <MenuButton onClick={handleClickMenuButton}>
+            <Cross>&#x2b;</Cross>
+          </MenuButton>
+        </Box>
+      </Box>
 
       <NavContainer>
         <Grid>
@@ -76,12 +93,13 @@ const Container = styled.div<{ isNavOpen: boolean }>(
     transition: all 150ms linear;
   }
 
-  ${Header} {
-    background-color: ${isNavOpen ? 'white' : 'transparent'};
+  ${Box} {
+    background-color: ${isNavOpen ? '#282c35' : 'transparent'};
   }
 
-  ${Title} {
+  ${Typography} {
     opacity: ${isNavOpen ? 1 : 0};
+    pointer-events: ${isNavOpen ? 'auto' : 'none'};
   }
 
   ${MenuButton} {
@@ -95,21 +113,10 @@ const Container = styled.div<{ isNavOpen: boolean }>(
 `
 );
 
-const Header = styled.header`
-  display: flex;
-  padding: 16px;
-  align-items: center;
-  justify-content: space-between;
-
-  @media screen and (min-width: 600px) {
-    padding: 16px 24px;
-  }
-`;
-
 const MenuButton = styled.button`
   pointer-events: auto;
   cursor: pointer;
-  font-family: Arial, sans-serif;
+  font-family: 'Futura PT', Arial, sans-serif;
   width: 32px;
   height: 32px;
   border: 0;
@@ -118,11 +125,6 @@ const MenuButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const Title = styled.h1`
-  font-size: 1rem;
-  line-height: 1.25rem;
 `;
 
 const Cross = styled.div`
