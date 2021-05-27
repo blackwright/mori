@@ -106,6 +106,10 @@ const Container = styled.div<{ isNavOpen: boolean }>(
     transform: rotate(${isNavOpen ? '45deg' : '0deg'});
   }
 
+  ${NavContainer} {
+    background-color: ${isNavOpen ? '#282c35' : 'transparent'};
+  }
+
   ${Grid} {
     opacity: ${isNavOpen ? 1 : 0};
     pointer-events: ${isNavOpen ? 'auto' : 'none'};
@@ -180,7 +184,7 @@ const Card = styled.li`
   }
 
   @media screen and (min-width: 901px) {
-    height: 400px;
+    height: 350px;
   }
 `;
 

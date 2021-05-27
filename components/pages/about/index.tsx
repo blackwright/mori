@@ -48,10 +48,8 @@ export const About: React.FC = () => {
       </Paragraph>
       <Paragraph>
         This site is a collection of{' '}
-        <Link href="javascript:void(0)" onClick={() => toggleNavOpen(true)}>
-          code experiments
-        </Link>
-        . You can view the{' '}
+        <Link onClick={() => toggleNavOpen(true)}>code experiments</Link>. You
+        can view the{' '}
         <Link href="https://github.com/blackwright/mori">source</Link>.
       </Paragraph>
     </Box>
