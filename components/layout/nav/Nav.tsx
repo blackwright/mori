@@ -35,7 +35,7 @@ export const Nav: React.FC<Props> = ({ title }) => {
       <Box
         as="header"
         display="flex"
-        p={4}
+        p={{ phone: 2, tablet: 4 }}
         alignItems="center"
         justifyContent="space-between"
       >

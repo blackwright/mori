@@ -55,7 +55,7 @@ export const LDaR = () => {
         <FontCredit
           href="https://uxuihero.com/love-death-robots-free-fan-iconfont/"
           fontSize="1rem"
-          p={4}
+          p={{ phone: 2, tablet: 4 }}
         >
           Icons by Michael Chernayk + Ofer Ariel
         </FontCredit>
