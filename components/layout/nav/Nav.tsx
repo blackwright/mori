@@ -120,9 +120,10 @@ const Container = styled.div<{ isNavOpen: boolean }>(
 const MenuButton = styled.button`
   pointer-events: auto;
   cursor: pointer;
-  font-family: 'Futura PT', Arial, sans-serif;
+  font-family: Lato, Arial, sans-serif;
   width: 32px;
   height: 32px;
+  padding: 0;
   border: 0;
   outline: 0;
   background: #6d0e18;
@@ -135,6 +136,7 @@ const Cross = styled.div`
   color: #eee;
   font-size: 1.5rem;
   line-height: 2rem;
+  margin-bottom: 3px;
 `;
 
 const NavContainer = styled.nav`
