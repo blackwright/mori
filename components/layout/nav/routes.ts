@@ -6,6 +6,11 @@ type Route = {
 
 export const routes: Route[] = [
   {
+    title: 'Pale',
+    path: '/pale',
+    img: '/thumbnails/pale.jpg'
+  },
+  {
     title: 'LD+R',
     path: '/ldar',
     img: '/thumbnails/ld+r.png'
