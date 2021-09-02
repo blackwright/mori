@@ -1,3 +1,5 @@
+// LD+R = [characters[30], characters[0], characters[15]];
+
 export const characters = [
   '\u002b', // x
   '\u0058', // +
