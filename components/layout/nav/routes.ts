@@ -13,12 +13,12 @@ export const routes: Route[] = [
   {
     title: 'LD+R',
     path: '/ldar',
-    img: '/thumbnails/ld+r.png'
+    img: '/thumbnails/ldar.png'
   },
   {
     title: 'Rise',
     path: '/rise',
-    img: '/thumbnails/rise.jpg'
+    img: '/thumbnails/rise.png'
   },
   {
     title: 'Dune',
@@ -33,6 +33,6 @@ export const routes: Route[] = [
   {
     title: 'Late',
     path: '/late',
-    img: '/thumbnails/late.jpg'
+    img: '/thumbnails/late.png'
   }
 ];
