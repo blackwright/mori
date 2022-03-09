@@ -17,22 +17,15 @@ export const About: React.FC = () => {
       overflowY="auto"
     >
       <Paragraph mb={6}>
-        I'm Jerry Gao, a front-end engineer in New York working at{' '}
-        <Link href="https://www.edapp.com/">EdApp</Link>. We develop a learning
-        management system. I work on the{' '}
-        <Link href="https://www.edapp.com/rapid-authoring/template-library/">
-          authoring experience
-        </Link>
-        ,{' '}
-        <Link href="https://www.edapp.com/course-library/">
-          public course library
-        </Link>
-        , and internal component library.
+        I'm Jerry Gao, a front-end engineer working at{' '}
+        <Link href="https://www.courierhealth.com">Courier Health</Link>, where
+        I build UI to communicate insights used by patient services programs to
+        improve patient outcomes.
       </Paragraph>
       <Paragraph mb={6}>
-        Previously, I was a full-stack developer at{' '}
-        <Link href="https://www.newtonx.com/">NewtonX</Link>, where I automated
-        client booking and operations workflow.
+        Previously, I was part of the authoring experience team at{' '}
+        <Link href="https://www.edapp.com/">EdApp</Link> and a full-stack
+        developer at <Link href="https://www.newtonx.com/">NewtonX</Link>.
       </Paragraph>
       <Paragraph mb={6}>
         I was a{' '}
