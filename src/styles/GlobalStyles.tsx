@@ -154,6 +154,11 @@ const CustomStyles = createGlobalStyle`
     text-decoration: underline;
   }
 
+  button svg {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * {
       animation-duration: 0.01ms !important;

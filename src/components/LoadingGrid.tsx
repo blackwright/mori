@@ -15,7 +15,7 @@ export function LoadingGrid() {
     <FullScreenMain tw="flex items-center justify-center">
       <div tw="flex flex-col items-center gap-8">
         <Button onClick={() => setKey((prevKey) => prevKey + 1)}>
-          <RotateCcw size="0.75rem" />
+          <RotateCcw />
         </Button>
 
         <div key={key} tw="grid gap-2 [grid-template-columns: repeat(5, 3rem)]">

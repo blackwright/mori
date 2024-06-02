@@ -1,5 +1,6 @@
 import tw, { styled } from 'twin.macro';
 import { useEffect, useRef, useState, type ComponentProps } from 'react';
+import { ChevronDown } from 'react-feather';
 import { Button } from '@/components';
 
 const MAX_PARAGRAPHS = 4;
@@ -23,7 +24,6 @@ export function ParagraphCount({
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleOpen = () => {
-    console.log('toggle');
     setIsOpen((prevIsOpen) => !prevIsOpen);
   };
 
@@ -57,7 +57,7 @@ export function ParagraphCount({
       disabled={disabled}
     >
       <span tw="flex items-center gap-1">
-        <span tw="font-sans text-xs font-semibold select-none">▼</span>
+        <ChevronDown />
         <span>{count}</span>
       </span>
 
