@@ -145,7 +145,7 @@ export class Cat extends Renderer {
     ctx.restore();
   }
 
-  tail() {
+  fixedTail() {
     const { ctx, tailWidth, x, bodyWidth, tailY } = this;
 
     ctx.save();
@@ -169,7 +169,7 @@ export class Cat extends Renderer {
 
     this.head();
     this.body();
-    this.tail();
+    this.fixedTail();
 
     ctx.restore();
   }
@@ -196,7 +196,7 @@ export class Cat extends Renderer {
 
     if (this.prevTailAngle > -Math.PI / 2 && nextTailAngle < -Math.PI / 2) {
       // each oscillation has a chance of producing a tail wag
-      this.isWagging = Math.random() < 0.2;
+      this.isWagging = Math.random() > 0.5;
     }
 
     this.prevTailAngle = nextTailAngle;
@@ -210,10 +210,17 @@ export class Cat extends Renderer {
     this.head();
     this.body();
 
+    ctx.restore();
+
     if (!this.isWagging) {
-      this.tail();
+      this.fixedTail();
       return;
     }
+
+    ctx.save();
+
+    ctx.lineWidth = this.tailWidth;
+    ctx.lineCap = 'round';
 
     ctx.translate(x, tailY);
 

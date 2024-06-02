@@ -11,7 +11,7 @@ class Raindrop {
     private ctx: CanvasRenderingContext2D,
     private canvasHeight: number,
     public x: number,
-    public height: number
+    public height: number,
   ) {
     this.createdAt = Date.now();
   }
@@ -24,6 +24,8 @@ class Raindrop {
   render() {
     const { ctx, x, y, height } = this;
 
+    ctx.save();
+
     ctx.strokeStyle = RAINDROP_COLOR;
     ctx.lineWidth = 1;
 
@@ -31,6 +33,8 @@ class Raindrop {
     ctx.moveTo(x, y);
     ctx.lineTo(x, y + height);
     ctx.stroke();
+
+    ctx.restore();
   }
 }
 
@@ -73,6 +77,6 @@ export class Rainfall {
   }
 
   render() {
-    this.raindrops.forEach((raindrop) => raindrop.render());
+    this.raindrops.forEach(raindrop => raindrop.render());
   }
 }
