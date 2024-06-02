@@ -16,7 +16,7 @@ type DotPosition = {
   left: number;
 };
 
-export function Pale() {
+export function PaleBlueDot() {
   const dotRef = useRef<HTMLDivElement | null>(null);
 
   const [dotPosition, setDotPosition] = useState<DotPosition | null>(null);
