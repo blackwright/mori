@@ -1,5 +1,5 @@
 import { Renderer } from '../renderer';
-import { roundedRect, CornerRadii } from '../utils';
+import { CornerRadii, roundedRect } from '../utils';
 
 const WOOD_COLOR = '#122C2B';
 const TABLE_DECORATION_COLOR = '#06151A';

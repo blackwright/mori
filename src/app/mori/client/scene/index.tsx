@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StarsPointCloud } from './StarsPointCloud';
 import { CloudsGroup } from './CloudsGroup';
+import { StarsPointCloud } from './StarsPointCloud';
 
 export const Scene: React.FC = () => {
   return (

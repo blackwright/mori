@@ -16,7 +16,7 @@ export class Wall extends Renderer {
     ctx.fillStyle = '#010038';
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-    await new Promise<void>(resolve => {
+    await new Promise<void>((resolve) => {
       const backgroundPatternImage = new Image();
 
       backgroundPatternImage.onload = () => {

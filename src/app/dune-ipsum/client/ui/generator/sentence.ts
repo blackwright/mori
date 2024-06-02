@@ -1,6 +1,6 @@
-import { WordType, getRandomWord } from './words';
 import { structures } from './structures';
-import { randomElement, capitalize } from './utils';
+import { capitalize, randomElement } from './utils';
+import { getRandomWord, WordType } from './words';
 
 export default class Sentence {
   private value: string;
@@ -12,7 +12,7 @@ export default class Sentence {
 
   private build(structure: string) {
     const words = (Array.from(structure) as WordType[]).map((wordType) =>
-      getRandomWord(wordType)
+      getRandomWord(wordType),
     );
 
     const sentence = words.join(' ').replace(/\s,\s/g, ',');

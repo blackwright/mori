@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Writer } from './writer';
 import { getParticleGap } from './utils';
+import { Writer } from './writer';
 
 type Props = {
   text: string;
@@ -29,8 +29,8 @@ export const ImageData: React.FC<Props> = ({ text, onChange }) => {
           maxFontSizeToFill: 77,
           textAlign: 'center',
           verticalAlign: 'middle',
-          sizeToFill: true
-        })
+          sizeToFill: true,
+        }),
       );
     }
   }, []);
@@ -43,7 +43,7 @@ export const ImageData: React.FC<Props> = ({ text, onChange }) => {
 
       onChange(
         writer.ctx.getImageData(0, 0, width, height),
-        getParticleGap(text)
+        getParticleGap(text),
       );
 
       writer.ctx.clearRect(0, 0, width, height);

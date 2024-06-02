@@ -1,9 +1,10 @@
-import { MathUtils, BufferAttribute } from 'three';
+import { BufferAttribute, MathUtils } from 'three';
 import type { BufferAttributes } from './types';
 
-export function createBufferAttributes(
-  position: Float32Array
-): { attributes: BufferAttributes; maxVisibleTime: number } {
+export function createBufferAttributes(position: Float32Array): {
+  attributes: BufferAttributes;
+  maxVisibleTime: number;
+} {
   let maxVisibleTime = 0;
 
   const vertexCount = position.length / 3;
@@ -26,8 +27,8 @@ export function createBufferAttributes(
     attributes: [
       new BufferAttribute(position, 3),
       new BufferAttribute(visibleTime, 1),
-      new BufferAttribute(color, 1)
+      new BufferAttribute(color, 1),
     ],
-    maxVisibleTime
+    maxVisibleTime,
   };
 }

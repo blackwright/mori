@@ -1,5 +1,5 @@
 import { Renderer } from '../renderer';
-import { roundedRect, CornerRadii } from '../utils';
+import { CornerRadii, roundedRect } from '../utils';
 
 const WINDOW_FRAME_COLOR = '#3D1A1E';
 const WINDOW_DECORATION_COLOR = '#682634';

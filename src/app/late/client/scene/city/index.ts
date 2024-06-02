@@ -1,7 +1,7 @@
-import { Renderer } from '../renderer';
-import { Building } from './building';
 import { randomNumberBetween } from '@/utils/numbers';
+import { Renderer } from '../renderer';
 import { getRandomColor } from '../utils';
+import { Building } from './building';
 
 const BACKGROUND_COLOR = '#08080a';
 const LAYER_OVERLAY_COLOR = 'rgba(33, 33, 33, 0.3)';
@@ -72,7 +72,7 @@ export class City extends Renderer {
         leftMostBuilding.width * 0.75,
       );
 
-      layer.forEach(building => (building.x -= xOffset));
+      layer.forEach((building) => (building.x -= xOffset));
       this.layers.push(layer);
     }
   }
@@ -89,7 +89,7 @@ export class City extends Renderer {
       const currentLayer = layers[i];
 
       if (i > 0) {
-        currentLayer.forEach(building => building.generateLights());
+        currentLayer.forEach((building) => building.generateLights());
       }
 
       for (const building of currentLayer) {

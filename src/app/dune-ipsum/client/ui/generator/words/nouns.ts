@@ -323,5 +323,5 @@ export default [
   'wisdom',
   'worm',
   'wound',
-  'Yueh'
+  'Yueh',
 ];

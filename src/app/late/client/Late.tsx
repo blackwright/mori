@@ -1,14 +1,14 @@
 'use client';
 
-import tw, { styled, css } from 'twin.macro';
-import { useRef, useEffect } from 'react';
+import tw, { css, styled } from 'twin.macro';
 import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 import { FullScreenMain } from '@/components/FullScreenMain';
 import { useDebouncedResize } from '@/utils/react';
-import { City } from './scene/city';
-import { Rainfall } from './scene/rain';
-import { Home, Cat } from './scene/home';
 import { useAnimations } from './animations';
+import { City } from './scene/city';
+import { Cat, Home } from './scene/home';
+import { Rainfall } from './scene/rain';
 
 export function Late() {
   const animationFrameId = useRef<number | null>(null);

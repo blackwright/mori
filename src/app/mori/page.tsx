@@ -1,5 +1,5 @@
-import { Mori } from './client/Mori';
 import type { Metadata } from 'next';
+import { Mori } from './client/Mori';
 
 export const metadata: Metadata = {
   title: 'Mori',

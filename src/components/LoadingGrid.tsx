@@ -2,11 +2,11 @@
 
 import 'twin.macro';
 import { useState } from 'react';
+import { RotateCcw } from 'react-feather';
 import { Button } from '@/components';
 import { FullScreenMain } from '@/components/FullScreenMain';
-import { COLORS } from './colors';
 import { Circle } from './Circle';
-import { RotateCcw } from 'react-feather';
+import { COLORS } from './colors';
 
 export function LoadingGrid() {
   const [key, setKey] = useState(0);
@@ -14,7 +14,7 @@ export function LoadingGrid() {
   return (
     <FullScreenMain tw="flex items-center justify-center">
       <div tw="flex flex-col items-center gap-8">
-        <Button onClick={() => setKey(prevKey => prevKey + 1)}>
+        <Button onClick={() => setKey((prevKey) => prevKey + 1)}>
           <RotateCcw size="0.75rem" />
         </Button>
 

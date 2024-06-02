@@ -46,5 +46,5 @@ export default [
   'upon',
   'with',
   'within',
-  'without'
+  'without',
 ];

@@ -1,6 +1,6 @@
+import { useLoader } from '@react-three/fiber';
 import * as React from 'react';
 import { TextureLoader } from 'three';
-import { useLoader } from '@react-three/fiber';
 
 type Props = {
   asset: string;

@@ -166,5 +166,5 @@ export default [
   'wild',
   'wise',
   'woven',
-  'young'
+  'young',
 ];

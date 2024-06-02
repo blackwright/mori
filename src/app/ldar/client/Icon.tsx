@@ -1,5 +1,5 @@
+import tw, { css, styled } from 'twin.macro';
 import { forwardRef } from 'react';
-import tw, { styled, css } from 'twin.macro';
 
 type Props = {
   className?: string;

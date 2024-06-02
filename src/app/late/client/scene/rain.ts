@@ -77,6 +77,6 @@ export class Rainfall {
   }
 
   render() {
-    this.raindrops.forEach(raindrop => raindrop.render());
+    this.raindrops.forEach((raindrop) => raindrop.render());
   }
 }

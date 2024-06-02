@@ -1,11 +1,11 @@
 'use client';
 
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { LINK_POSITION_OFFSET } from './constants';
 import {
   Background,
-  BeamOverlay,
   Beam,
+  BeamOverlay,
   Dot,
   Grain,
   PaddedLink,

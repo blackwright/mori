@@ -1,6 +1,6 @@
-import { useRef, useMemo, useLayoutEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Vector3, Mesh, type BoxGeometry, type ShaderMaterial } from 'three';
+import { useLayoutEffect, useMemo, useRef } from 'react';
+import { Mesh, Vector3, type BoxGeometry, type ShaderMaterial } from 'three';
 import {
   clampNumberRange,
   type Clamp,
@@ -51,7 +51,7 @@ export function Scene() {
     camera.lookAt(0, 20, 0);
   }, [camera]);
 
-  useFrame(state => {
+  useFrame((state) => {
     const sinValue = Math.sin(state.clock.getElapsedTime());
 
     lightPosition.y = clampNumberRange(sinValue, cosToPositionYClamp);

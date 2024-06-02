@@ -1,10 +1,11 @@
 import { Renderer } from '../renderer';
-import { Wall } from './wall';
-import { Window } from './window';
+import { Clock } from './clock';
 import { Dresser } from './dresser';
 import { Pictures } from './pictures';
 import { Table } from './table';
-import { Clock } from './clock';
+import { Wall } from './wall';
+import { Window } from './window';
+
 export { Cat } from './cat';
 
 export class Home extends Renderer {

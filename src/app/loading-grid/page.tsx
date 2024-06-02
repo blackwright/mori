@@ -1,5 +1,5 @@
-import { LoadingGrid } from './client/LoadingGrid';
 import type { Metadata } from 'next';
+import { LoadingGrid } from './client/LoadingGrid';
 
 export const metadata: Metadata = {
   title: 'Loading Grid',

@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import tw, { styled } from 'twin.macro';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import tw, { styled } from 'twin.macro';
+import { useState } from 'react';
 import { routes } from './routes';
 
 export function Nav() {
@@ -13,14 +13,14 @@ export function Nav() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const handleClickMenuButton = () => {
-    setIsNavOpen(prevIsOpen => !prevIsOpen);
+    setIsNavOpen((prevIsOpen) => !prevIsOpen);
   };
 
   return (
     <>
       <Container $isNavOpen={isNavOpen}>
         <Header $isNavOpen={isNavOpen}>
-          <h1>{routes.find(route => route.path === pathname)?.title}</h1>
+          <h1>{routes.find((route) => route.path === pathname)?.title}</h1>
 
           <Link href="/" onClick={() => setIsNavOpen(false)}>
             About
@@ -33,7 +33,7 @@ export function Nav() {
 
         <NavContainer $isNavOpen={isNavOpen}>
           <Grid>
-            {routes.map(route => (
+            {routes.map((route) => (
               <Card key={route.path} className="group">
                 <Link
                   href={route.path}

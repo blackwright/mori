@@ -1,15 +1,15 @@
 'use client';
 
-import { useState, useCallback } from 'react';
 import { Canvas } from '@react-three/fiber';
+import { useCallback, useState } from 'react';
 import { MathUtils } from 'three';
-import { Scene } from './scene';
 import { FullScreenMain } from '@/components/FullScreenMain';
-import { Generator } from './ui/generator';
-import { ImageData } from './ui/image-data';
-import { Controls } from './ui/controls';
-import { getRandomQuote } from './ui/generator/words';
+import { Scene } from './scene';
 import { InterfaceWrapper } from './styled';
+import { Controls } from './ui/controls';
+import { Generator } from './ui/generator';
+import { getRandomQuote } from './ui/generator/words';
+import { ImageData } from './ui/image-data';
 
 export function DuneIpsum() {
   const [count, setCount] = useState(1);
@@ -80,7 +80,7 @@ export function DuneIpsum() {
         maxSentences={2}
         onChange={handleChange}
       >
-        {handleGenerate => (
+        {(handleGenerate) => (
           <InterfaceWrapper>
             <Controls
               text={text}

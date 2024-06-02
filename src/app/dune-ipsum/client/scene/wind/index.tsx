@@ -1,13 +1,13 @@
-import { useRef, useMemo, useLayoutEffect } from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
+import { useLayoutEffect, useMemo, useRef } from 'react';
 import {
-  MathUtils,
-  Color,
   BufferGeometry,
-  PointsMaterial,
+  Color,
   Float32BufferAttribute,
+  MathUtils,
+  PointsMaterial,
   type Points,
 } from 'three';
-import { useThree, useFrame } from '@react-three/fiber';
 import { getParticleCount } from './utils';
 
 const COLOR = new Color(0xeeeeee);

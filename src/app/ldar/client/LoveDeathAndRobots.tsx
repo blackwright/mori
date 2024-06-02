@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
 import tw from 'twin.macro';
 import { motion, useAnimation } from 'framer-motion';
+import { useCallback, useEffect, useState } from 'react';
 import { FullScreenMain } from '@/components/FullScreenMain';
+import { shuffle } from '@/utils/numbers';
+import { characters } from './characters';
 import { GlobalStyles } from './GlobalStyles';
 import { Slot } from './Slot';
-import { characters } from './characters';
-import { shuffle } from '@/utils/numbers';
 
 type State = {
   key: number;
@@ -21,7 +21,7 @@ export function LoveDeathAndRobots() {
   });
 
   const runSlots = useCallback(() => {
-    setState(prevState => ({
+    setState((prevState) => ({
       key: prevState.key + 1,
       characterGroups: [...new Array(3)].map(shuffleCharacters),
     }));

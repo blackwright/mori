@@ -1,7 +1,7 @@
 import tw from 'twin.macro';
 import { Button } from '@/components';
-import { ParagraphCount } from './ParagraphCount';
 import { CopyButton } from './CopyButton';
+import { ParagraphCount } from './ParagraphCount';
 
 type Props = {
   text: string;

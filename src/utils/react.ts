@@ -1,9 +1,9 @@
 import {
   useEffect,
-  type Ref,
-  type MutableRefObject,
-  type EffectCallback,
   type DependencyList,
+  type EffectCallback,
+  type MutableRefObject,
+  type Ref,
 } from 'react';
 import { debounced } from '@/utils';
 
@@ -12,8 +12,8 @@ export function mergeRefs<T>(
 ): (element: T | null) => void {
   return (element: T | null) => {
     refs
-      .filter(ref => ref != null)
-      .forEach(ref => {
+      .filter((ref) => ref != null)
+      .forEach((ref) => {
         if (typeof ref === 'function') {
           ref(element);
         } else {

@@ -22,5 +22,5 @@ export const structures = [
   'NPN,NPAN,NPANV',
   'ANVPNCNV',
   'ANVPN',
-  'CNCNPRAN'
+  'CNCNPRAN',
 ];

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Incoming } from './Incoming';
 import { Outgoing } from './Outgoing';
-import { createBufferAttributes } from './utils';
 import type { BufferAttributes } from './types';
+import { createBufferAttributes } from './utils';
 
 type Props = {
   position: Float32Array;
@@ -24,7 +24,7 @@ export function Text({ position, incomingDelay, onComplete }: Props) {
   });
 
   useEffect(() => {
-    setState(prevState => {
+    setState((prevState) => {
       const { attributes: incoming, maxVisibleTime } =
         createBufferAttributes(position);
 

@@ -1,5 +1,5 @@
 import tw, { styled } from 'twin.macro';
-import { useRef, useState, useEffect, type ComponentProps } from 'react';
+import { useEffect, useRef, useState, type ComponentProps } from 'react';
 import { Button } from '@/components';
 
 const MAX_PARAGRAPHS = 4;
@@ -24,7 +24,7 @@ export function ParagraphCount({
 
   const handleToggleOpen = () => {
     console.log('toggle');
-    setIsOpen(prevIsOpen => !prevIsOpen);
+    setIsOpen((prevIsOpen) => !prevIsOpen);
   };
 
   const handleOptionClick = (value: number) => {
@@ -62,7 +62,7 @@ export function ParagraphCount({
       </span>
 
       <Dropdown $isOpen={isOpen && !disabled}>
-        {OPTIONS.map(num => (
+        {OPTIONS.map((num) => (
           <Option key={num} onClick={() => handleOptionClick(num)}>
             {num}
           </Option>

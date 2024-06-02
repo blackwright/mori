@@ -1,5 +1,5 @@
-import { LoveDeathAndRobots } from './client/LoveDeathAndRobots';
 import type { Metadata } from 'next';
+import { LoveDeathAndRobots } from './client/LoveDeathAndRobots';
 
 export const metadata: Metadata = {
   title: '❤️💀+🤖',

@@ -1,7 +1,7 @@
+import tw, { css, styled } from 'twin.macro';
 import { useState } from 'react';
-import tw, { styled, css } from 'twin.macro';
-import { keyframes } from 'styled-components';
 import { Check } from 'react-feather';
+import { keyframes } from 'styled-components';
 
 type Props = {
   color: string;

@@ -1,6 +1,6 @@
-import { Vector3, BackSide } from 'three';
-import { atmosphereVertexShader } from './atmosphere.vertex';
+import { BackSide, Vector3 } from 'three';
 import { atmosphereFragmentShader } from './atmosphere.fragment';
+import { atmosphereVertexShader } from './atmosphere.vertex';
 
 export const shader = {
   uniforms: {
@@ -9,10 +9,10 @@ export const shader = {
     mieCoefficient: { value: 0.085 },
     mieDirectionalG: { value: 0.995 },
     lightPosition: { value: new Vector3() },
-    up: { value: new Vector3(0, 1, 0) }
+    up: { value: new Vector3(0, 1, 0) },
   },
   vertexShader: atmosphereVertexShader,
   fragmentShader: atmosphereFragmentShader,
   side: BackSide,
-  depthWrite: false
+  depthWrite: false,
 };

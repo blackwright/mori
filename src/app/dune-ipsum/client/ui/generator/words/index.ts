@@ -1,3 +1,4 @@
+import { randomElement } from '../utils';
 import adjectives from './adjectives';
 import articles from './articles';
 import conjunctions from './conjunctions';
@@ -5,7 +6,6 @@ import nouns from './nouns';
 import prepositions from './prepositions';
 import quotes from './quotes';
 import verbs from './verbs';
-import { randomElement } from '../utils';
 
 export enum WordType {
   NOUN = 'N',
@@ -14,7 +14,7 @@ export enum WordType {
   PREPOSITION = 'P',
   CONJUNCTION = 'C',
   ADJECTIVE = 'A',
-  SEPARATOR = ','
+  SEPARATOR = ',',
 }
 
 export function getRandomWord(type: WordType): string {

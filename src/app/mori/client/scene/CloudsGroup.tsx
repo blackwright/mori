@@ -1,5 +1,5 @@
+import { useFrame, useThree } from '@react-three/fiber';
 import * as React from 'react';
-import { useThree, useFrame } from '@react-three/fiber';
 import { type Group } from 'three';
 import { usePauseOnHide } from '@/utils/three';
 import { Cloud } from './Cloud';
@@ -21,7 +21,7 @@ export function CloudsGroup({ count }: Props) {
       groupRef.current.rotateY(0.05 * delta);
       groupRef.current.rotateZ(0.003 * delta);
 
-      groupRef.current.children.forEach(cloud => {
+      groupRef.current.children.forEach((cloud) => {
         cloud.lookAt(camera.position);
       });
     }

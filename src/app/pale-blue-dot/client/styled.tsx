@@ -1,6 +1,4 @@
-'use client';
-
-import tw, { styled, css } from 'twin.macro';
+import tw, { css, styled } from 'twin.macro';
 import { keyframes } from 'styled-components';
 import { DOT_SIZE, LINK_PADDING } from './constants';
 
@@ -52,7 +50,7 @@ export const Beam = styled.div<{
   $width: string;
   $rotate: string;
   $alpha: number;
-}>(props => [
+}>((props) => [
   tw`
     absolute
     top-1/2

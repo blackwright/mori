@@ -1,7 +1,7 @@
-import GlobalStyles from '@/styles/GlobalStyles';
-import StyledComponentsRegistry from '@/lib/registry';
-import { Nav } from './Nav';
 import type { Metadata } from 'next';
+import StyledComponentsRegistry from '@/lib/registry';
+import GlobalStyles from '@/styles/GlobalStyles';
+import { Nav } from './Nav';
 
 export const metadata: Metadata = {
   title: {

@@ -1,7 +1,7 @@
 export function debounced(
   fn: (...args: any[]) => any,
   msToWait: number = 500,
-  isImmediate: boolean = false
+  isImmediate: boolean = false,
 ) {
   let timeoutId: number | null = null;
 

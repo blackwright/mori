@@ -1,9 +1,9 @@
+import { useFrame, useThree } from '@react-three/fiber';
 import * as React from 'react';
-import { useThree, useFrame } from '@react-three/fiber';
-import { Points, Color, BufferAttribute } from 'three';
+import { BufferAttribute, Color, Points } from 'three';
 import { usePauseOnHide } from '@/utils/three';
-import { starVertexShader } from '../shaders/star.vertex';
 import { starFragmentShader } from '../shaders/star.fragment';
+import { starVertexShader } from '../shaders/star.vertex';
 
 type Props = {
   count: number;

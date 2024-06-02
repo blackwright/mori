@@ -130,5 +130,5 @@ export default [
   'waylays',
   'will sing',
   'witnesses',
-  'wrestles'
+  'wrestles',
 ];

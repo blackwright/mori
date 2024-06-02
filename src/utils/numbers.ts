@@ -17,7 +17,7 @@ export function clamp(value: number, [min, max]: Clamp): number {
 
 export function clampNumberRange(
   value: number,
-  { input, output }: ClampRanges
+  { input, output }: ClampRanges,
 ) {
   const mappedValue =
     ((value - input[0]) * (output[1] - output[0])) / (input[1] - input[0]) +
@@ -37,7 +37,7 @@ export function isInteger(number: number) {
 export function randomNumberBetween(
   min: number,
   max: number,
-  decimalPrecision = 1
+  decimalPrecision = 1,
 ) {
   if (isInteger(min) && isInteger(max)) {
     return min + Math.floor(Math.random() * (max - min));

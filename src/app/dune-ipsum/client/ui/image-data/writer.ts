@@ -26,7 +26,7 @@ const defaultOptions: Required<Options> = {
   textAlign: 'left',
   verticalAlign: 'top',
   paddingX: 0,
-  paddingY: 0
+  paddingY: 0,
 };
 
 export class Writer {

@@ -28,5 +28,5 @@ export default [
   'wherever',
   'whether',
   'while',
-  'yet'
+  'yet',
 ];

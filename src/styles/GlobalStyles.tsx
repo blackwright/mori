@@ -1,7 +1,7 @@
 'use client';
 
-import { createGlobalStyle } from 'styled-components';
 import { GlobalStyles as BaseStyles } from 'twin.macro';
+import { createGlobalStyle } from 'styled-components';
 
 const CustomStyles = createGlobalStyle`
   @font-face {

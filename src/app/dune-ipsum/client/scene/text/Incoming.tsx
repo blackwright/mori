@@ -1,5 +1,5 @@
-import { useRef, useMemo, useEffect, useLayoutEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import type { BufferGeometry, ShaderMaterial } from 'three';
 import { incomingShader } from './shaders';
 import type { BufferAttributes } from './types';

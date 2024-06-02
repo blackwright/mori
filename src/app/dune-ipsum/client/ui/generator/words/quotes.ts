@@ -32,5 +32,5 @@ export default [
   'God created Arrakis to train the faithful.',
   'His eyes assumed the blue of the Ibad.',
   'The angry man rages denial.',
-  'They say she has pretensions of a literary nature.'
+  'They say she has pretensions of a literary nature.',
 ];
