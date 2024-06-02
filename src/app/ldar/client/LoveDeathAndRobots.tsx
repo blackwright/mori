@@ -1,8 +1,9 @@
 'use client';
 
-import tw from 'twin.macro';
+import tw, { theme } from 'twin.macro';
 import { motion, useAnimation } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
+import { Heart, Plus } from 'react-feather';
 import { FullScreenMain } from '@/components/FullScreenMain';
 import { shuffle } from '@/utils/numbers';
 import { characters } from './characters';
@@ -23,6 +24,8 @@ export function LoveDeathAndRobots() {
   const runSlots = useCallback(() => {
     setState((prevState) => ({
       key: prevState.key + 1,
+      // Commented code contains only the title screen icons:
+      // characterGroups: [[characters[30]], [characters[0]], [characters[15]]],
       characterGroups: [...new Array(3)].map(shuffleCharacters),
     }));
   }, [setState]);
@@ -46,8 +49,8 @@ export function LoveDeathAndRobots() {
       <GlobalStyles />
 
       <FullScreenMain tw="flex flex-col gap-12 items-center justify-center">
-        <Handle animate={controls} onTap={pullHandleSequence}>
-          +
+        <Handle animate={controls} onClick={pullHandleSequence}>
+          <Plus stroke-width="1" tw="w-full h-full" />
         </Handle>
 
         <SlotWindow>
@@ -77,18 +80,16 @@ const SlotWindow = tw.div`
 `;
 
 const Handle = tw(motion.button)`
-  flex
-  items-center
-  justify-center
+  relative
   bg-transparent
   cursor-pointer
-  rounded-full
-  [border-width: 3px]
-  border-white
   [width: 40px]
   [height: 40px]
-  [font-family: Arial, sans-serif]
-  [font-size: 8rem]
+  border
+  border-slate-100
+  rounded-full
+  hover:bg-slate-100/20
+  active:bg-slate-200/10
 `;
 
 const FontCredit = tw.a`
