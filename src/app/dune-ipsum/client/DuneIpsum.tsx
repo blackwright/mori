@@ -11,7 +11,7 @@ import { Controls } from './ui/controls';
 import { getRandomQuote } from './ui/generator/words';
 import { InterfaceWrapper } from './styled';
 
-export function Dune() {
+export function DuneIpsum() {
   const [count, setCount] = useState(1);
 
   const [text, setText] = useState(getRandomQuote());

@@ -21,8 +21,8 @@ export const routes: Route[] = [
     img: '/thumbnails/rise.png',
   },
   {
-    title: 'Dune',
-    path: '/dune',
+    title: 'Dune Ipsum',
+    path: '/dune-ipsum',
     img: '/thumbnails/dune.png',
   },
   {
