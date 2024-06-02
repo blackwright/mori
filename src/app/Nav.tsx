@@ -85,6 +85,8 @@ const Header = styled.header<StyledNavProps>(({ $isNavOpen }) => [
     h-16
     pl-8
     pr-20
+    border-b
+    border-slate-800
   `,
 
   $isNavOpen ? tw`opacity-100` : tw`opacity-0`,
@@ -123,6 +125,7 @@ const NavContainer = styled.nav<StyledNavProps>(({ $isNavOpen }) => [
     flex-grow
     w-screen
     [height: calc(100% - 4rem)]
+    bg-slate-900
     transition-all
   `,
 

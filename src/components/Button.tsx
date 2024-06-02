@@ -8,11 +8,12 @@ export const Button = tw.button`
   cursor-pointer
   py-0.5
   px-4
-  min-w-10
+  min-w-8
+  min-h-8
   border
   border-slate-100
   rounded
-  text-slate-50
+  text-slate-100
   hover:bg-slate-100/20
   active:bg-slate-200/10
   disabled:(

@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
+import { Button } from '@/components';
 import { ParagraphCount } from './ParagraphCount';
-import { Button } from './styled';
 import { CopyButton } from './CopyButton';
 
 type Props = {

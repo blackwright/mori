@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Button } from './styled';
+import { Button } from '@/components';
 
 type Props = {
   text: string;

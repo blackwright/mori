@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect, type ComponentProps } from 'react';
 import tw, { styled } from 'twin.macro';
-import { Button } from './styled';
+import { useRef, useState, useEffect, type ComponentProps } from 'react';
+import { Button } from '@/components';
 
 const MAX_PARAGRAPHS = 4;
 
