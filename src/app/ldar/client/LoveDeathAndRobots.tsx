@@ -77,6 +77,7 @@ const SlotWindow = tw.div`
   [width: 300px]
   [height: 100px]
   overflow-hidden
+  select-none
 `;
 
 const Handle = tw(motion.button)`
