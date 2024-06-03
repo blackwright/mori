@@ -3,7 +3,7 @@
 import { Canvas } from '@react-three/fiber';
 import { useCallback, useState } from 'react';
 import { MathUtils } from 'three';
-import { FullScreenMain } from '@/components/FullScreenMain';
+import { FullScreenMain } from '@/components';
 import { Scene } from './scene';
 import { InterfaceWrapper } from './styled';
 import { Controls } from './ui/controls';

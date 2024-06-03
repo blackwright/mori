@@ -2,7 +2,7 @@
 
 import 'twin.macro';
 import { Canvas } from '@react-three/fiber';
-import { FullScreenMain } from '@/components/FullScreenMain';
+import { FullScreenMain } from '@/components';
 import { Scene } from './Scene';
 
 export function Rise() {

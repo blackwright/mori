@@ -1,7 +1,7 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import { FullScreenMain } from '@/components/FullScreenMain';
+import { FullScreenMain } from '@/components';
 import { Scene } from './scene';
 
 export function Mori() {

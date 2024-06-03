@@ -1,10 +1,10 @@
 'use client';
 
-import tw, { theme } from 'twin.macro';
+import tw from 'twin.macro';
 import { motion, useAnimation } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
-import { Heart, Plus } from 'react-feather';
-import { FullScreenMain } from '@/components/FullScreenMain';
+import { Plus } from 'react-feather';
+import { FullScreenMain } from '@/components';
 import { shuffle } from '@/utils/numbers';
 import { characters } from './characters';
 import { GlobalStyles } from './GlobalStyles';
