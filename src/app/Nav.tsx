@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { Plus } from 'react-feather';
+import { Button } from '@/components';
 import { routes } from './routes';
 
 export function Nav() {
@@ -28,7 +30,7 @@ export function Nav() {
         </Header>
 
         <MenuButton onClick={handleClickMenuButton} $isNavOpen={isNavOpen}>
-          <Cross>&#x2b;</Cross>
+          <Plus />
         </MenuButton>
 
         <NavContainer $isNavOpen={isNavOpen}>
@@ -92,7 +94,7 @@ const Header = styled.header<StyledNavProps>(({ $isNavOpen }) => [
   $isNavOpen ? tw`opacity-100` : tw`opacity-0`,
 ]);
 
-const MenuButton = styled.button<StyledNavProps>(({ $isNavOpen }) => [
+const MenuButton = styled(Button)<StyledNavProps>(({ $isNavOpen }) => [
   tw`
     absolute
     top-4
@@ -104,19 +106,12 @@ const MenuButton = styled.button<StyledNavProps>(({ $isNavOpen }) => [
     pointer-events-auto
     w-8
     h-8
-    bg-rose-950
     p-0
     transition-all
   `,
 
   $isNavOpen && tw`rotate-45`,
 ]);
-
-const Cross = tw.div`
-  text-slate-50
-  text-xl
-  mb-0.5
-`;
 
 const NavContainer = styled.nav<StyledNavProps>(({ $isNavOpen }) => [
   tw`
