@@ -19,7 +19,7 @@ export function Mori() {
       >
         <color attach="background" args={[0, 0, 0.01]} />
         <Scene />
-        <CameraControls />
+        <CameraControls minDistance={0} maxDistance={25} />
       </Canvas>
     </FullScreenMain>
   );
