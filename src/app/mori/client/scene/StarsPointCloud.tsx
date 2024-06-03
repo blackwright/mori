@@ -22,15 +22,9 @@ export function StarsPointCloud({ count }: Props) {
     const positions = new Float32Array(count * 3);
     const alphas = new Float32Array(count);
 
-    for (let i = 0; i < count; i += 3) {
+    for (let i = 0; i < count; i++) {
       positions[i] = Math.random() * 100 - 50;
-      positions[i + 1] = Math.random() * 100 - 50;
-      positions[i + 2] = Math.random() * 100 - 50;
-
-      alphas[i / 3] = Math.random();
-      alphas[i / 3 + 1] = Math.random();
-
-      alphas[i / 3 + 2] = Math.random();
+      alphas[i] = Math.random();
     }
 
     return [positions, alphas];
@@ -39,7 +33,7 @@ export function StarsPointCloud({ count }: Props) {
   const alphaDirections = React.useMemo(() => {
     const alphaDirections = new Float32Array(alphas.length);
 
-    for (let i = 0; i < alphaDirections.length; i++) {
+    for (let i = 1; i < alphaDirections.length; i++) {
       alphaDirections[i] = Math.random() < 0.5 ? 1 : -1;
     }
 
