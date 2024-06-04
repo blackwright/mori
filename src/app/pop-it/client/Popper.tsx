@@ -2,28 +2,31 @@ import tw, { css, styled } from 'twin.macro';
 import { useState } from 'react';
 import { Check } from 'react-feather';
 import { keyframes } from 'styled-components';
+import { Ripples } from './Ripples';
 
 type Props = {
   color: string;
   index: number;
 };
 
-export function Circle({ color, index }: Props) {
-  const [hasHovered, setHasHovered] = useState(false);
+export function Popper({ color, index }: Props) {
+  const [isPressed, setIsPressed] = useState(false);
 
   return (
-    <OuterCircle
+    <Button
       $color={color}
-      $hasHovered={hasHovered}
+      $isPressed={isPressed}
       className="group"
-      onMouseEnter={() => setHasHovered(true)}
+      onPointerDown={() => setIsPressed(true)}
     >
-      <InnerCircle $color={color} $index={index} $hasHovered={hasHovered}>
-        <div css={hasHovered ? tw`visible` : tw`invisible`}>
+      <InnerCircle $color={color} $index={index} $isPressed={isPressed}>
+        <div css={isPressed ? tw`visible` : tw`invisible`}>
           <Check size="0.75rem" />
         </div>
       </InnerCircle>
-    </OuterCircle>
+
+      <Ripples />
+    </Button>
   );
 }
 
@@ -44,10 +47,10 @@ const backgroundFade = keyframes`
   }
 `;
 
-const OuterCircle = styled.div<{
+const Button = styled.button<{
   $color: string;
-  $hasHovered: boolean;
-}>(({ $color, $hasHovered }) => [
+  $isPressed: boolean;
+}>(({ $color, $isPressed }) => [
   tw`
     relative
     cursor-pointer
@@ -59,10 +62,12 @@ const OuterCircle = styled.div<{
     aspect-square
     border
     rounded-full
+    overflow-hidden
+    [transition: all 1s ease-in-out]
   `,
 
-  $hasHovered
-    ? tw`border-slate-100`
+  $isPressed
+    ? tw`border-slate-100/100`
     : css`
         border-color: ${$color};
       `,
@@ -71,8 +76,8 @@ const OuterCircle = styled.div<{
 const InnerCircle = styled.div<{
   $color: string;
   $index: number;
-  $hasHovered: boolean;
-}>(({ $color, $index, $hasHovered }) => [
+  $isPressed: boolean;
+}>(({ $color, $index, $isPressed }) => [
   tw`
     flex
     items-center
@@ -82,11 +87,12 @@ const InnerCircle = styled.div<{
     rounded-full
     transition-all
     transform-gpu
+    pointer-events-none
   `,
 
-  $hasHovered
+  $isPressed
     ? tw`
-        bg-slate-50/10
+        bg-slate-200/10
       `
     : css`
         --bg-color: ${$color};
