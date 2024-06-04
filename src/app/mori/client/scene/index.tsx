@@ -1,7 +1,7 @@
 import { CloudsGroup } from './CloudsGroup';
 import { StarsPointCloud } from './StarsPointCloud';
 
-export const Scene: React.FC = () => {
+export function Scene() {
   return (
     <>
       <StarsPointCloud count={2_000} />
@@ -9,4 +9,4 @@ export const Scene: React.FC = () => {
       <ambientLight args={[0xffffff, 1]} />
     </>
   );
-};
+}

@@ -8,7 +8,7 @@ type Props = {
   onChange: (imageData: ImageData, particleGap: number) => void;
 };
 
-export const ImageData: React.FC<Props> = ({ text, onChange }) => {
+export function ImageData({ text, onChange }: Props) {
   const wrapperRef = React.useRef<HTMLDivElement | null>(null);
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
 
@@ -55,7 +55,7 @@ export const ImageData: React.FC<Props> = ({ text, onChange }) => {
       <canvas ref={canvasRef} />
     </CanvasWrapper>
   );
-};
+}
 
 const CanvasWrapper = styled.div`
   flex-grow: 1;
