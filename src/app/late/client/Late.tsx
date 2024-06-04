@@ -171,7 +171,7 @@ export function Late() {
   }, []);
 
   return (
-    <MotionBackground animate={grayscaleFlash}>
+    <MotionBackground animate={grayscaleFlash} tw="cursor-pointer">
       <CityCanvas ref={cityCanvasRef} />
       <Light animate={outdoorFlash} />
       <RainCanvas ref={rainCanvasRef} />
