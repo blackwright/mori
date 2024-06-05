@@ -78,6 +78,10 @@ export function Late() {
   useDebouncedResize(() => {
     const { innerWidth, innerHeight, devicePixelRatio } = window;
 
+    if (clockIntervalRef.current) {
+      window.clearInterval(clockIntervalRef.current);
+    }
+
     const createHome = () => {
       const homeCanvas = homeCanvasRef.current;
 
@@ -95,16 +99,10 @@ export function Late() {
           () => home.clock.tick(),
           1_000,
         );
-
-        return () => {
-          if (clockIntervalRef.current) {
-            window.clearInterval(clockIntervalRef.current);
-          }
-        };
       }
     };
 
-    return createHome();
+    createHome();
   }, []);
 
   const catCanvasRef = useRef<HTMLCanvasElement>(null);
