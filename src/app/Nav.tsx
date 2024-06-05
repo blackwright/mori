@@ -147,10 +147,14 @@ const CardTitle = tw.h2`
   text-white
   text-2xl
   opacity-0
+  p-4
+  rounded
+  border
+  border-slate-100
   transition-all
   group-hover:(
-    bg-rose-950
-    opacity-90
+    bg-slate-950/75
+    opacity-100
   )
 `;
 
