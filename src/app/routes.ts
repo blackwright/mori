@@ -35,9 +35,4 @@ export const routes: Route[] = [
     path: '/ldar',
     img: '/thumbnails/ldar.png',
   },
-  {
-    title: 'Pop It',
-    path: '/pop-it',
-    img: '/thumbnails/pop-it.png',
-  },
 ];
