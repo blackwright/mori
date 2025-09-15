@@ -14,8 +14,9 @@ export const Button = tw.button`
   border-slate-100
   rounded
   text-slate-100
-  hover:bg-slate-100/20
-  active:bg-slate-200/10
+  bg-slate-200/10
+  hover:bg-slate-200/40
+  active:bg-slate-200/20
   disabled:(
     cursor-not-allowed
     opacity-50 

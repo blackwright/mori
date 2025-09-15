@@ -3,19 +3,31 @@
 import tw, { styled } from 'twin.macro';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Plus } from 'react-feather';
-import { Button } from '@/components';
+import { NAV_SEARCH_PARAM_KEY, NAV_SEARCH_PARAM_VALUE } from './constants';
+import { MenuButton } from './MenuButton';
 import { routes } from './routes';
+import type { StyledNavProps } from './types';
 
 export function Nav() {
+  const { replace } = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const isNavOpen =
+    searchParams.get(NAV_SEARCH_PARAM_KEY) === NAV_SEARCH_PARAM_VALUE;
 
-  const handleClickMenuButton = () => {
-    setIsNavOpen((prevIsOpen) => !prevIsOpen);
+  const handleChangeIsNavOpen = (newIsNavOpen: boolean) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+
+    if (newIsNavOpen) {
+      newSearchParams.set(NAV_SEARCH_PARAM_KEY, NAV_SEARCH_PARAM_VALUE);
+    } else {
+      newSearchParams.delete(NAV_SEARCH_PARAM_KEY);
+    }
+
+    replace(`${pathname}?${newSearchParams}`);
   };
 
   return (
@@ -24,14 +36,12 @@ export function Nav() {
         <Header $isNavOpen={isNavOpen}>
           <h1>{routes.find((route) => route.path === pathname)?.title}</h1>
 
-          <Link href="/" onClick={() => setIsNavOpen(false)}>
+          <Link href="/" onClick={() => handleChangeIsNavOpen(false)}>
             About
           </Link>
         </Header>
 
-        <MenuButton onClick={handleClickMenuButton} $isNavOpen={isNavOpen}>
-          <Plus />
-        </MenuButton>
+        <MenuButton tw="absolute top-4 right-4" />
 
         <NavContainer $isNavOpen={isNavOpen}>
           <Grid>
@@ -39,7 +49,7 @@ export function Nav() {
               <Card key={route.path} className="group">
                 <Link
                   href={route.path}
-                  onClick={() => setIsNavOpen(false)}
+                  onClick={() => handleChangeIsNavOpen(false)}
                   tw="relative flex items-center justify-center w-full h-full p-4"
                 >
                   <Image
@@ -59,10 +69,6 @@ export function Nav() {
     </>
   );
 }
-
-type StyledNavProps = {
-  $isNavOpen: boolean;
-};
 
 const Container = styled.div<StyledNavProps>(({ $isNavOpen }) => [
   tw`
@@ -92,25 +98,6 @@ const Header = styled.header<StyledNavProps>(({ $isNavOpen }) => [
   `,
 
   $isNavOpen ? tw`opacity-100` : tw`opacity-0`,
-]);
-
-const MenuButton = styled(Button)<StyledNavProps>(({ $isNavOpen }) => [
-  tw`
-    absolute
-    top-4
-    right-4
-    flex
-    items-center
-    justify-center
-    cursor-pointer
-    pointer-events-auto
-    w-8
-    h-8
-    p-0
-    transition-all
-  `,
-
-  $isNavOpen && tw`rotate-45`,
 ]);
 
 const NavContainer = styled.nav<StyledNavProps>(({ $isNavOpen }) => [

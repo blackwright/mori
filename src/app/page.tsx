@@ -1,11 +1,30 @@
 import 'twin.macro';
-import { AboutContainer } from './AboutContainer';
+import { MenuButton } from './MenuButton';
+import { AboutContainer, Callout, CalloutParagraph } from './styled';
 
 export default function AboutPage() {
   return (
     <AboutContainer>
       <p>
-        I'm Jerry Gao, a front-end engineer working at{' '}
+        I'm Jerry Gao, a front-end software engineer in New York. I enjoy
+        building interactive UIs and the work that goes into maintaining a great
+        developer experience.
+      </p>
+      <Callout>
+        <CalloutParagraph>
+          <span>This site is a collection of code experiments:</span>
+          <span>
+            <MenuButton />
+          </span>
+        </CalloutParagraph>
+
+        <p>
+          You can view the{' '}
+          <a href="https://github.com/blackwright/mori">source</a>.
+        </p>
+      </Callout>
+      <p>
+        I currently work at{' '}
         <a href="https://www.courierhealth.com">Courier Health</a>, where I
         build UI to communicate insights used by patient services programs to
         improve patient outcomes.
@@ -24,12 +43,8 @@ export default function AboutPage() {
         Massachusetts College of Art and Design.
       </p>
       <p>
-        Here's my <a href="https://github.com/blackwright">GitHub</a> and{' '}
-        <a href="https://www.linkedin.com/in/blackwright/">LinkedIn</a>.
-      </p>
-      <p>
-        This site is a collection of code experiments. You can view the{' '}
-        <a href="https://github.com/blackwright/mori">source</a>.
+        Here are links to my <a href="https://github.com/blackwright">GitHub</a>{' '}
+        and <a href="https://www.linkedin.com/in/blackwright/">LinkedIn</a>.
       </p>
     </AboutContainer>
   );
