@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import StyledComponentsRegistry from '@/lib/registry';
 import GlobalStyles from '@/styles/GlobalStyles';
 import { robotoSlab } from './fonts';
@@ -20,7 +21,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
           {props.children}
 
-          <Nav />
+          <Suspense fallback={null}>
+            <Nav />
+          </Suspense>
         </StyledComponentsRegistry>
       </body>
     </html>

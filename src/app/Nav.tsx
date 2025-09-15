@@ -4,7 +4,6 @@ import tw, { styled } from 'twin.macro';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Plus } from 'react-feather';
 import { NAV_SEARCH_PARAM_KEY, NAV_SEARCH_PARAM_VALUE } from './constants';
 import { MenuButton } from './MenuButton';
 import { routes } from './routes';
