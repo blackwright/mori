@@ -30,5 +30,5 @@ export const Callout = tw.div`
 export const CalloutParagraph = tw.p`
   flex
   items-center
-  gap-2
+  gap-3
 `;

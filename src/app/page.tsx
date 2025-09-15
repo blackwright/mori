@@ -12,7 +12,7 @@ export default function AboutPage() {
       </p>
       <Callout>
         <CalloutParagraph>
-          <span>This site is a collection of code experiments:</span>
+          <span>This site is a collection of code experiments</span>
           <span>
             <MenuButton />
           </span>
@@ -26,12 +26,10 @@ export default function AboutPage() {
       <p>
         I currently work at{' '}
         <a href="https://www.courierhealth.com">Courier Health</a>, where I
-        build UI to communicate insights used by patient services programs to
-        improve patient outcomes.
+        build UI to improve healthcare outcomes under patient services programs.
       </p>
       <p>
-        Previously, I was part of the authoring experience team at{' '}
-        <a href="https://www.edapp.com/">EdApp</a> and a full-stack developer at{' '}
+        Previously, I was part of the authoring experience team at EdApp (acquired by <a href="https://training.safetyculture.com/edapp-now-sc-training/">SafetyCulture</a>) and a full-stack developer at{' '}
         <a href="https://www.newtonx.com/">NewtonX</a>.
       </p>
       <p>
@@ -39,7 +37,7 @@ export default function AboutPage() {
         <a href="https://www.coroflot.com/jerry-gao">
           designer and illustrator
         </a>{' '}
-        before I learned how to code. I majored in illustration at the
+        before I learned how to code, having majored in illustration at the
         Massachusetts College of Art and Design.
       </p>
       <p>
