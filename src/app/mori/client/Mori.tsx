@@ -34,7 +34,7 @@ export function Mori() {
       <AnimatePresence>
         {areDetailsOpen && (
           <Drawer>
-            <p>A twinkling night sky rendered with react-three-fiber &mdash; click and drag to look around.</p>
+            <p>A twinkling night sky rendered with react-three-fiber &mdash; try looking around.</p>
             <p>Clouds use one of two sprite images, and are randomly positioned and rotated to break up visual consistency.</p>
             <p>Stars are a slowly rotating spherical point cloud where each point is assigned a randomized `alpha` value that waxes and wanes over time.</p>
             <p>This value is used by a vertex shader to determine the size of each point and a fragment shader to determine its transparency.</p>
