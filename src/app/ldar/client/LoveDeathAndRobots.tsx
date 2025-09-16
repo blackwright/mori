@@ -1,10 +1,12 @@
 'use client';
 
 import tw from 'twin.macro';
-import { motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
+import { PlusCircle } from 'react-feather';
 import { Plus } from 'react-feather';
-import { FullScreenMain } from '@/components';
+import { useDetailsSearchParams } from '@/app/hooks';
+import { FullScreenMain, Drawer } from '@/components';
 import { shuffle } from '@/utils/numbers';
 import { characters } from './characters';
 import { GlobalStyles } from './GlobalStyles';
@@ -16,6 +18,8 @@ type State = {
 };
 
 export function LoveDeathAndRobots() {
+  const [areDetailsOpen] = useDetailsSearchParams();
+
   const [state, setState] = useState<State>({
     key: 0,
     characterGroups: [],
@@ -28,7 +32,7 @@ export function LoveDeathAndRobots() {
       // characterGroups: [[characters[30]], [characters[0]], [characters[15]]],
       characterGroups: [...new Array(3)].map(shuffleCharacters),
     }));
-  }, [setState]);
+  }, []);
 
   useEffect(() => {
     runSlots();
@@ -61,12 +65,16 @@ export function LoveDeathAndRobots() {
           ))}
         </SlotWindow>
 
-        <FontCredit
-          href="https://uxuihero.com/love-death-robots-free-fan-iconfont/"
-          tw="p-2 lg:p-4"
-        >
-          Icons by Michael Chernayk + Ofer Ariel
-        </FontCredit>
+          <AnimatePresence>
+            {areDetailsOpen && (
+              <Drawer>
+                <p>A recreation of the slot machine-style icon animation from the series <em>Love Death + Robots</em> &mdash; click the <PlusCircle tw="inline" /> to pull.</p>
+                <p>
+                  Icons by <a href="https://dribbble.com/shots/6227334-Love-Death-Robots-Icons-Font" target="_blank">Michael Chernayk + Ofer Ariel</a>.
+                </p>
+              </Drawer>
+            )}
+          </AnimatePresence>
       </FullScreenMain>
     </>
   );
@@ -86,17 +94,11 @@ const Handle = tw(motion.button)`
   cursor-pointer
   [width: 40px]
   [height: 40px]
-  border
+  border-2
   border-slate-100
   rounded-full
   hover:bg-slate-100/20
   active:bg-slate-200/10
-`;
-
-const FontCredit = tw.a`
-  absolute
-  bottom-0
-  right-0
 `;
 
 function shuffleCharacters() {

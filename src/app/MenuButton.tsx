@@ -4,7 +4,7 @@ import tw, { styled } from 'twin.macro';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Plus } from 'react-feather';
 import { Button } from '@/components';
-import { NAV_SEARCH_PARAM_KEY, NAV_SEARCH_PARAM_VALUE } from './constants';
+import { NAV_SEARCH_PARAM } from './constants';
 import type { StyledNavProps } from './types';
 
 const StyledButton = styled(Button)<StyledNavProps>(({ $isNavOpen }) => [
@@ -33,16 +33,16 @@ export function MenuButton({ className }: Props) {
   const searchParams = useSearchParams();
 
   const isNavOpen =
-    searchParams.get(NAV_SEARCH_PARAM_KEY) === NAV_SEARCH_PARAM_VALUE;
+    searchParams.get(NAV_SEARCH_PARAM.key) === NAV_SEARCH_PARAM.value;
 
   const handleToggleIsNavOpen = () => {
     const newSearchParams = new URLSearchParams(searchParams);
     const newIsNavOpen = !isNavOpen;
 
     if (newIsNavOpen) {
-      newSearchParams.set(NAV_SEARCH_PARAM_KEY, NAV_SEARCH_PARAM_VALUE);
+      newSearchParams.set(NAV_SEARCH_PARAM.key, NAV_SEARCH_PARAM.value);
     } else {
-      newSearchParams.delete(NAV_SEARCH_PARAM_KEY);
+      newSearchParams.delete(NAV_SEARCH_PARAM.key);
     }
 
     replace(`${pathname}?${newSearchParams}`);

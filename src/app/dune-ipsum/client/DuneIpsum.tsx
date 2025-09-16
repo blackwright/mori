@@ -3,22 +3,23 @@
 import { Canvas } from '@react-three/fiber';
 import { useCallback, useState } from 'react';
 import { MathUtils } from 'three';
-import { FullScreenMain } from '@/components';
+import { FullScreenMain, Drawer } from '@/components';
+import { AnimatePresence } from 'framer-motion';
 import { Scene } from './scene';
 import { InterfaceWrapper } from './styled';
 import { Controls } from './ui/controls';
 import { Generator } from './ui/generator';
 import { getRandomQuote } from './ui/generator/words';
 import { ImageData } from './ui/image-data';
+import { useDetailsSearchParams } from '@/app/hooks';
 
 export function DuneIpsum() {
   const [count, setCount] = useState(1);
-
   const [text, setText] = useState(getRandomQuote());
-
   const [position, setPosition] = useState<Float32Array | null>(null);
-
   const [isRendering, setIsRendering] = useState(true);
+
+  const [areDetailsOpen] = useDetailsSearchParams();
 
   const handleImageData = useCallback(
     (imageData: ImageData, particleGap: number) => {
@@ -74,6 +75,7 @@ export function DuneIpsum() {
           />
         </Canvas>
       )}
+
       <Generator
         paragraphs={count}
         minSentences={1}
@@ -94,6 +96,18 @@ export function DuneIpsum() {
           </InterfaceWrapper>
         )}
       </Generator>
+
+      <AnimatePresence>
+        {areDetailsOpen && (
+          <Drawer>
+            <p>A Dune-themed lorem ipsum generator built with react-three-fiber.</p>
+            <p>Whenever text gets generated, it's constructed from a predetermined pool of vocabulary and sentence structures.</p>
+            <p>The text is then painted to an invisible canvas element and formatted to fit the screen. This allows the text to be sized, broken up, and positioned in a more reliable manner across varying screen sizes.</p>
+            <p>From the canvas, pixel data is converted into an array of position vector values. Each particle is also associated with a time value that determines when it becomes visible (pixels further to the right generally become visible later).</p>
+            <p>Finally, the particles are rendered by a vertex shader utilizing the position values, while the "animation" is accomplished with a fragment shader that either paints or discards pixels based on the elapsed time.</p>
+          </Drawer>
+        )}
+      </AnimatePresence>
     </FullScreenMain>
   );
 }

@@ -4,7 +4,8 @@ import tw, { styled } from 'twin.macro';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { NAV_SEARCH_PARAM_KEY, NAV_SEARCH_PARAM_VALUE } from './constants';
+import { NAV_SEARCH_PARAM, DETAILS_SEARCH_PARAM } from './constants';
+import { DetailsButton } from './DetailsButton';
 import { MenuButton } from './MenuButton';
 import { routes } from './routes';
 import type { StyledNavProps } from './types';
@@ -15,15 +16,15 @@ export function Nav() {
   const searchParams = useSearchParams();
 
   const isNavOpen =
-    searchParams.get(NAV_SEARCH_PARAM_KEY) === NAV_SEARCH_PARAM_VALUE;
+    searchParams.get(NAV_SEARCH_PARAM.key) === NAV_SEARCH_PARAM.value;
 
   const handleChangeIsNavOpen = (newIsNavOpen: boolean) => {
     const newSearchParams = new URLSearchParams(searchParams);
 
     if (newIsNavOpen) {
-      newSearchParams.set(NAV_SEARCH_PARAM_KEY, NAV_SEARCH_PARAM_VALUE);
+      newSearchParams.set(NAV_SEARCH_PARAM.key, NAV_SEARCH_PARAM.value);
     } else {
-      newSearchParams.delete(NAV_SEARCH_PARAM_KEY);
+      newSearchParams.delete(NAV_SEARCH_PARAM.key);
     }
 
     replace(`${pathname}?${newSearchParams}`);
@@ -31,6 +32,8 @@ export function Nav() {
 
   return (
     <>
+      <DetailsButton />
+
       <Container $isNavOpen={isNavOpen}>
         <Header $isNavOpen={isNavOpen}>
           <h1>{routes.find((route) => route.path === pathname)?.title}</h1>

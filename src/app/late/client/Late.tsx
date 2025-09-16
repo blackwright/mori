@@ -3,18 +3,21 @@
 import tw, { css, styled } from 'twin.macro';
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
-import { FullScreenMain } from '@/components/FullScreenMain';
+import { Drawer, FullScreenMain } from '@/components';
 import { useDebouncedResize } from '@/utils/react';
+import { AnimatePresence } from 'framer-motion';
 import { useAnimations } from './animations';
+import { useDetailsSearchParams } from '@/app/hooks';
 import { City } from './scene/city';
 import { Cat, Home } from './scene/home';
 import { Rainfall } from './scene/rain';
 
 export function Late() {
   const animationFrameId = useRef<number | null>(null);
-
   const cityCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const cityRef = useRef<City | null>(null);
+
+  const [areDetailsOpen] = useDetailsSearchParams();
 
   useDebouncedResize(() => {
     const createCity = () => {
@@ -165,6 +168,10 @@ export function Late() {
       }
 
       document.removeEventListener('click', flashSequence);
+
+      grayscaleFlash.stop();
+      outdoorFlash.stop();
+      indoorFlash.stop();
     };
   }, []);
 
@@ -176,6 +183,18 @@ export function Late() {
       <Canvas ref={homeCanvasRef} />
       <Canvas ref={catCanvasRef} />
       <Light animate={indoorFlash} />
+
+      <AnimatePresence>
+        {areDetailsOpen && (
+          <Drawer>
+            <p>An exercise in drawing on HTML canvas &mdash; click for lightning.</p>
+            <p>The scene is built with layers of canvas &mdash; the city buildings, the window, the rain, the home interior, and the cat are all rendered on separate canvas elements to make animating through repaints possible.</p>
+            <p>Everything is sized based on relative measurements, and everything will attempt to repaint itself whenever the screen size changes.</p>
+            <p>Certain elements, such as the buildings and the artwork in the home, are rendered with a degree of randomization so they appear differently on each page load.</p>
+            <p>I learned that drawing shapes with math is fun to figure out, but very time-consuming.</p>
+          </Drawer>
+        )}
+      </AnimatePresence>
     </MotionBackground>
   );
 }

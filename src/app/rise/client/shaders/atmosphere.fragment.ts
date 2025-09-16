@@ -37,7 +37,7 @@ void main() {
   float sR = rayleighZenithLength * inverse;
   float sM = mieZenithLength * inverse;
 
-  vec3 Fex = exp(-(vBetaR * sR + vBetaM * sM));
+  vec3 factorExtinction = exp(-(vBetaR * sR + vBetaM * sM));
 
   float cosTheta = dot(direction, vLightDirection);
 
@@ -47,16 +47,16 @@ void main() {
   float mPhase = hgPhase(cosTheta, mieDirectionalG);
   vec3 betaMTheta = vBetaM * mPhase;
 
-  vec3 Lin = pow(vLightE * ((betaRTheta + betaMTheta) / (vBetaR + vBetaM)) * (1.0 - Fex), vec3(1.5));
-  Lin *= mix(vec3(1.0), pow(vLightE * ((betaRTheta + betaMTheta) / (vBetaR + vBetaM)) * Fex, vec3(1.0 / 2.0)), clamp(pow(1.0 - dot(up, vLightDirection), 5.0), 0.0, 1.0));
+  vec3 Lin = pow(vLightE * ((betaRTheta + betaMTheta) / (vBetaR + vBetaM)) * (1.0 - factorExtinction), vec3(1.5));
+  Lin *= mix(vec3(1.0), pow(vLightE * ((betaRTheta + betaMTheta) / (vBetaR + vBetaM)) * factorExtinction, vec3(1.0 / 2.0)), clamp(pow(1.0 - dot(up, vLightDirection), 5.0), 0.0, 1.0));
 
   float theta = acos(direction.y);
   float phi = atan(direction.z, direction.x);
   vec2 uv = vec2(phi, theta) / vec2(2.0 * pi, pi) + vec2(0.5, 0.0);
-  vec3 L0 = vec3(0.1) * Fex;
+  vec3 L0 = vec3(0.1) * factorExtinction;
 
   float lightDisc = smoothstep(lightAngularDiameterCos, lightAngularDiameterCos + 0.00002, cosTheta);
-  L0 += (vLightE * 19000.0 * Fex) * lightDisc;
+  L0 += (vLightE * 19000.0 * factorExtinction) * lightDisc;
 
   vec3 texColor = (Lin + L0) * 0.04 + vec3(0.0, 0.0003, 0.00075);
 

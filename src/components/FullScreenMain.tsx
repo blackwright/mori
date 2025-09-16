@@ -5,4 +5,5 @@ export const FullScreenMain = tw.main`
   w-screen
   h-screen
   bg-slate-900
+  overflow-hidden
 `;
