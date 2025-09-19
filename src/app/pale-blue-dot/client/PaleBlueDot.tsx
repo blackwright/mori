@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { LINK_POSITION_OFFSET } from './constants';
 import { useDetailsSearchParams } from '@/app/hooks';
 import { Drawer } from '@/components';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 import {
   Background,
   Beam,

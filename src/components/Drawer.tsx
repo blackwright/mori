@@ -1,7 +1,7 @@
 'use client';
 
 import tw from 'twin.macro';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
 
 const slidingAnimation = {

@@ -1,7 +1,7 @@
 'use client';
 
 import tw from 'twin.macro';
-import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'motion/react';
 import { useCallback, useEffect, useState } from 'react';
 import { PlusCircle } from 'react-feather';
 import { Plus } from 'react-feather';

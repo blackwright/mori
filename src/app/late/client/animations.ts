@@ -1,4 +1,4 @@
-import { useAnimation } from 'framer-motion';
+import { useAnimation } from 'motion/react';
 import { useCallback, useMemo, useEffect } from 'react';
 
 const LIGHTNING_ENTER_DURATION = 0.025;

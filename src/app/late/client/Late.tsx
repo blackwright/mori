@@ -1,11 +1,10 @@
 'use client';
 
 import tw, { css, styled } from 'twin.macro';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useRef } from 'react';
 import { Drawer, FullScreenMain } from '@/components';
 import { useDebouncedResize } from '@/utils/react';
-import { AnimatePresence } from 'framer-motion';
 import { useAnimations } from './animations';
 import { useDetailsSearchParams } from '@/app/hooks';
 import { City } from './scene/city';

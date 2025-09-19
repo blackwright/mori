@@ -28,7 +28,7 @@ export default function AboutPage() {
         <p>
           I currently work at{' '}
           <a href="https://www.courierhealth.com">Courier Health</a>, where I
-          build UI to improve healthcare outcomes under patient services programs.
+          build UI to improve healthcare outcomes for patient services programs.
         </p>
         <p>
           Previously, I was part of the authoring experience team at EdApp (acquired by <a href="https://training.safetyculture.com/edapp-now-sc-training/">SafetyCulture</a>) and a full-stack developer at{' '}

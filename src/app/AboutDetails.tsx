@@ -2,7 +2,7 @@
 
 import 'twin.macro';
 import { useDetailsSearchParams } from './hooks';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 import { Drawer } from '@/components';
 
 export function AboutDetails() {

@@ -1,5 +1,5 @@
 import tw from 'twin.macro';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Icon } from './Icon';
 
 type Props = {

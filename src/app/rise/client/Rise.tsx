@@ -5,7 +5,7 @@ import { Canvas } from '@react-three/fiber';
 import { FullScreenMain, Drawer } from '@/components';
 import { useDetailsSearchParams } from '@/app/hooks';
 import { Scene } from './Scene';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 
 export function Rise() {
   const [areDetailsOpen] = useDetailsSearchParams();
