@@ -1,13 +1,12 @@
 'use client';
 
+import { useDetailsSearchParams } from '@/app/hooks';
+import { Drawer, FullScreenMain } from '@/components';
 import { Canvas } from '@react-three/fiber';
 import { AnimatePresence } from 'motion/react';
 import { useCallback, useState } from 'react';
 import { MathUtils } from 'three';
-import { useDetailsSearchParams } from '@/app/hooks';
-import { Drawer, FullScreenMain } from '@/components';
 import { Scene } from './scene';
-import { InterfaceWrapper } from './styled';
 import { Controls } from './ui/controls';
 import { Generator } from './ui/generator';
 import { getRandomQuote } from './ui/generator/words';
@@ -83,7 +82,7 @@ export function DuneIpsum() {
         onChange={handleChange}
       >
         {(handleGenerate) => (
-          <InterfaceWrapper>
+          <div className="absolute top-0 left-0 flex flex-col w-full h-full pb-6">
             <Controls
               text={text}
               count={count}
@@ -93,7 +92,7 @@ export function DuneIpsum() {
             />
 
             <ImageData text={text} onChange={handleImageData} />
-          </InterfaceWrapper>
+          </div>
         )}
       </Generator>
 

@@ -1,9 +1,16 @@
-import tw from 'twin.macro';
+import { cn } from '@/utils/cn';
+import { type ComponentProps } from 'react';
 
-export const FullScreenMain = tw.main`
-  relative
-  w-screen
-  h-screen
-  bg-slate-900
-  overflow-hidden
-`;
+type Props = ComponentProps<'main'>;
+
+export function FullScreenMain({ className, ...props }: Props) {
+  return (
+    <main
+      className={cn(
+        'relative h-screen w-screen overflow-hidden bg-slate-900',
+        className,
+      )}
+      {...props}
+    />
+  );
+}

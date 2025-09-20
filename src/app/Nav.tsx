@@ -1,14 +1,13 @@
 'use client';
 
-import tw, { styled } from 'twin.macro';
+import { cn } from '@/utils/cn';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { NAV_SEARCH_PARAM, DETAILS_SEARCH_PARAM } from './constants';
 import { DetailsButton } from './DetailsButton';
 import { MenuButton } from './MenuButton';
+import { NAV_SEARCH_PARAM } from './constants';
 import { routes } from './routes';
-import type { StyledNavProps } from './types';
 
 export function Nav() {
   const { replace } = useRouter();
@@ -34,25 +33,43 @@ export function Nav() {
     <>
       <DetailsButton />
 
-      <Container $isNavOpen={isNavOpen}>
-        <Header $isNavOpen={isNavOpen}>
+      <div
+        className={cn(
+          'absolute top-0 left-0 z-10 h-screen w-screen',
+          isNavOpen ? 'pointer-events-auto' : 'pointer-events-none',
+        )}
+      >
+        <header
+          className={cn(
+            'flex h-16 items-center justify-between gap-4 border-b border-slate-800 bg-slate-900 pr-20 pl-8',
+            isNavOpen ? 'opacity-100' : 'opacity-0',
+          )}
+        >
           <h1>{routes.find((route) => route.path === pathname)?.title}</h1>
 
           <Link href="/" onClick={() => handleChangeIsNavOpen(false)}>
             About
           </Link>
-        </Header>
+        </header>
 
-        <MenuButton tw="absolute top-4 right-4" />
+        <MenuButton className="absolute top-4 right-4" />
 
-        <NavContainer $isNavOpen={isNavOpen}>
-          <Grid>
+        <nav
+          className={cn(
+            'flex [height:calc(100%-4rem)] w-screen flex-grow flex-col bg-slate-900 transition-all',
+            isNavOpen ? 'opacity-100' : 'opacity-0',
+          )}
+        >
+          <ul className="grid [max-width:100vw] grid-cols-1 overflow-y-auto xl:grid-cols-2">
             {routes.map((route) => (
-              <Card key={route.path} className="group">
+              <li
+                key={route.path}
+                className="group relative [height:200px] bg-slate-400 xl:[height:350px]"
+              >
                 <Link
                   href={route.path}
                   onClick={() => handleChangeIsNavOpen(false)}
-                  tw="relative flex items-center justify-center w-full h-full p-4"
+                  className="relative flex h-full w-full items-center justify-center p-4"
                 >
                   <Image
                     src={route.img}
@@ -61,95 +78,15 @@ export function Nav() {
                     loading="lazy"
                     fill
                   />
-                  <CardTitle>{route.title}</CardTitle>
+                  <h2 className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded border border-slate-100 p-4 text-2xl text-white opacity-0 transition-all group-hover:bg-slate-950/75 group-hover:opacity-100">
+                    {route.title}
+                  </h2>
                 </Link>
-              </Card>
+              </li>
             ))}
-          </Grid>
-        </NavContainer>
-      </Container>
+          </ul>
+        </nav>
+      </div>
     </>
   );
 }
-
-const Container = styled.div<StyledNavProps>(({ $isNavOpen }) => [
-  tw`
-    absolute
-    top-0
-    left-0
-    w-screen
-    h-screen
-    z-10
-  `,
-
-  $isNavOpen ? tw`pointer-events-auto` : tw`pointer-events-none`,
-]);
-
-const Header = styled.header<StyledNavProps>(({ $isNavOpen }) => [
-  tw`
-    flex
-    items-center
-    justify-between
-    gap-4
-    bg-slate-900
-    h-16
-    pl-8
-    pr-20
-    border-b
-    border-slate-800
-  `,
-
-  $isNavOpen ? tw`opacity-100` : tw`opacity-0`,
-]);
-
-const NavContainer = styled.nav<StyledNavProps>(({ $isNavOpen }) => [
-  tw`
-    flex
-    flex-col
-    flex-grow
-    w-screen
-    [height: calc(100% - 4rem)]
-    bg-slate-900
-    transition-all
-  `,
-
-  $isNavOpen ? tw`opacity-100` : tw`opacity-0`,
-]);
-
-const Grid = tw.ul`
-  grid
-  grid-cols-1
-  [max-width: 100vw]
-  overflow-y-auto
-  xl:grid-cols-2
-`;
-
-const CardTitle = tw.h2`
-  absolute
-  top-0
-  left-0
-  flex
-  items-center
-  justify-center
-  w-full
-  h-full
-  text-white
-  text-2xl
-  opacity-0
-  p-4
-  rounded
-  border
-  border-slate-100
-  transition-all
-  group-hover:(
-    bg-slate-950/75
-    opacity-100
-  )
-`;
-
-const Card = tw.li`
-  relative
-  [height: 200px]
-  bg-slate-400
-  xl:[height: 350px]
-`;

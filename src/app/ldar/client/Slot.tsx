@@ -1,15 +1,19 @@
-import tw from 'twin.macro';
+import { cn } from '@/utils/cn';
 import { motion } from 'motion/react';
 import { Icon } from './Icon';
+import styles from './slot.module.css';
 
 type Props = {
   index: number;
   children: string[];
+  className?: string;
 };
 
-export function Slot({ index, children }: Props) {
+const MotionIcon = motion(Icon);
+
+export function Slot({ index, children, className }: Props) {
   return (
-    <Container>
+    <div className={cn('relative', styles.container, className)}>
       {children.map((code, i) => {
         const initialRotateX = (i * 360) / children.length;
 
@@ -24,15 +28,6 @@ export function Slot({ index, children }: Props) {
           </MotionIcon>
         );
       })}
-    </Container>
+    </div>
   );
 }
-
-const Container = tw.div`
-  relative
-  [width: 100px]
-  [height: 100px]
-  [perspective: 1000cm]
-`;
-
-const MotionIcon = motion(Icon);

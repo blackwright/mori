@@ -1,37 +1,25 @@
-import tw, { css, styled } from 'twin.macro';
+import { cn } from '@/utils/cn';
 import { forwardRef } from 'react';
+import styles from './icon.module.css';
 
 type Props = {
   className?: string;
   children: string;
 };
 
-const Component = forwardRef<HTMLElement, Props>(
+export const Icon = forwardRef<HTMLElement, Props>(
   ({ className, children }, ref) => {
     return (
-      <i ref={ref} className={className}>
+      <i
+        ref={ref}
+        className={cn(
+          'absolute top-0 left-0 w-full text-center text-white not-italic',
+          styles.icon,
+          className,
+        )}
+      >
         {children}
       </i>
     );
   },
 );
-
-export const Icon = styled(Component)(() => [
-  tw`
-    absolute
-    top-0
-    left-0
-    w-full
-    [height: 8rem]
-    text-white
-    text-center
-    [font-size: 6rem]
-    not-italic
-    [line-height: 6rem]
-    [backface-visibility: hidden]
-  `,
-
-  css`
-    font-family: 'ldr-ofer-michael';
-  `,
-]);

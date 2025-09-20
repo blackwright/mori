@@ -1,10 +1,9 @@
 'use client';
 
-import 'twin.macro';
-import { Canvas } from '@react-three/fiber';
-import { AnimatePresence } from 'motion/react';
 import { useDetailsSearchParams } from '@/app/hooks';
 import { Drawer, FullScreenMain } from '@/components';
+import { Canvas } from '@react-three/fiber';
+import { AnimatePresence } from 'motion/react';
 import { Scene } from './Scene';
 
 export function Rise() {

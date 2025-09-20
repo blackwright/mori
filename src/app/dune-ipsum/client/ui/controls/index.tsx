@@ -1,4 +1,3 @@
-import tw from 'twin.macro';
 import { Button } from '@/components';
 import { CopyButton } from './CopyButton';
 import { ParagraphCount } from './ParagraphCount';
@@ -19,7 +18,7 @@ export function Controls({
   disabled,
 }: Props) {
   return (
-    <Wrapper>
+    <div className="flex items-stretch justify-center gap-3 py-8 lg:py-16">
       <ParagraphCount
         count={count}
         onChange={onChangeCount}
@@ -31,15 +30,6 @@ export function Controls({
       </Button>
 
       <CopyButton text={text} />
-    </Wrapper>
+    </div>
   );
 }
-
-const Wrapper = tw.div`
-  flex
-  items-stretch
-  justify-center
-  gap-3
-  py-8
-  lg:py-16
-`;

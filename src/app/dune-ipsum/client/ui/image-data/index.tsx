@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { getParticleGap } from './utils';
 import { Writer } from './writer';
 
@@ -51,14 +50,8 @@ export function ImageData({ text, onChange }: Props) {
   }, [onChange, text, writer]);
 
   return (
-    <CanvasWrapper ref={wrapperRef}>
+    <div className="invisible mx-12 flex-grow" ref={wrapperRef}>
       <canvas ref={canvasRef} />
-    </CanvasWrapper>
+    </div>
   );
 }
-
-const CanvasWrapper = styled.div`
-  flex-grow: 1;
-  visibility: hidden;
-  margin: 0 48px;
-`;

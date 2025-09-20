@@ -1,20 +1,37 @@
 'use client';
 
-import tw from 'twin.macro';
+import { useDetailsSearchParams } from '@/app/hooks';
+import { Drawer, FullScreenMain } from '@/components';
+import { cn } from '@/utils/cn';
+import { shuffle } from '@/utils/numbers';
 import { AnimatePresence, motion, useAnimation } from 'motion/react';
 import { useCallback, useEffect, useState } from 'react';
 import { Plus, PlusCircle } from 'react-feather';
-import { useDetailsSearchParams } from '@/app/hooks';
-import { Drawer, FullScreenMain } from '@/components';
-import { shuffle } from '@/utils/numbers';
-import { characters } from './characters';
-import { GlobalStyles } from './GlobalStyles';
 import { Slot } from './Slot';
+import { characters } from './characters';
+import styles from './love-death-and-robots.module.css';
 
 type State = {
   key: number;
   characterGroups: string[][];
 };
+
+type HandleProps = React.ComponentProps<typeof motion.button> & {
+  className?: string;
+};
+
+function Handle({ className, ...props }: HandleProps) {
+  return (
+    <motion.button
+      className={cn(
+        'relative cursor-pointer rounded-full border-2 border-slate-100 bg-transparent hover:bg-slate-100/20 active:bg-slate-200/10',
+        styles.handle,
+        className,
+      )}
+      {...props}
+    />
+  );
+}
 
 export function LoveDeathAndRobots() {
   const [areDetailsOpen] = useDetailsSearchParams();
@@ -35,7 +52,7 @@ export function LoveDeathAndRobots() {
 
   useEffect(() => {
     runSlots();
-  }, []);
+  }, [runSlots]);
 
   const controls = useAnimation();
 
@@ -48,68 +65,50 @@ export function LoveDeathAndRobots() {
   }
 
   return (
-    <>
-      <GlobalStyles />
+    <FullScreenMain
+      className={cn(
+        'flex flex-col items-center justify-center gap-12',
+        styles.root,
+      )}
+    >
+      <Handle animate={controls} onClick={pullHandleSequence}>
+        <Plus strokeWidth={1} className="h-full w-full" />
+      </Handle>
 
-      <FullScreenMain tw="flex flex-col gap-12 items-center justify-center">
-        <Handle animate={controls} onClick={pullHandleSequence}>
-          <Plus stroke-width="1" tw="w-full h-full" />
-        </Handle>
+      <div
+        className={cn('flex overflow-hidden select-none', styles.slotWindow)}
+      >
+        {state.characterGroups.map((characters, i) => (
+          <Slot key={String(state.key + i)} index={i}>
+            {characters}
+          </Slot>
+        ))}
+      </div>
 
-        <SlotWindow>
-          {state.characterGroups.map((characters, i) => (
-            <Slot key={String(state.key + i)} index={i}>
-              {characters}
-            </Slot>
-          ))}
-        </SlotWindow>
-
-        <AnimatePresence>
-          {areDetailsOpen && (
-            <Drawer>
-              <p>
-                A recreation of the slot machine-style icon animation from the
-                series <em>Love Death + Robots</em> &mdash; click the{' '}
-                <PlusCircle tw="inline" /> to pull.
-              </p>
-              <p>
-                Icons by{' '}
-                <a
-                  href="https://dribbble.com/shots/6227334-Love-Death-Robots-Icons-Font"
-                  target="_blank"
-                >
-                  Michael Chernayk + Ofer Ariel
-                </a>
-                .
-              </p>
-            </Drawer>
-          )}
-        </AnimatePresence>
-      </FullScreenMain>
-    </>
+      <AnimatePresence>
+        {areDetailsOpen && (
+          <Drawer>
+            <p>
+              A recreation of the slot machine-style icon animation from the
+              series <em>Love Death + Robots</em> &mdash; click the{' '}
+              <PlusCircle className="inline" /> to pull.
+            </p>
+            <p>
+              Icons by{' '}
+              <a
+                href="https://dribbble.com/shots/6227334-Love-Death-Robots-Icons-Font"
+                target="_blank"
+              >
+                Michael Chernayk + Ofer Ariel
+              </a>
+              .
+            </p>
+          </Drawer>
+        )}
+      </AnimatePresence>
+    </FullScreenMain>
   );
 }
-
-const SlotWindow = tw.div`
-  flex
-  [width: 300px]
-  [height: 100px]
-  overflow-hidden
-  select-none
-`;
-
-const Handle = tw(motion.button)`
-  relative
-  bg-transparent
-  cursor-pointer
-  [width: 40px]
-  [height: 40px]
-  border-2
-  border-slate-100
-  rounded-full
-  hover:bg-slate-100/20
-  active:bg-slate-200/10
-`;
 
 function shuffleCharacters() {
   return shuffle(characters);

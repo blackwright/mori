@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import StyledComponentsRegistry from '@/lib/registry';
-import GlobalStyles from '@/styles/GlobalStyles';
-import { robotoSlab } from './fonts';
 import { Nav } from './Nav';
+import { robotoSlab } from './fonts';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: {
@@ -16,15 +15,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" className={robotoSlab.className}>
       <body>
-        <StyledComponentsRegistry>
-          <GlobalStyles />
+        {props.children}
 
-          {props.children}
-
-          <Suspense fallback={null}>
-            <Nav />
-          </Suspense>
-        </StyledComponentsRegistry>
+        <Suspense fallback={null}>
+          <Nav />
+        </Suspense>
       </body>
     </html>
   );

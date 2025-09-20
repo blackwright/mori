@@ -1,7 +1,7 @@
-import tw, { styled } from 'twin.macro';
+import { Button } from '@/components';
+import { cn } from '@/utils/cn';
 import { useEffect, useRef, useState, type ComponentProps } from 'react';
 import { ChevronDown } from 'react-feather';
-import { Button } from '@/components';
 
 const MAX_PARAGRAPHS = 4;
 
@@ -56,45 +56,31 @@ export function ParagraphCount({
       onClick={handleToggleOpen}
       disabled={disabled}
     >
-      <span tw="flex items-center gap-1">
+      <span className="flex items-center gap-1">
         <ChevronDown />
         <span>{count}</span>
       </span>
 
-      <Dropdown $isOpen={isOpen && !disabled}>
+      <ul
+        className={cn(
+          'absolute top-10 left-0',
+          'flex flex-col',
+          'w-full',
+          'rounded border border-slate-100',
+          'transition-all',
+          isOpen && !disabled ? 'visible' : 'hidden',
+        )}
+      >
         {OPTIONS.map((num) => (
-          <Option key={num} onClick={() => handleOptionClick(num)}>
+          <li
+            key={num}
+            onClick={() => handleOptionClick(num)}
+            className="flex w-full items-center justify-center p-1 transition-all hover:bg-slate-100/20"
+          >
             {num}
-          </Option>
+          </li>
         ))}
-      </Dropdown>
+      </ul>
     </Button>
   );
 }
-
-const Dropdown = styled.ul<{ $isOpen: boolean }>(({ $isOpen }) => [
-  tw`
-    absolute
-    top-10
-    left-0
-    flex
-    flex-col
-    w-full
-    border
-    border-slate-100
-    rounded
-    transition-all
-  `,
-
-  $isOpen ? tw`visible` : tw`hidden`,
-]);
-
-const Option = tw.li`
-  flex
-  items-center
-  justify-center
-  p-1
-  w-full
-  transition-all
-  hover:bg-slate-100/20
-`;

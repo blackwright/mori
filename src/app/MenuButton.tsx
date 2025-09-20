@@ -1,27 +1,10 @@
 'use client';
 
-import tw, { styled } from 'twin.macro';
+import { Button } from '@/components';
+import { cn } from '@/utils/cn';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Plus } from 'react-feather';
-import { Button } from '@/components';
 import { NAV_SEARCH_PARAM } from './constants';
-import type { StyledNavProps } from './types';
-
-const StyledButton = styled(Button)<StyledNavProps>(({ $isNavOpen }) => [
-  tw`
-    inline-flex
-    items-center
-    justify-center
-    cursor-pointer
-    pointer-events-auto
-    w-8
-    h-8
-    p-0
-    transition-all
-  `,
-
-  $isNavOpen && tw`rotate-45`,
-]);
 
 type Props = {
   className?: string;
@@ -49,12 +32,15 @@ export function MenuButton({ className }: Props) {
   };
 
   return (
-    <StyledButton
-      $isNavOpen={isNavOpen}
+    <Button
       onClick={handleToggleIsNavOpen}
-      className={className}
+      className={cn(
+        'pointer-events-auto inline-flex h-8 w-8 cursor-pointer items-center justify-center p-0 transition-all',
+        isNavOpen && 'rotate-45',
+        className,
+      )}
     >
       <Plus />
-    </StyledButton>
+    </Button>
   );
 }

@@ -1,12 +1,11 @@
 'use client';
 
-import 'twin.macro';
+import { useDetailsSearchParams } from '@/app/hooks';
+import { Drawer, FullScreenMain } from '@/components';
 import { CameraControls } from '@react-three/drei';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { AnimatePresence } from 'motion/react';
 import { Texture, TextureLoader } from 'three';
-import { useDetailsSearchParams } from '@/app/hooks';
-import { Drawer, FullScreenMain } from '@/components';
 import { Scene } from './scene';
 
 const CANVAS_CAMERA_OPTIONS = {
@@ -31,7 +30,7 @@ export function Mori() {
       <Canvas
         camera={CANVAS_CAMERA_OPTIONS}
         resize={CANVAS_RESIZE_OPTIONS}
-        tw="cursor-pointer"
+        className="cursor-pointer"
       >
         <color attach="background" args={[0, 0, 0.01]} />
         <Scene textures={textures} />

@@ -1,15 +1,19 @@
 'use client';
 
-import tw, { css, styled } from 'twin.macro';
-import { AnimatePresence, motion } from 'motion/react';
-import { useEffect, useRef } from 'react';
 import { useDetailsSearchParams } from '@/app/hooks';
 import { Drawer, FullScreenMain } from '@/components';
+import { cn } from '@/utils/cn';
 import { useDebouncedResize } from '@/utils/react';
+import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useRef } from 'react';
 import { useAnimations } from './animations';
 import { City } from './scene/city';
 import { Cat, Home } from './scene/home';
 import { Rainfall } from './scene/rain';
+
+const fullScreenStyle = cn('absolute top-0 left-0 h-full w-full');
+
+const MotionBackground = motion(FullScreenMain);
 
 export function Late() {
   const animationFrameId = useRef<number | null>(null);
@@ -176,12 +180,24 @@ export function Late() {
 
   return (
     <MotionBackground animate={grayscaleFlash} tw="cursor-pointer">
-      <CityCanvas ref={cityCanvasRef} />
-      <Light animate={outdoorFlash} />
-      <RainCanvas ref={rainCanvasRef} />
-      <Canvas ref={homeCanvasRef} />
-      <Canvas ref={catCanvasRef} />
-      <Light animate={indoorFlash} />
+      <canvas
+        className={cn(fullScreenStyle, '[filter: blur(2px)]')}
+        ref={cityCanvasRef}
+      />
+      <motion.div
+        className={cn(fullScreenStyle, 'bg-white opacity-0')}
+        animate={outdoorFlash}
+      />
+      <canvas
+        className={cn(fullScreenStyle, '[filter: blur(2px)]')}
+        ref={rainCanvasRef}
+      />
+      <canvas className={fullScreenStyle} ref={homeCanvasRef} />
+      <canvas className={fullScreenStyle} ref={catCanvasRef} />
+      <motion.div
+        className={cn(fullScreenStyle, 'bg-white opacity-0')}
+        animate={indoorFlash}
+      />
 
       <AnimatePresence>
         {areDetailsOpen && (
@@ -214,34 +230,3 @@ export function Late() {
     </MotionBackground>
   );
 }
-
-const fullScreenStyle = css`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`;
-
-const MotionBackground = motion(FullScreenMain);
-
-const Canvas = styled.canvas`
-  ${fullScreenStyle}
-`;
-
-const CityCanvas = styled(Canvas)`
-  filter: blur(2px);
-`;
-
-const RainCanvas = styled(Canvas)`
-  transform: rotate(15deg);
-`;
-
-const Light = styled(motion.div)(() => [
-  fullScreenStyle,
-
-  tw`
-    bg-white
-    opacity-0
-  `,
-]);
