@@ -1,13 +1,13 @@
+import { Button } from '@/components';
 import { useRef, useState } from 'react';
 import { Check, Copy } from 'react-feather';
-import { Button } from '@/components';
 
 type Props = {
   text: string;
 };
 
 export function CopyButton({ text }: Props) {
-  const timeoutIdRef = useRef<number>();
+  const timeoutIdRef = useRef<number>(undefined);
 
   const [justClickedCopy, setJustClickedCopy] = useState(false);
 
