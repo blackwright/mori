@@ -65,18 +65,12 @@
   );
 }
 
-.beam {
-  height: 150%;
-}
-
 .dot {
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
   animation: blink 8s ease infinite;
 }
 
 .grain {
-  width: 200%;
-  height: 200%;
   background-image: url('/pale/cork.png');
   animation: translate 0.25s steps(10) infinite;
 }

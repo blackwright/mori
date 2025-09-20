@@ -1,19 +1,16 @@
-import { cn } from '@/utils/cn';
 import { motion } from 'motion/react';
 import { Icon } from './Icon';
-import styles from './slot.module.css';
 
 type Props = {
   index: number;
   children: string[];
-  className?: string;
 };
 
 const MotionIcon = motion(Icon);
 
-export function Slot({ index, children, className }: Props) {
+export function Slot({ index, children }: Props) {
   return (
-    <div className={cn('relative', styles.container, className)}>
+    <div className="relative [height:100px] [width:100px] [perspective:1000cm]">
       {children.map((code, i) => {
         const initialRotateX = (i * 360) / children.length;
 

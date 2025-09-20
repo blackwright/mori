@@ -24,7 +24,7 @@ type BeamProps = {
 function Beam({ left, width, rotate, alpha, children }: BeamProps) {
   return (
     <div
-      className={cn('absolute top-1/2 z-1', styles.beam)}
+      className="absolute top-1/2 z-1 [height:150%]"
       style={{
         width,
         left,
@@ -89,7 +89,7 @@ export function PaleBlueDot() {
 
       <div
         className={cn(
-          'fixed -top-1/2 -left-1/2 z-1 mix-blend-color-burn',
+          'fixed -top-1/2 -left-1/2 z-1 [height:200%] [width:200%] mix-blend-color-burn',
           styles.grain,
         )}
       />

@@ -181,7 +181,7 @@ export function Late() {
   return (
     <MotionBackground animate={grayscaleFlash} tw="cursor-pointer">
       <canvas
-        className={cn(fullScreenStyle, '[filter: blur(2px)]')}
+        className={cn(fullScreenStyle, '[filter:blur(2px)]')}
         ref={cityCanvasRef}
       />
       <motion.div
@@ -189,7 +189,7 @@ export function Late() {
         animate={outdoorFlash}
       />
       <canvas
-        className={cn(fullScreenStyle, '[filter: blur(2px)]')}
+        className={cn(fullScreenStyle, '[filter:blur(2px)]')}
         ref={rainCanvasRef}
       />
       <canvas className={fullScreenStyle} ref={homeCanvasRef} />
