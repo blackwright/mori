@@ -1,8 +1,8 @@
 'use client';
 
+import { FullScreenMain } from '@/components/FullScreenMain';
 import { cn } from '@/utils/cn';
 import { MoreHorizontal } from 'react-feather';
-import { FullScreenMain } from './FullScreenMain';
 import styles from './loading.module.css';
 
 export default function Loading() {
@@ -11,7 +11,7 @@ export default function Loading() {
       <div
         className={cn(
           'absolute h-12 w-12 transform-gpu rounded-full',
-          styles.spinningGradient,
+          styles['spinning-gradient'],
         )}
       />
 

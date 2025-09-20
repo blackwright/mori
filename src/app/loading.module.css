@@ -12,7 +12,7 @@
   background: conic-gradient(
     from 90deg at 50% 50%,
     rgba(10, 10, 10, 0) 0deg,
-    theme('colors.slate.50') 360deg
+    var(--color-slate-50) 360deg
   );
   animation: rotate 1s infinite linear;
 }
@@ -25,6 +25,6 @@
   transform: translate(-50%, -50%);
   width: calc(3rem - 1px);
   height: calc(3rem - 1px);
-  background-color: theme('colors.slate.900');
+  background-color: var(--color-slate-900);
   border-radius: 9999px;
 }
