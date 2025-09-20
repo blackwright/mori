@@ -1,30 +1,24 @@
-import { useLoader } from '@react-three/fiber';
 import * as React from 'react';
-import { TextureLoader } from 'three';
+import { type Texture } from 'three';
 
 type Props = {
-  asset: string;
+  texture: Texture;
   x: number;
   y: number;
   z: number;
 };
 
-export function Cloud({ asset, x, y, z }: Props) {
-  const texture = useLoader(TextureLoader, asset);
-
+export function Cloud({ texture, x, y, z }: Props) {
   return (
     <mesh position={[x, y, z]}>
       <planeGeometry attach="geometry" args={[50, 50]} />
-      <meshLambertMaterial
+      <meshBasicMaterial
         attach="material"
-        args={[
-          {
-            map: texture,
-            transparent: true,
-            opacity: 0.1,
-            depthTest: false,
-          },
-        ]}
+        map={texture}
+        transparent
+        opacity={0.1}
+        depthWrite={false}
+        depthTest={false}
       />
     </mesh>
   );

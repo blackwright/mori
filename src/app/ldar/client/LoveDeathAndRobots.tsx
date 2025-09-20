@@ -3,10 +3,9 @@
 import tw from 'twin.macro';
 import { AnimatePresence, motion, useAnimation } from 'motion/react';
 import { useCallback, useEffect, useState } from 'react';
-import { PlusCircle } from 'react-feather';
-import { Plus } from 'react-feather';
+import { Plus, PlusCircle } from 'react-feather';
 import { useDetailsSearchParams } from '@/app/hooks';
-import { FullScreenMain, Drawer } from '@/components';
+import { Drawer, FullScreenMain } from '@/components';
 import { shuffle } from '@/utils/numbers';
 import { characters } from './characters';
 import { GlobalStyles } from './GlobalStyles';
@@ -65,16 +64,27 @@ export function LoveDeathAndRobots() {
           ))}
         </SlotWindow>
 
-          <AnimatePresence>
-            {areDetailsOpen && (
-              <Drawer>
-                <p>A recreation of the slot machine-style icon animation from the series <em>Love Death + Robots</em> &mdash; click the <PlusCircle tw="inline" /> to pull.</p>
-                <p>
-                  Icons by <a href="https://dribbble.com/shots/6227334-Love-Death-Robots-Icons-Font" target="_blank">Michael Chernayk + Ofer Ariel</a>.
-                </p>
-              </Drawer>
-            )}
-          </AnimatePresence>
+        <AnimatePresence>
+          {areDetailsOpen && (
+            <Drawer>
+              <p>
+                A recreation of the slot machine-style icon animation from the
+                series <em>Love Death + Robots</em> &mdash; click the{' '}
+                <PlusCircle tw="inline" /> to pull.
+              </p>
+              <p>
+                Icons by{' '}
+                <a
+                  href="https://dribbble.com/shots/6227334-Love-Death-Robots-Icons-Font"
+                  target="_blank"
+                >
+                  Michael Chernayk + Ofer Ariel
+                </a>
+                .
+              </p>
+            </Drawer>
+          )}
+        </AnimatePresence>
       </FullScreenMain>
     </>
   );

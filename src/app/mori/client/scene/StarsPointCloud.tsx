@@ -23,8 +23,13 @@ export function StarsPointCloud({ count }: Props) {
     const alphas = new Float32Array(count);
 
     for (let i = 0; i < count; i++) {
-      positions[i] = Math.random() * 100 - 50;
-      alphas[i] = Math.random();
+      const i3 = i * 3;
+
+      positions[i3] = Math.random() * 100 - 50;
+      positions[i3 + 1] = Math.random() * 100 - 50;
+      positions[i3 + 2] = Math.random() * 100 - 50;
+
+      alphas[i] = Math.random() * 0.8 + 0.2;
     }
 
     return [positions, alphas];
@@ -75,16 +80,12 @@ export function StarsPointCloud({ count }: Props) {
       <bufferGeometry attach="geometry">
         <bufferAttribute
           attach="attributes-position"
-          array={positions}
-          count={positions.length / 3}
-          itemSize={3}
+          args={[positions, 3, false]}
         />
         <bufferAttribute
           ref={alphasRef}
           attach="attributes-alpha"
-          array={alphas}
-          count={alphas.length}
-          itemSize={1}
+          args={[alphas, 1, false]}
         />
       </bufferGeometry>
       <shaderMaterial

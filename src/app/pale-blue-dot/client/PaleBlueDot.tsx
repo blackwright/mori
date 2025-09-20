@@ -1,11 +1,11 @@
 'use client';
 
 import 'twin.macro';
+import { AnimatePresence } from 'motion/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { LINK_POSITION_OFFSET } from './constants';
 import { useDetailsSearchParams } from '@/app/hooks';
 import { Drawer } from '@/components';
-import { AnimatePresence } from 'motion/react';
+import { LINK_POSITION_OFFSET } from './constants';
 import {
   Background,
   Beam,
@@ -80,11 +80,28 @@ export function PaleBlueDot() {
       <AnimatePresence>
         {areDetailsOpen && (
           <Drawer>
-            <p><em>The Pale Blue Dot</em> is a photo of Earth taken by space probe Voyager 1 from a distance of 3.7 billion miles, as proposed by <a href="https://www.youtube.com/watch?v=wupToqz1e2g" target="_blank">Carl Sagan</a>, who said:</p>
+            <p>
+              <em>The Pale Blue Dot</em> is a photo of Earth taken by space
+              probe Voyager 1 from a distance of 3.7 billion miles, as proposed
+              by{' '}
+              <a
+                href="https://www.youtube.com/watch?v=wupToqz1e2g"
+                target="_blank"
+              >
+                Carl Sagan
+              </a>
+              , who said:
+            </p>
             <blockquote tw="bg-slate-900/50 p-4 border-l-4 border-slate-900 rounded-r-lg">
-              To me, it underscores our responsibility to deal more kindly with one another, and to preserve and cherish the pale blue dot, the only home we've ever known.
+              To me, it underscores our responsibility to deal more kindly with
+              one another, and to preserve and cherish the pale blue dot, the
+              only home we've ever known.
             </blockquote>
-            <p>This is a recreation of NASA's <em>Pale Blue Dot Revisited</em> image in HTML and CSS, implemented with gradients and a keyframe animation on an image texture to simulate film grain noise.</p>
+            <p>
+              This is a recreation of NASA's <em>Pale Blue Dot Revisited</em>{' '}
+              image in HTML and CSS, implemented with gradients and a keyframe
+              animation on an image texture to simulate film grain noise.
+            </p>
           </Drawer>
         )}
       </AnimatePresence>

@@ -1,12 +1,12 @@
 'use client';
 
 import tw, { css, styled } from 'twin.macro';
-import { motion, AnimatePresence } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef } from 'react';
+import { useDetailsSearchParams } from '@/app/hooks';
 import { Drawer, FullScreenMain } from '@/components';
 import { useDebouncedResize } from '@/utils/react';
 import { useAnimations } from './animations';
-import { useDetailsSearchParams } from '@/app/hooks';
 import { City } from './scene/city';
 import { Cat, Home } from './scene/home';
 import { Rainfall } from './scene/rain';
@@ -186,11 +186,28 @@ export function Late() {
       <AnimatePresence>
         {areDetailsOpen && (
           <Drawer>
-            <p>An exercise in drawing on HTML canvas &mdash; click for lightning.</p>
-            <p>The scene is built with layers of canvas &mdash; the city buildings, the window, the rain, the home interior, and the cat are all rendered on separate canvas elements to make animating through repaints possible.</p>
-            <p>Everything is sized based on relative measurements, and everything will attempt to repaint itself whenever the screen size changes.</p>
-            <p>Certain elements, such as the buildings and the artwork in the home, are rendered with a degree of randomization so they appear differently on each page load.</p>
-            <p>I learned that drawing shapes with math is fun to figure out, but very time-consuming.</p>
+            <p>
+              An exercise in drawing on HTML canvas &mdash; click for lightning.
+            </p>
+            <p>
+              The scene is built with layers of canvas &mdash; the city
+              buildings, the window, the rain, the home interior, and the cat
+              are all rendered on separate canvas elements to make animating
+              through repaints possible.
+            </p>
+            <p>
+              Everything is sized based on relative measurements, and everything
+              will attempt to repaint itself whenever the screen size changes.
+            </p>
+            <p>
+              Certain elements, such as the buildings and the artwork in the
+              home, are rendered with a degree of randomization so they appear
+              differently on each page load.
+            </p>
+            <p>
+              I learned that drawing shapes with math is fun to figure out, but
+              very time-consuming.
+            </p>
           </Drawer>
         )}
       </AnimatePresence>

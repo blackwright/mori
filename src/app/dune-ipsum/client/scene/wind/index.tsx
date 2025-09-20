@@ -37,9 +37,10 @@ export function Wind({ isRendering }: Props) {
         height: size.height,
       });
 
+      const positions = new Float32Array(particleCount * 3);
       geometry.setAttribute(
         'position',
-        new Float32BufferAttribute(particleCount, 3),
+        new Float32BufferAttribute(positions, 3),
       );
 
       for (let i = 0; i < particleCount; i++) {
