@@ -1,10 +1,12 @@
-type Route = {
+import type { Route } from 'next';
+
+type RouteObject = {
   title: string;
-  path: string;
+  path: Route;
   img: string;
 };
 
-export const routes: Route[] = [
+export const routes: RouteObject[] = [
   {
     title: 'Dune Ipsum',
     path: '/dune-ipsum',

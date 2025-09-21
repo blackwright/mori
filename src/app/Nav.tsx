@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/utils/cn';
+import { type Route } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -26,7 +27,7 @@ export function Nav() {
       newSearchParams.delete(NAV_SEARCH_PARAM.key);
     }
 
-    replace(`${pathname}?${newSearchParams}`);
+    replace(`${pathname}?${newSearchParams}` as Route);
   };
 
   return (

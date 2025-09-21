@@ -1,4 +1,5 @@
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { type Route } from 'next';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { DETAILS_SEARCH_PARAM } from './constants';
 
 export function useDetailsSearchParams(): [boolean, () => void] {
@@ -6,7 +7,8 @@ export function useDetailsSearchParams(): [boolean, () => void] {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const areDetailsOpen = searchParams.get(DETAILS_SEARCH_PARAM.key) === DETAILS_SEARCH_PARAM.value;
+  const areDetailsOpen =
+    searchParams.get(DETAILS_SEARCH_PARAM.key) === DETAILS_SEARCH_PARAM.value;
 
   const handleToggleDetails = () => {
     const newDetailsOpen = !areDetailsOpen;
@@ -18,7 +20,7 @@ export function useDetailsSearchParams(): [boolean, () => void] {
       newSearchParams.delete(DETAILS_SEARCH_PARAM.key);
     }
 
-    replace(`${pathname}?${newSearchParams}`);
+    replace(`${pathname}?${newSearchParams}` as Route);
   };
 
   return [areDetailsOpen, handleToggleDetails];

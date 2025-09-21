@@ -2,6 +2,7 @@
 
 import { Button } from '@/components';
 import { cn } from '@/utils/cn';
+import { type Route } from 'next';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Plus } from 'react-feather';
 import { NAV_SEARCH_PARAM } from './constants';
@@ -28,7 +29,7 @@ export function MenuButton({ className }: Props) {
       newSearchParams.delete(NAV_SEARCH_PARAM.key);
     }
 
-    replace(`${pathname}?${newSearchParams}`);
+    replace(`${pathname}?${newSearchParams}` as Route);
   };
 
   return (
