@@ -1,0 +1,105 @@
+@keyframes scanline {
+  0% {
+    transform: translate3d(0, 200000%, 0);
+  }
+}
+
+@keyframes scanlines {
+  0% {
+    background-position: 0 50%;
+  }
+}
+
+.cogitator {
+  * {
+    text-shadow:
+      0 0 0.2rem currentColor,
+      1px 1px rgba(255, 0, 255, 0.7),
+      -1px -1px rgba(0, 255, 255, 0.6);
+  }
+}
+
+.crt {
+  position: relative;
+  &:before,
+  &:after {
+    content: '';
+    transform: translateZ(0);
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+
+  &:before {
+    background: repeating-linear-gradient(
+      var(--color-red-800) 0px,
+      var(--color-lime-700) 4px,
+      var(--color-cyan-900) 6px
+    );
+  }
+
+  &:after {
+    background: repeating-linear-gradient(
+      90deg,
+      var(--color-red-800) 1px,
+      var(--color-lime-700) 3px,
+      var(--color-cyan-900) 5px
+    );
+  }
+}
+
+.scanlines {
+  &:before,
+  &:after {
+    position: absolute;
+    display: block;
+    content: '';
+    pointer-events: none;
+  }
+
+  &:before {
+    width: 100%;
+    height: 2px;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.05);
+    animation: scanline 8s linear infinite;
+  }
+  &:after {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0, 0, 0, 0.3) 50%
+    );
+    background-size: 100% 4px;
+    animation: scanlines 1s steps(60) infinite;
+  }
+}
+
+.pixelGrid {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(rgba(0, 0, 0, 0.8) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size:
+    50px 50px,
+    100px 100px;
+  background-position:
+    10px 20px,
+    30px 40px;
+  z-index: 3;
+}
