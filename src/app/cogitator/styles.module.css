@@ -1,16 +1,24 @@
-@keyframes scanline {
+@keyframes pov {
   0% {
-    transform: translate3d(0, 200000%, 0);
+    transform: rotate3d(1, 1, 1, 0deg) scale3d(1, 1, 1);
   }
-}
-
-@keyframes scanlines {
-  0% {
-    background-position: 0 50%;
+  25% {
+    transform: rotate3d(1, 1, 1, 0.3deg) scale3d(1.02, 1.02, 1.02);
+  }
+  50% {
+    transform: rotate3d(1, 1, 1, 0deg) scale3d(1, 1, 1);
+  }
+  75% {
+    transform: rotate3d(1, 1, 1, -0.3deg) scale3d(1.02, 1.02, 1.02);
+  }
+  100% {
+    transform: rotate3d(1, 1, 1, 0deg) scale3d(1, 1, 1);
   }
 }
 
 .cogitator {
+  animation: pov 120s ease-in-out infinite;
+
   * {
     text-shadow:
       0 0 0.2rem currentColor,
@@ -50,6 +58,18 @@
       var(--color-lime-700) 3px,
       var(--color-cyan-900) 5px
     );
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translate3d(0, 200000%, 0);
+  }
+}
+
+@keyframes scanlines {
+  0% {
+    background-position: 0 50%;
   }
 }
 

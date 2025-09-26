@@ -6,15 +6,26 @@ import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { Silkscreen } from 'next/font/google';
 import { useState } from 'react';
-import { ChevronRight } from 'react-feather';
 import { Aquila } from './Aquila';
+import { Command } from './Command';
 import { Inquisition } from './Inquisition';
+import { Message } from './Message';
+import { Typewriter } from './Typewriter';
 import styles from './styles.module.css';
 
 const silkscreen = Silkscreen({
   subsets: ['latin'],
   weight: ['400'],
 });
+
+enum Status {
+  VOX_CHANNELS,
+  NOOSPHERIC_LINK,
+  ASTROPATHIC_SIGNAL,
+  SIGNAL_STRENGTH,
+  WARP_INTERFERENCE,
+  INITIALIZED,
+}
 
 export default function Cogitator() {
   const [input, setInput] = useState('');
@@ -25,6 +36,14 @@ export default function Cogitator() {
     }),
   });
 
+  const [status, setStatus] = useState<Status>(Status.VOX_CHANNELS);
+
+  const advanceStatus = () => {
+    setTimeout(() => {
+      setStatus((prev) => prev + 1);
+    }, 250);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -32,8 +51,9 @@ export default function Cogitator() {
       return;
     }
 
-    await sendMessage({ text: input });
     setInput('');
+
+    await sendMessage({ text: input });
   };
 
   return (
@@ -51,40 +71,72 @@ export default function Cogitator() {
         )}
       >
         <div className="flex grow flex-col gap-4 overflow-auto p-8">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={
-                message.role === 'user' ? 'text-slate-200' : 'text-green-400'
-              }
-            >
-              {message.parts.map((part, i) => {
-                if (part.type === 'text') {
-                  return <span key={i}>{part.text}</span>;
-                }
+          <div className="ml-14 flex flex-col gap-4">
+            <div className="text-lg text-green-500">
+              <Typewriter onComplete={advanceStatus}>
+                ++ Vox Channels Established
+              </Typewriter>
 
-                return null;
-              })}
+              {status > Status.VOX_CHANNELS && (
+                <Typewriter onComplete={advanceStatus}>
+                  ++ Noospheric Link Initialized
+                </Typewriter>
+              )}
+
+              {status > Status.NOOSPHERIC_LINK && (
+                <Typewriter onComplete={advanceStatus}>
+                  ++ Astropathic Link Initialized
+                </Typewriter>
+              )}
+
+              {status > Status.ASTROPATHIC_SIGNAL && (
+                <Typewriter
+                  onComplete={advanceStatus}
+                  className="text-orange-300/50"
+                >
+                  :::: Signal Strength: Marginal
+                </Typewriter>
+              )}
+
+              {status > Status.SIGNAL_STRENGTH && (
+                <Typewriter
+                  onComplete={advanceStatus}
+                  className="text-red-600/50"
+                >
+                  :::: Warp Interference: Significant
+                </Typewriter>
+              )}
+
+              {status > Status.WARP_INTERFERENCE && (
+                <Typewriter>++ Ready</Typewriter>
+              )}
             </div>
-          ))}
 
-          <form onSubmit={handleSubmit} className="flex w-full items-center">
-            <span>
-              <ChevronRight
-                strokeWidth="0.25rem"
-                strokeLinejoin="miter"
-                strokeLinecap="square"
+            <div className="flex flex-col gap-4">
+              {messages.map((message) => (
+                <Message key={message.id} data={message} />
+              ))}
+            </div>
+          </div>
+
+          {status >= Status.INITIALIZED && (
+            <form
+              onSubmit={handleSubmit}
+              className="flex w-full items-center gap-4"
+            >
+              <span className="w-6 text-white">
+                <Command fill="currentColor" />
+              </span>
+              <input
+                name="prompt"
+                value={input}
+                autoFocus
+                autoComplete="off"
+                onChange={(e) => setInput(e.target.value)}
+                className="flex grow px-4 py-2 uppercase outline-0"
               />
-            </span>
-            <input
-              name="prompt"
-              value={input}
-              autoFocus
-              autoComplete="off"
-              onChange={(e) => setInput(e.target.value)}
-              className="flex grow px-4 py-2 uppercase outline-0"
-            />
-          </form>
+            </form>
+          )}
         </div>
 
         <div className="mx-8 flex flex-col">
