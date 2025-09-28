@@ -1,14 +1,11 @@
 import { motion } from 'motion/react';
+import { useMemo } from 'react';
 
 type Props = {
   children: string;
+  stagger?: number;
   onComplete?: () => void;
   className?: string;
-};
-
-const sentenceVariants = {
-  hidden: {},
-  visible: { opacity: 1, transition: { staggerChildren: 0.03 } },
 };
 
 export const letterVariants = {
@@ -16,7 +13,20 @@ export const letterVariants = {
   visible: { opacity: 1, transition: { opacity: { duration: 0 } } },
 };
 
-export function Typewriter({ children, onComplete, className }: Props) {
+export function Typewriter({
+  stagger = 0.01,
+  children,
+  onComplete,
+  className,
+}: Props) {
+  const sentenceVariants = useMemo(
+    () => ({
+      hidden: {},
+      visible: { opacity: 1, transition: { staggerChildren: stagger } },
+    }),
+    [stagger],
+  );
+
   return (
     <motion.div
       variants={sentenceVariants}

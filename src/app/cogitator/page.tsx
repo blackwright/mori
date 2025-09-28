@@ -1,11 +1,11 @@
 'use client';
 
-import { FullScreenMain } from '@/components';
+import { Button, FullScreenMain } from '@/components';
 import { cn } from '@/utils/cn';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { Silkscreen } from 'next/font/google';
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Aquila } from './Aquila';
 import { Command } from './Command';
 import { Inquisition } from './Inquisition';
@@ -20,17 +20,21 @@ const silkscreen = Silkscreen({
 
 enum Status {
   VOX_CHANNELS,
-  NOOSPHERIC_LINK,
   ASTROPATHIC_SIGNAL,
-  SIGNAL_STRENGTH,
   WARP_INTERFERENCE,
-  INITIALIZED,
+  RESTARTING_PROMPT,
+  INITIAL_PROMPT,
+  WAITING_FOR_USER,
+  ENDED_STREAMING,
+  ENDED,
 }
 
 export default function Cogitator() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const [input, setInput] = useState('');
 
-  const { messages, sendMessage } = useChat({
+  const { messages, sendMessage, setMessages } = useChat({
     transport: new DefaultChatTransport({
       api: '/api/cogitator',
     }),
@@ -38,11 +42,25 @@ export default function Cogitator() {
 
   const [status, setStatus] = useState<Status>(Status.VOX_CHANNELS);
 
-  const advanceStatus = () => {
+  const updateStatus = useCallback((newStatus: Status, ms = 88) => {
     setTimeout(() => {
-      setStatus((prev) => prev + 1);
-    }, 250);
-  };
+      setStatus(newStatus);
+    }, ms);
+  }, []);
+
+  const handleEnding = useCallback((endingState: 'streaming' | 'done') => {
+    if (endingState === 'streaming') {
+      setStatus(Status.ENDED_STREAMING);
+    } else if (endingState === 'done') {
+      setStatus(Status.ENDED);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (status === Status.RESTARTING_PROMPT) {
+      setStatus(Status.INITIAL_PROMPT);
+    }
+  }, [status]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,11 +74,17 @@ export default function Cogitator() {
     await sendMessage({ text: input });
   };
 
+  const handleRestart = () => {
+    setMessages([]);
+    setStatus(Status.RESTARTING_PROMPT);
+  };
+
   return (
     <FullScreenMain
+      onClick={() => inputRef.current?.focus()}
       className={cn(
         silkscreen.className,
-        'p-16 text-3xl tracking-wider text-white/85 uppercase',
+        'p-16 text-3xl tracking-wider text-white/85',
         styles.cogitator,
         styles.crt,
       )}
@@ -70,76 +94,86 @@ export default function Cogitator() {
           'relative flex h-full w-full flex-col gap-4 border-4 border-green-600',
         )}
       >
-        <div className="flex grow flex-col gap-4 overflow-auto p-8">
-          <div className="ml-14 flex flex-col gap-4">
+        <div className="flex min-h-0 grow flex-col gap-4 p-8">
+          <div className="ml-14 flex min-h-0 flex-col gap-4 overflow-auto select-none">
             <div className="text-lg text-green-500">
-              <Typewriter onComplete={advanceStatus}>
+              <Typewriter
+                onComplete={() => updateStatus(Status.ASTROPATHIC_SIGNAL)}
+              >
                 ++ Vox Channels Established
               </Typewriter>
 
-              {status > Status.VOX_CHANNELS && (
-                <Typewriter onComplete={advanceStatus}>
-                  ++ Noospheric Link Initialized
-                </Typewriter>
-              )}
-
-              {status > Status.NOOSPHERIC_LINK && (
-                <Typewriter onComplete={advanceStatus}>
+              {status >= Status.ASTROPATHIC_SIGNAL && (
+                <Typewriter
+                  onComplete={() => updateStatus(Status.WARP_INTERFERENCE)}
+                >
                   ++ Astropathic Link Initialized
                 </Typewriter>
               )}
 
-              {status > Status.ASTROPATHIC_SIGNAL && (
+              {status >= Status.WARP_INTERFERENCE && (
                 <Typewriter
-                  onComplete={advanceStatus}
-                  className="text-orange-300/50"
-                >
-                  :::: Signal Strength: Marginal
-                </Typewriter>
-              )}
-
-              {status > Status.SIGNAL_STRENGTH && (
-                <Typewriter
-                  onComplete={advanceStatus}
+                  onComplete={() => updateStatus(Status.INITIAL_PROMPT, 200)}
                   className="text-red-600/50"
                 >
-                  :::: Warp Interference: Significant
+                  :::: Warp Interference Detected ::::
                 </Typewriter>
-              )}
-
-              {status > Status.WARP_INTERFERENCE && (
-                <Typewriter>++ Ready</Typewriter>
               )}
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 text-lg text-green-400">
+              {status >= Status.INITIAL_PROMPT && (
+                <Typewriter
+                  stagger={0.005}
+                  onComplete={() => updateStatus(Status.WAITING_FOR_USER)}
+                  className="font-mono"
+                >
+                  With a whisper, Mirthe extends her hand. The air shimmers
+                  violet and the wall before you ripples like water as it
+                  dissolves into a vast gothic archway. We have found the
+                  entrance to the Geller field generator. Warning runes flash
+                  across the blast door in crimson binharic script. "Open it,"
+                  she urges. We are the only ones left – we must go forward.
+                </Typewriter>
+              )}
+
               {messages.map((message) => (
-                <Message key={message.id} data={message} />
+                <Message key={message.id} data={message} onEnd={handleEnding} />
               ))}
             </div>
           </div>
 
-          {status >= Status.INITIALIZED && (
-            <form
-              onSubmit={handleSubmit}
-              className="flex w-full items-center gap-4"
-            >
-              <span className="w-6 text-white">
-                <Command fill="currentColor" />
-              </span>
-              <input
-                name="prompt"
-                value={input}
-                autoFocus
-                autoComplete="off"
-                onChange={(e) => setInput(e.target.value)}
-                className="flex grow px-4 py-2 uppercase outline-0"
-              />
-            </form>
-          )}
+          {status >= Status.WAITING_FOR_USER &&
+            (status >= Status.ENDED ? (
+              <Button onClick={handleRestart} className="my-4 flex self-center">
+                Restart
+              </Button>
+            ) : (
+              status === Status.WAITING_FOR_USER && (
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex w-full shrink-0 items-center gap-4"
+                >
+                  <span className="w-6 text-white">
+                    <Command fill="currentColor" />
+                  </span>
+                  <input
+                    ref={inputRef}
+                    name="prompt"
+                    value={input}
+                    autoFocus
+                    autoComplete="off"
+                    onChange={(e) => setInput(e.target.value)}
+                    className={cn(
+                      'flex grow px-4 py-2 text-2xl uppercase outline-0',
+                    )}
+                  />
+                </form>
+              )
+            ))}
         </div>
 
-        <div className="mx-8 flex flex-col">
+        <div className="mx-8 flex flex-col select-none">
           <div className="border-orange-300/80p-2 relative flex min-w-0 justify-between gap-4 border-4 p-2 tracking-normal text-orange-300/80">
             <div className="flex">
               <div className="flex w-full flex-col text-sm">
@@ -193,7 +227,7 @@ export default function Cogitator() {
           </div>
         </div>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between select-none">
           <div className="ml-2 flex w-[calc(50%-64px)] overflow-hidden text-xs text-green-800">
             <div className="flex items-center gap-8 whitespace-nowrap">
               <div>Data-Vault Sigil: 7A-23B9-6C4D-FF12-9983</div>
@@ -228,13 +262,14 @@ export default function Cogitator() {
         </div>
       </div>
 
+      <div className={styles.pixelGrid} />
+
       <div
         className={cn(
           'pointer-events-none absolute top-0 left-0 h-screen w-screen select-none',
           styles.scanlines,
         )}
       />
-      <div className={styles.pixelGrid} />
     </FullScreenMain>
   );
 }
