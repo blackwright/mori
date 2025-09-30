@@ -84,7 +84,6 @@ export default function Cogitator() {
 
   return (
     <FullScreenMain
-      onClick={() => inputRef.current?.focus()}
       className={cn(
         silkscreen.className,
         'p-16 text-3xl tracking-wider text-white/85',
@@ -181,7 +180,7 @@ export default function Cogitator() {
                 autoComplete="off"
                 onChange={(e) => setInput(e.target.value)}
                 className={cn(
-                  'flex grow px-4 py-2 text-2xl uppercase outline-0',
+                  'flex grow bg-white/5 px-4 py-2 text-2xl uppercase outline-2 outline-white/25',
                 )}
               />
             </form>
