@@ -1,5 +1,5 @@
 import { cn } from '@/utils/cn';
-import { clampNumberRange } from '@/utils/numbers';
+import { interpolateColors } from '@/utils/colors';
 import { type UIMessage } from 'ai';
 import { Fragment, useEffect, useMemo, useRef } from 'react';
 import { zalgoize } from './utils';
@@ -56,15 +56,7 @@ export function Message({ data: { role, parts }, onEnd }: Props) {
   );
 }
 
-function getClassNameByLevel(level: number) {
-  if (Number.isNaN(level) || level < 3) {
-    return 'text-green-400';
-  } else if (level < 5) {
-    return 'text-yellow-400';
-  } else {
-    return 'text-red-600';
-  }
-}
+const colorsByLevel = interpolateColors('#34D399', '#DC2626', 10);
 
 function ParsedText({
   children,
@@ -77,9 +69,7 @@ function ParsedText({
 }) {
   const endingStateRef = useRef<'streaming' | 'done' | null>(null);
 
-  const [className, outputText] = useMemo(() => {
-    let result = children.replace(/^␁\d?␄?\s?/g, '');
-
+  const [level, outputText] = useMemo(() => {
     const level = children.charAt(1);
 
     if (!level) {
@@ -88,26 +78,26 @@ function ParsedText({
 
     const levelNumber = Number(level);
 
-    const className = getClassNameByLevel(levelNumber);
+    const result = zalgoize(children.replace(/^␁\d+?\s?/g, ''), levelNumber);
 
-    if (levelNumber >= 6) {
-      const zalgoLevel = clampNumberRange(levelNumber, {
-        input: [6, 9],
-        output: [1, 5],
-      });
-
-      result = zalgoize(result, zalgoLevel);
-    }
-
-    return [className, result];
+    return [levelNumber, result];
   }, [children]);
 
+  const color = useMemo(
+    () => (level != null ? colorsByLevel[level] : colorsByLevel[9]),
+    [level],
+  );
+
   useEffect(() => {
-    if (children.includes('␄') && state && endingStateRef.current !== state) {
+    if (level && level > 7 && state && endingStateRef.current !== state) {
       onEnd(state);
       endingStateRef.current = state;
     }
-  }, [children, state, onEnd]);
+  }, [level, state, onEnd]);
 
-  return <span className={cn('font-mono', className)}>{outputText}</span>;
+  return (
+    <span className={cn('font-mono')} style={{ color }}>
+      {outputText}
+    </span>
+  );
 }

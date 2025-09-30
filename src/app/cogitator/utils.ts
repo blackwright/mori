@@ -1,50 +1,101 @@
-const UP_ZALGO_CHARS = [
-  ...Array.from({ length: 0x036f - 0x0300 }, (_, i) =>
-    String.fromCharCode(0x0300 + i),
-  ),
+const zalgoUp = [
+  '\u030d',
+  '\u030e',
+  '\u0304',
+  '\u0305',
+  '\u033f',
+  '\u0311',
+  '\u0306',
+  '\u0310',
+  '\u0352',
+  '\u0357',
+  '\u0351',
+  '\u0307',
+  '\u0308',
+  '\u030a',
+  '\u0342',
+  '\u0343',
+  '\u0344',
+  '\u034a',
+  '\u034b',
+  '\u034c',
+  '\u0303',
+  '\u0302',
+  '\u030c',
+  '\u0350',
 ];
-
-const DOWN_ZALGO_CHARS = [
-  ...Array.from({ length: 0x1aff - 0x1ab0 }, (_, i) =>
-    String.fromCharCode(0x1ab0 + i),
-  ),
-  ...Array.from({ length: 0x1dff - 0x1dc0 }, (_, i) =>
-    String.fromCharCode(0x1dc0 + i),
-  ),
+const zalgoDown = [
+  '\u0316',
+  '\u0317',
+  '\u0318',
+  '\u0319',
+  '\u031c',
+  '\u031d',
+  '\u031e',
+  '\u031f',
+  '\u0320',
+  '\u0324',
+  '\u0325',
+  '\u0326',
+  '\u0329',
+  '\u032a',
+  '\u032b',
+  '\u032c',
+  '\u032d',
+  '\u032e',
+  '\u032f',
+  '\u0330',
+  '\u0331',
+  '\u0332',
+  '\u0333',
+  '\u0339',
 ];
-
-const MID_ZALGO_CHARS = [
-  ...Array.from({ length: 0x20ff - 0x20d0 }, (_, i) =>
-    String.fromCharCode(0x20d0 + i),
-  ),
+const zalgoMiddle = [
+  '\u0315',
+  '\u031b',
+  '\u0340',
+  '\u0341',
+  '\u0358',
+  '\u0321',
+  '\u0322',
+  '\u0327',
+  '\u0328',
+  '\u0334',
+  '\u0335',
+  '\u0336',
+  '\u034f',
+  '\u035c',
+  '\u035d',
+  '\u035e',
+  '\u035f',
+  '\u0360',
+  '\u0362',
+  '\u0338',
+  '\u0337',
+  '\u0361',
+  '\u0489',
 ];
-
-const ALL_ZALGO_CHARS = UP_ZALGO_CHARS.concat(
-  DOWN_ZALGO_CHARS,
-  MID_ZALGO_CHARS,
-);
 
 export function zalgoize(text: string, intensity: number): string {
-  return text
-    .split(' ')
-    .map((char) => {
-      const probability = 0.5 + (0.5 * (intensity - 1)) / 9;
-      const shouldZalgoize = Math.random() < probability;
+  if (intensity <= 0) {
+    return text;
+  }
 
-      if (!shouldZalgoize) {
-        return char;
+  let result = '';
+
+  for (let char of text) {
+    if (Math.random() < intensity / 10) {
+      let marksCount = 1 + Math.floor((Math.random() * intensity) / 2);
+
+      for (let i = 0; i < marksCount; i++) {
+        const set = [zalgoUp, zalgoDown, zalgoMiddle][
+          Math.floor(Math.random() * 3)
+        ];
+        char += set[Math.floor(Math.random() * set.length)];
       }
+    }
+    result += char;
+  }
 
-      let zalgoChars = '';
-
-      const count = Math.floor(Math.random() * intensity) + 1;
-
-      for (let i = 0; i < count; i++) {
-        zalgoChars +=
-          ALL_ZALGO_CHARS[Math.floor(Math.random() * ALL_ZALGO_CHARS.length)];
-      }
-
-      return char + zalgoChars;
-    })
-    .join(' ');
+  return result;
 }

@@ -6,6 +6,7 @@ import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { Silkscreen } from 'next/font/google';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { RotateCcw } from 'react-feather';
 import { Aquila } from './Aquila';
 import { Command } from './Command';
 import { Inquisition } from './Inquisition';
@@ -22,14 +23,16 @@ enum Status {
   VOX_CHANNELS,
   ASTROPATHIC_SIGNAL,
   WARP_INTERFERENCE,
+  WARP_MONITORING,
   RESTARTING_PROMPT,
   INITIAL_PROMPT,
   WAITING_FOR_USER,
-  ENDED_STREAMING,
-  ENDED,
+  STREAMING_ENDING,
+  ENDING,
 }
 
 export default function Cogitator() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [input, setInput] = useState('');
@@ -50,9 +53,9 @@ export default function Cogitator() {
 
   const handleEnding = useCallback((endingState: 'streaming' | 'done') => {
     if (endingState === 'streaming') {
-      setStatus(Status.ENDED_STREAMING);
+      setStatus(Status.STREAMING_ENDING);
     } else if (endingState === 'done') {
-      setStatus(Status.ENDED);
+      setStatus(Status.ENDING);
     }
   }, []);
 
@@ -98,6 +101,7 @@ export default function Cogitator() {
           <div className="ml-14 flex min-h-0 flex-col gap-4 overflow-auto select-none">
             <div className="text-lg text-green-500">
               <Typewriter
+                stagger={0.005}
                 onComplete={() => updateStatus(Status.ASTROPATHIC_SIGNAL)}
               >
                 ++ Vox Channels Established
@@ -105,7 +109,8 @@ export default function Cogitator() {
 
               {status >= Status.ASTROPATHIC_SIGNAL && (
                 <Typewriter
-                  onComplete={() => updateStatus(Status.WARP_INTERFERENCE)}
+                  stagger={0.005}
+                  onComplete={() => updateStatus(Status.WARP_INTERFERENCE, 200)}
                 >
                   ++ Astropathic Link Initialized
                 </Typewriter>
@@ -113,27 +118,34 @@ export default function Cogitator() {
 
               {status >= Status.WARP_INTERFERENCE && (
                 <Typewriter
+                  onComplete={() => updateStatus(Status.WARP_MONITORING)}
+                  className="text-red-600/50"
+                >
+                  -- Warp Interference Detected
+                </Typewriter>
+              )}
+
+              {status >= Status.WARP_MONITORING && (
+                <Typewriter
                   onComplete={() => updateStatus(Status.INITIAL_PROMPT, 200)}
                   className="text-red-600/50"
                 >
-                  :::: Warp Interference Detected ::::
+                  :::: Monitoring Data Exchange for Warp Contamination ::::
                 </Typewriter>
               )}
             </div>
 
-            <div className="flex flex-col gap-4 text-lg text-green-400">
+            <div
+              ref={scrollContainerRef}
+              className="flex flex-col gap-4 text-lg text-green-400"
+            >
               {status >= Status.INITIAL_PROMPT && (
                 <Typewriter
                   stagger={0.005}
                   onComplete={() => updateStatus(Status.WAITING_FOR_USER)}
                   className="font-mono"
                 >
-                  With a whisper, Mirthe extends her hand. The air shimmers
-                  violet and the wall before you ripples like water as it
-                  dissolves into a vast gothic archway. We have found the
-                  entrance to the Geller field generator. Warning runes flash
-                  across the blast door in crimson binharic script. "Open it,"
-                  she urges. We are the only ones left – we must go forward.
+                  Awaiting Query...
                 </Typewriter>
               )}
 
@@ -143,34 +155,37 @@ export default function Cogitator() {
             </div>
           </div>
 
-          {status >= Status.WAITING_FOR_USER &&
-            (status >= Status.ENDED ? (
-              <Button onClick={handleRestart} className="my-4 flex self-center">
-                Restart
-              </Button>
-            ) : (
-              status === Status.WAITING_FOR_USER && (
-                <form
-                  onSubmit={handleSubmit}
-                  className="flex w-full shrink-0 items-center gap-4"
-                >
-                  <span className="w-6 text-white">
-                    <Command fill="currentColor" />
-                  </span>
-                  <input
-                    ref={inputRef}
-                    name="prompt"
-                    value={input}
-                    autoFocus
-                    autoComplete="off"
-                    onChange={(e) => setInput(e.target.value)}
-                    className={cn(
-                      'flex grow px-4 py-2 text-2xl uppercase outline-0',
-                    )}
-                  />
-                </form>
-              )
-            ))}
+          {status >= Status.WAITING_FOR_USER && (
+            <form
+              onSubmit={handleSubmit}
+              className="flex w-full shrink-0 items-center gap-4"
+            >
+              <span className="w-6 text-white">
+                {status >= Status.STREAMING_ENDING ? (
+                  <Button
+                    type="button"
+                    onClick={handleRestart}
+                    className="flex self-center p-1"
+                  >
+                    <RotateCcw />
+                  </Button>
+                ) : (
+                  <Command fill="currentColor" />
+                )}
+              </span>
+              <input
+                ref={inputRef}
+                name="prompt"
+                value={input}
+                autoFocus
+                autoComplete="off"
+                onChange={(e) => setInput(e.target.value)}
+                className={cn(
+                  'flex grow px-4 py-2 text-2xl uppercase outline-0',
+                )}
+              />
+            </form>
+          )}
         </div>
 
         <div className="mx-8 flex flex-col select-none">
