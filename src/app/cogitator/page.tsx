@@ -86,19 +86,19 @@ export default function Cogitator() {
     <FullScreenMain
       className={cn(
         silkscreen.className,
-        'p-16 text-3xl tracking-wider text-white/85',
+        'pt-12 text-xs tracking-wider text-white/85 md:p-16 md:text-sm',
         styles.cogitator,
         styles.crt,
       )}
     >
       <div
         className={cn(
-          'relative flex h-full w-full flex-col gap-4 border-4 border-green-600',
+          'relative flex h-full w-full flex-col gap-4 border-green-600 md:border-4',
         )}
       >
-        <div className="flex min-h-0 grow flex-col gap-4 p-8">
-          <div className="ml-14 flex min-h-0 flex-col gap-4 overflow-auto select-none">
-            <div className="text-lg text-green-500">
+        <div className="flex min-h-0 grow flex-col gap-4 p-4 md:p-8">
+          <div className="flex min-h-0 flex-col gap-4 overflow-auto select-none md:ml-14">
+            <div className="text-sm text-green-500 md:text-lg">
               <Typewriter
                 stagger={0.005}
                 onComplete={() => updateStatus(Status.ASTROPATHIC_SIGNAL)}
@@ -159,7 +159,7 @@ export default function Cogitator() {
               onSubmit={handleSubmit}
               className="flex w-full shrink-0 items-center gap-4"
             >
-              <span className="w-6 text-white">
+              <span className="w-6 shrink-0 text-white">
                 {status >= Status.STREAMING_ENDING ? (
                   <Button
                     type="button"
@@ -179,9 +179,7 @@ export default function Cogitator() {
                 autoFocus
                 autoComplete="off"
                 onChange={(e) => setInput(e.target.value)}
-                className={cn(
-                  'flex grow bg-white/5 px-4 py-2 text-2xl uppercase outline-2 outline-white/25',
-                )}
+                className="flex min-w-0 grow border-2 border-white/25 bg-white/5 px-4 py-2 text-lg uppercase focus:outline-1 focus:outline-white/75 md:text-2xl"
               />
             </form>
           )}
@@ -190,7 +188,7 @@ export default function Cogitator() {
         <div className="mx-8 flex flex-col select-none">
           <div className="border-orange-300/80p-2 relative flex min-w-0 justify-between gap-4 border-4 p-2 tracking-normal text-orange-300/80">
             <div className="flex">
-              <div className="flex w-full flex-col text-sm">
+              <div className="flex w-full flex-col">
                 <div className="max-w-full truncate">Calixis CIR.22.08</div>
                 <div className="max-w-full truncate text-yellow-800">
                   61 F NRT/1 POST ADR
@@ -198,12 +196,12 @@ export default function Cogitator() {
               </div>
             </div>
 
-            <div className="flex truncate text-sm">
+            <div className="hidden truncate xl:flex">
               PRIORITY ALERT: ASTROPATHIC SIGNAL
             </div>
 
-            <div className="flex">
-              <div className="flex w-full flex-col text-sm">
+            <div className="hidden md:flex">
+              <div className="flex w-full flex-col">
                 <div className="max-w-full truncate">INQ COGITATOR</div>
                 <div className="max-w-full truncate text-yellow-800">
                   O-03/22/776.M41
@@ -211,7 +209,7 @@ export default function Cogitator() {
               </div>
             </div>
 
-            <div className="ml-16 flex">
+            <div className="ml-16 hidden xl:flex">
               <div className="flex w-full flex-col truncate text-xs text-yellow-800">
                 <div className="max-w-full truncate">Segmentum Obscurus</div>
                 <div className="max-w-full truncate">Authority: Ordo Xenos</div>
@@ -224,7 +222,7 @@ export default function Cogitator() {
               </div>
             </div>
 
-            <div className="flex text-sm text-yellow-800 select-none">
+            <div className="hidden text-yellow-800 select-none md:flex">
               <div className="max-w-full truncate">===</div>
             </div>
 
@@ -264,13 +262,13 @@ export default function Cogitator() {
         </div>
       </div>
 
-      <div className="justify-centertext-green-600 absolute top-4 left-1/2 flex -translate-x-1/2 items-center border-4 border-green-600/15 bg-slate-900 p-1 px-2 text-green-600 outline-8 outline-slate-900">
+      <div className="justify-centertext-green-600 absolute top-4 left-1/2 hidden -translate-x-1/2 items-center border-4 border-green-600/15 bg-slate-900 p-1 px-2 text-green-600 outline-8 outline-slate-900 md:flex">
         <div className="w-36 border-4 border-green-600/15 p-2">
           <Aquila fill="currentColor" />
         </div>
       </div>
 
-      <div className="justify-centertext-green-600 absolute bottom-0 left-1/2 flex -translate-x-1/2 items-center border-4 border-green-600/15 bg-slate-900 p-1 text-green-600 outline-8 outline-slate-900">
+      <div className="justify-centertext-green-600 absolute bottom-0 left-1/2 hidden -translate-x-1/2 items-center border-4 border-green-600/15 bg-slate-900 p-1 text-green-600 outline-8 outline-slate-900 md:flex">
         <div className="w-14 border-4 border-green-600/15 p-2">
           <Inquisition fill="currentColor" />
         </div>

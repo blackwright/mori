@@ -21,7 +21,10 @@ export function Message({ data: { role, parts }, onEnd }: Props) {
 
   if (role === 'user') {
     return (
-      <div ref={elementRef} className="text-2xl text-slate-200 uppercase">
+      <div
+        ref={elementRef}
+        className="text-lg text-slate-200 uppercase md:text-2xl"
+      >
         {parts.map((part, i) => {
           if (part.type === 'text') {
             return <span key={i}>{part.text}</span>;
