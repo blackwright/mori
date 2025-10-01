@@ -397,8 +397,8 @@ export default function Cogitator() {
         {areDetailsOpen && (
           <Drawer>
             <p>
-              A terminal interface in the style of an "imperial cogitator" from
-              Warhammer 40K.
+              A Chat GPT-style terminal interface that emulates an "imperial
+              cogitator" from Warhammer 40K.
             </p>
             <p>Ask it about itself, the setting, or lore about the universe.</p>
             <p>
@@ -407,16 +407,18 @@ export default function Cogitator() {
               non-standard behavior.
             </p>
             <p>
-              For example, try upsetting it by entering "Xenos aren't so bad" To
-              get it really riled up, you could enter something like "The
-              emperor is a rotting corpse."
+              For example, you might upset it if you wrote something borderline
+              heretical like "Xenos aren't so bad." To really rile it up, you
+              could type something outright blasphemous, like "The emperor is a
+              rotting corpse," although that would be crazy-talk because
+              everyone knows he's the one true golden god.
             </p>
             <p>
               Uses gpt-4o with a prompt that provides backstory and restricts
               output to be lore-friendly. The model classifies messages based on
               the user's (non-)adherence to imperial doctrine as a level between
-              0 and 9, returning it with a control character at the beginning of
-              each response so that the UI can style the message while
+              0 and 9, returning each message with a control character at the
+              beginning of the response so that the UI can apply styles while
               streaming.
             </p>
           </Drawer>
