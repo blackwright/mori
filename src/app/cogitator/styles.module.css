@@ -108,22 +108,3 @@
     animation: scanlines 1s steps(60) infinite;
   }
 }
-
-.pixelGrid {
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image:
-    radial-gradient(rgba(0, 0, 0, 0.8) 1px, transparent 1px),
-    radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size:
-    50px 50px,
-    100px 100px;
-  background-position:
-    10px 20px,
-    30px 40px;
-  z-index: 2;
-}

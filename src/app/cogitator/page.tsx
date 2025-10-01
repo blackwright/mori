@@ -246,14 +246,14 @@ export default function Cogitator() {
             {status >= Status.WAITING_FOR_USER && (
               <form
                 onSubmit={handleSubmit}
-                className="flex w-full shrink-0 items-center gap-4"
+                className="flex w-full shrink-0 items-center gap-4 border-2 border-white/25 bg-green-950 p-2 focus-within:outline-1 focus-within:outline-white/75"
               >
-                <span className="w-6 shrink-0 text-white">
+                <span className="w-8 shrink-0 text-white">
                   {status >= Status.STREAMING_ENDING ? (
                     <Button
                       type="button"
                       onClick={handleRestart}
-                      className="flex self-center p-1"
+                      className="flex self-center bg-white/25 p-1"
                     >
                       <RotateCcw />
                     </Button>
@@ -269,7 +269,7 @@ export default function Cogitator() {
                   autoFocus
                   autoComplete="off"
                   onChange={(e) => setInput(e.target.value)}
-                  className="z-10 flex min-w-0 grow border-2 border-white/25 bg-green-950 px-4 py-2 text-lg uppercase focus:outline-1 focus:outline-white/75 md:text-2xl"
+                  className="z-10 flex min-w-0 grow text-lg uppercase outline-0 md:text-2xl"
                 />
               </form>
             )}
@@ -384,8 +384,6 @@ export default function Cogitator() {
             <Inquisition fill="currentColor" />
           </div>
         </div>
-
-        <div className={styles.pixelGrid} />
 
         <div
           className={cn(
