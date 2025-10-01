@@ -8,33 +8,38 @@ type RouteObject = {
 
 export const routes: RouteObject[] = [
   {
+    title: 'Cogitator',
+    path: '/cogitator',
+    img: '/thumbnails/cogitator.webp',
+  },
+  {
     title: 'Dune Ipsum',
     path: '/dune-ipsum',
-    img: '/thumbnails/dune.png',
+    img: '/thumbnails/dune.webp',
   },
   {
     title: 'Late',
     path: '/late',
-    img: '/thumbnails/late.png',
+    img: '/thumbnails/late.webp',
   },
   {
     title: 'Mori',
     path: '/mori',
-    img: '/thumbnails/mori.jpg',
+    img: '/thumbnails/mori.webp',
   },
   {
     title: 'Rise',
     path: '/rise',
-    img: '/thumbnails/rise.png',
+    img: '/thumbnails/rise.webp',
   },
   {
     title: 'Pale Blue Dot',
     path: '/pale-blue-dot',
-    img: '/thumbnails/pale.jpg',
+    img: '/thumbnails/pale.webp',
   },
   {
     title: '❤️ 💀 + 🤖',
     path: '/ldar',
-    img: '/thumbnails/ldar.png',
+    img: '/thumbnails/ldar.webp',
   },
 ];
