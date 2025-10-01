@@ -120,7 +120,7 @@ export default function Cogitator() {
             left: '35%',
             width: '30vw',
             height: '25vh',
-            '--animation-delay': '-3.5s',
+            '--animation-delay': '-6.5s',
           }}
         />
 
@@ -131,7 +131,7 @@ export default function Cogitator() {
             top: '25%',
             width: '21vw',
             height: '28vh',
-            '--animation-delay': '-9.5s',
+            '--animation-delay': '-8.9s',
           }}
         />
 
