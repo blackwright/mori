@@ -7,6 +7,7 @@ import { DefaultChatTransport } from 'ai';
 import { Silkscreen } from 'next/font/google';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { RotateCcw } from 'react-feather';
+import { AnimatedTerminal } from './AnimatedTerminal';
 import { Aquila } from './Aquila';
 import { Command } from './Command';
 import { Inquisition } from './Inquisition';
@@ -92,6 +93,48 @@ export default function Cogitator() {
       )}
     >
       <div className="relative flex h-full w-full flex-col gap-4 border-green-600 text-xs md:border-4">
+        <AnimatedTerminal
+          style={{
+            top: '2%',
+            left: '2%',
+            width: '30vw',
+            height: '36vh',
+            '--animation-delay': '-1.2s',
+          }}
+        />
+
+        <AnimatedTerminal
+          className="text-right"
+          style={{
+            top: '5%',
+            left: '30%',
+            width: '32vw',
+            height: '21vh',
+            '--animation-delay': '-10.2s',
+          }}
+        />
+
+        <AnimatedTerminal
+          style={{
+            top: '35%',
+            left: '35%',
+            width: '30vw',
+            height: '25vh',
+            '--animation-delay': '-3.5s',
+          }}
+        />
+
+        <AnimatedTerminal
+          className="text-right"
+          style={{
+            left: '2%',
+            top: '25%',
+            width: '21vw',
+            height: '28vh',
+            '--animation-delay': '-9.5s',
+          }}
+        />
+
         <div className="absolute -top-6 left-0 hidden w-full justify-between text-green-800 md:flex">
           <div className="flex w-1/2 overflow-hidden whitespace-nowrap">
             7A-23B9-6C4D-FF12-9983 44F9-A12D-0BB7-77C4-11E8
@@ -212,7 +255,7 @@ export default function Cogitator() {
                 autoFocus
                 autoComplete="off"
                 onChange={(e) => setInput(e.target.value)}
-                className="flex min-w-0 grow border-2 border-white/25 bg-white/5 px-4 py-2 text-lg uppercase focus:outline-1 focus:outline-white/75 md:text-2xl"
+                className="z-10 flex min-w-0 grow border-2 border-white/25 bg-green-950 px-4 py-2 text-lg uppercase focus:outline-1 focus:outline-white/75 md:text-2xl"
               />
             </form>
           )}
@@ -329,7 +372,7 @@ export default function Cogitator() {
 
       <div
         className={cn(
-          'pointer-events-none absolute top-0 left-0 h-screen w-screen select-none',
+          'pointer-events-none absolute top-0 left-0 z-20 h-screen w-screen select-none',
           styles.scanlines,
         )}
       />
