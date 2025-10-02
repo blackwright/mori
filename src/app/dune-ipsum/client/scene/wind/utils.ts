@@ -4,5 +4,5 @@ type Dimensions = {
 };
 
 export function getParticleCount({ width, height }: Dimensions): number {
-  return (width * height) / 1000;
+  return Math.floor((width * height) / 1000);
 }
