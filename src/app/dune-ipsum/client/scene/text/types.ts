@@ -1,7 +1,7 @@
-import { BufferAttribute } from 'three';
+import { type Float32BufferAttribute } from 'three';
 
 export type BufferAttributes = [
-  BufferAttribute,
-  BufferAttribute,
-  BufferAttribute,
+  Float32BufferAttribute,
+  Float32BufferAttribute,
+  Float32BufferAttribute,
 ];

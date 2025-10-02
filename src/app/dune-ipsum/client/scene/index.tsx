@@ -5,7 +5,7 @@ import { Wind } from './wind';
 type Props = {
   position: Float32Array;
   isRendering: boolean;
-  onComplete?: () => void;
+  onComplete: () => void;
 };
 
 export function Scene({ position, isRendering, onComplete }: Props) {

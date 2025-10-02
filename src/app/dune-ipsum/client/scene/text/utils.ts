@@ -1,4 +1,4 @@
-import { BufferAttribute, MathUtils } from 'three';
+import { Float32BufferAttribute, MathUtils } from 'three';
 import type { BufferAttributes } from './types';
 
 export function createBufferAttributes(position: Float32Array): {
@@ -25,9 +25,9 @@ export function createBufferAttributes(position: Float32Array): {
 
   return {
     attributes: [
-      new BufferAttribute(position, 3),
-      new BufferAttribute(visibleTime, 1),
-      new BufferAttribute(color, 1),
+      new Float32BufferAttribute(position, 3),
+      new Float32BufferAttribute(visibleTime, 1),
+      new Float32BufferAttribute(color, 1),
     ],
     maxVisibleTime,
   };

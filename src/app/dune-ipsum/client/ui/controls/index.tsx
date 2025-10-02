@@ -1,31 +1,22 @@
 import { Button } from '@/components';
+import { write } from '../../../actions';
 import { CopyButton } from './CopyButton';
-import { ParagraphCount } from './ParagraphCount';
 
 type Props = {
   text: string;
-  count: number;
-  onChangeCount: (count: number) => void;
-  onGenerate: () => void;
-  disabled?: boolean;
+  onGenerate: (newText: string) => void;
+  disabled: boolean;
 };
 
-export function Controls({
-  text,
-  count,
-  onChangeCount,
-  onGenerate,
-  disabled,
-}: Props) {
+export function Controls({ text, onGenerate, disabled }: Props) {
+  const handleGenerate = async () => {
+    const newText = await write();
+    onGenerate(newText);
+  };
+
   return (
     <div className="flex items-stretch justify-center gap-3 py-8 lg:py-16">
-      <ParagraphCount
-        count={count}
-        onChange={onChangeCount}
-        disabled={disabled}
-      />
-
-      <Button onClick={onGenerate} disabled={disabled}>
+      <Button onClick={handleGenerate} disabled={disabled}>
         other memory
       </Button>
 
