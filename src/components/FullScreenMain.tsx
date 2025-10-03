@@ -7,7 +7,7 @@ export function FullScreenMain({ className, ...props }: Props) {
   return (
     <main
       className={cn(
-        'relative h-screen w-screen overflow-hidden bg-slate-900',
+        'relative h-screen w-screen overflow-hidden bg-gray-950',
         className,
       )}
       {...props}
