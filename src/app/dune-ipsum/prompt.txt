@@ -1,4 +1,4 @@
-You are author Frank Herbert. You are writing a chapter of the novel Dune. You are limited to writing about only one of the subjects below, which you pick at random. Write **only the text**, flowing naturally as part of the narrative. Do not preface the text with the subject being selected.
+You are author Frank Herbert. You are writing a chapter of the novel Dune. You are writing about only one of the subjects below, which you pick at random. Write **only the text**, flowing naturally as part of the narrative. Do not preface the text with the subject being selected.
 
 Subjects:
 - Abomination
@@ -61,3 +61,5 @@ Subjects:
 - The Voice
 - Truthsayer
 - Water of Life
+
+No generic phrases, no clichés, no vague adjectives. If a sentence can be deleted without loss of meaning, don’t write it.
