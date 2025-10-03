@@ -4,11 +4,16 @@ import { useDetailsSearchParams } from '@/app/hooks';
 import { Drawer, FullScreenMain } from '@/components';
 import { Canvas } from '@react-three/fiber';
 import { AnimatePresence } from 'motion/react';
-import { useCallback, useState } from 'react';
+import { Suspense, useCallback, useState } from 'react';
 import { MathUtils } from 'three';
-import { Scene } from './scene';
+import { write } from '../actions';
+import { Incoming } from './scene/text/Incoming';
+import { Outgoing } from './scene/text/Outgoing';
+import { Wind } from './scene/wind';
+import { type TextState } from './types';
 import { Controls } from './ui/controls';
 import { ImageData } from './ui/image-data';
+import { createIncomingTextGeometry } from './utils';
 
 type Props = {
   initialText: string;
@@ -17,9 +22,15 @@ type Props = {
 export function DuneIpsum({ initialText }: Props) {
   const [text, setText] = useState(initialText);
 
-  const [position, setPosition] = useState<Float32Array | null>(null);
-
   const [isRendering, setIsRendering] = useState(true);
+
+  const [incomingTextState, setIncomingTextState] = useState<TextState | null>(
+    null,
+  );
+
+  const [outgoingTextState, setOutgoingTextState] = useState<TextState | null>(
+    null,
+  );
 
   const [areDetailsOpen] = useDetailsSearchParams();
 
@@ -43,40 +54,63 @@ export function DuneIpsum({ initialText }: Props) {
         i += MathUtils.randInt(1, particleGap) * 4;
       }
 
-      setPosition(Float32Array.from(pointCoords));
+      const position = Float32Array.from(pointCoords);
+
+      setIncomingTextState((prev) => ({
+        key: prev?.key ?? 0 + 1,
+        ...createIncomingTextGeometry(position),
+      }));
     },
     [],
   );
 
   const handleComplete = useCallback(() => {
     setIsRendering(false);
+    setOutgoingTextState(null);
   }, []);
 
-  const handleGenerate = (newText: string) => {
+  const handleGenerate = async () => {
     if (isRendering) {
       return;
     }
 
     setIsRendering(true);
 
+    setOutgoingTextState(incomingTextState);
+    setIncomingTextState(null);
+
+    const newText = await write();
     setText(newText);
   };
 
   return (
     <FullScreenMain>
-      {position && (
-        <Canvas
-          orthographic={true}
-          camera={{ position: [0, 0, 1], far: 500 }}
-          resize={{ scroll: true, debounce: { scroll: 50, resize: 0 } }}
-        >
-          <Scene
-            position={position}
-            isRendering={isRendering}
-            onComplete={handleComplete}
-          />
-        </Canvas>
-      )}
+      <Canvas
+        orthographic={true}
+        camera={{ position: [0, 0, 1], far: 500 }}
+        resize={{ scroll: true, debounce: { scroll: 50, resize: 0 } }}
+      >
+        <Suspense fallback={null}>
+          {incomingTextState && (
+            <Incoming
+              key={`incoming-${incomingTextState.key}`}
+              geometry={incomingTextState.geometry}
+              incomingDelay={2}
+              maxVisibleTime={incomingTextState.maxVisibleTime}
+              onComplete={handleComplete}
+            />
+          )}
+
+          {outgoingTextState && (
+            <Outgoing
+              key={`outgoing-${outgoingTextState.key}`}
+              geometry={outgoingTextState.geometry}
+            />
+          )}
+
+          <Wind isRendering={isRendering} />
+        </Suspense>
+      </Canvas>
 
       <div className="absolute top-0 left-0 flex h-full w-full flex-col pb-6">
         <Controls

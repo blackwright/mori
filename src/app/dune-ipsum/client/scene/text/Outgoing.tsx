@@ -1,7 +1,7 @@
 import { useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import type { BufferGeometry, ShaderMaterial } from 'three';
-import { outgoingShader } from './shaders';
+import { createOutgoingShader } from './shaders';
 
 type Props = {
   geometry: BufferGeometry;
@@ -9,6 +9,8 @@ type Props = {
 
 export function Outgoing({ geometry }: Props) {
   const materialRef = useRef<ShaderMaterial | null>(null);
+
+  const shader = useMemo(() => createOutgoingShader(), [geometry]);
 
   useFrame((_, delta) => {
     if (materialRef.current) {
@@ -18,11 +20,7 @@ export function Outgoing({ geometry }: Props) {
 
   return (
     <points geometry={geometry}>
-      <shaderMaterial
-        ref={materialRef}
-        attach="material"
-        args={[outgoingShader]}
-      />
+      <shaderMaterial ref={materialRef} attach="material" args={[shader]} />
     </points>
   );
 }

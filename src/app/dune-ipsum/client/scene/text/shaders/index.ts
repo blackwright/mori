@@ -2,7 +2,7 @@ import { incomingVertexShader } from './incoming.vertex';
 import { outgoingVertexShader } from './outgoing.vertex';
 import { textFragmentShader } from './text.fragment';
 
-export const incomingShader = (uDelay: number) => {
+export function createIncomingShader(uDelay: number) {
   return {
     uniforms: {
       u_time: { value: 0.0 },
@@ -11,12 +11,14 @@ export const incomingShader = (uDelay: number) => {
     vertexShader: incomingVertexShader,
     fragmentShader: textFragmentShader,
   };
-};
+}
 
-export const outgoingShader = {
-  uniforms: {
-    u_time: { value: 0.0 },
-  },
-  vertexShader: outgoingVertexShader,
-  fragmentShader: textFragmentShader,
-};
+export function createOutgoingShader() {
+  return {
+    uniforms: {
+      u_time: { value: 0.0 },
+    },
+    vertexShader: outgoingVertexShader,
+    fragmentShader: textFragmentShader,
+  };
+}

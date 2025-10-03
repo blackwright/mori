@@ -1,13 +1,13 @@
 import { useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import type { BufferGeometry, ShaderMaterial } from 'three';
-import { incomingShader } from './shaders';
+import { createIncomingShader } from './shaders';
 
 type Props = {
   geometry: BufferGeometry;
   incomingDelay: number;
   maxVisibleTime: number;
-  onComplete?: () => void;
+  onComplete: () => void;
 };
 
 export function Incoming({
@@ -20,19 +20,21 @@ export function Incoming({
 
   const materialRef = useRef<ShaderMaterial | null>(null);
 
-  const shader = useMemo(() => incomingShader(incomingDelay), [incomingDelay]);
+  const shader = useMemo(
+    () => createIncomingShader(incomingDelay),
+    [geometry, incomingDelay],
+  );
 
   useFrame((_, delta) => {
-    if (materialRef.current) {
+    if (materialRef.current && !hasCompletedRef.current) {
       materialRef.current.uniforms.u_time.value += delta;
 
       if (
         materialRef.current.uniforms.u_time.value >
-          maxVisibleTime + incomingDelay &&
-        !hasCompletedRef.current
+        maxVisibleTime + incomingDelay
       ) {
         hasCompletedRef.current = true;
-        onComplete?.();
+        onComplete();
       }
     }
   });

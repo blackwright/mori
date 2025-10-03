@@ -1,9 +1,9 @@
 import { BufferGeometry, Float32BufferAttribute, MathUtils } from 'three';
+import { type TextState } from './types';
 
-export function createIncomingTextGeometry(position: Float32Array): {
-  geometry: BufferGeometry;
-  maxVisibleTime: number;
-} {
+export function createIncomingTextGeometry(
+  position: Float32Array,
+): Omit<TextState, 'key'> {
   let maxVisibleTime = 0;
 
   const vertexCount = position.length / 3;
