@@ -1,8 +1,7 @@
-import { Float32BufferAttribute, MathUtils } from 'three';
-import type { BufferAttributes } from './types';
+import { BufferGeometry, Float32BufferAttribute, MathUtils } from 'three';
 
-export function createBufferAttributes(position: Float32Array): {
-  attributes: BufferAttributes;
+export function createIncomingTextGeometry(position: Float32Array): {
+  geometry: BufferGeometry;
   maxVisibleTime: number;
 } {
   let maxVisibleTime = 0;
@@ -23,12 +22,17 @@ export function createBufferAttributes(position: Float32Array): {
     visibleTime[i] = newVisibleTime;
   }
 
+  const geometry = new BufferGeometry();
+
+  geometry.setAttribute('position', new Float32BufferAttribute(position, 3));
+  geometry.setAttribute(
+    'visible_time',
+    new Float32BufferAttribute(visibleTime, 1),
+  );
+  geometry.setAttribute('color', new Float32BufferAttribute(color, 1));
+
   return {
-    attributes: [
-      new Float32BufferAttribute(position, 3),
-      new Float32BufferAttribute(visibleTime, 1),
-      new Float32BufferAttribute(color, 1),
-    ],
+    geometry,
     maxVisibleTime,
   };
 }

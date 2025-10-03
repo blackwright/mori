@@ -81,7 +81,7 @@ export function Wind({ isRendering }: Props) {
       <pointsMaterial
         ref={materialRef}
         attach="material"
-        args={[{ size: 1 }]}
+        args={[{ size: 2 }]}
         color={COLOR}
       />
     </points>

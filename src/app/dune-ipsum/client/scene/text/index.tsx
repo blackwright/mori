@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import type { BufferGeometry } from 'three';
 import { Incoming } from './Incoming';
 import { Outgoing } from './Outgoing';
-import type { BufferAttributes } from './types';
-import { createBufferAttributes } from './utils';
+import { createIncomingTextGeometry } from './utils';
 
 type Props = {
   position: Float32Array;
@@ -11,25 +11,28 @@ type Props = {
 };
 
 type State = {
-  incoming?: BufferAttributes;
-  outgoing?: BufferAttributes;
-  maxVisibleTime?: number;
+  key: number;
+  incoming: BufferGeometry | null;
+  outgoing: BufferGeometry | null;
+  maxVisibleTime: number | null;
 };
 
 export function Text({ position, incomingDelay, onComplete }: Props) {
   const [state, setState] = useState<State>({
-    incoming: undefined,
-    outgoing: undefined,
-    maxVisibleTime: undefined,
+    key: 0,
+    incoming: null,
+    outgoing: null,
+    maxVisibleTime: null,
   });
 
   useEffect(() => {
     setState((prevState) => {
-      const { attributes: incoming, maxVisibleTime } =
-        createBufferAttributes(position);
+      const { geometry: incoming, maxVisibleTime } =
+        createIncomingTextGeometry(position);
 
       return {
-        outgoing: prevState.incoming ? prevState.incoming : undefined,
+        key: prevState.key + 1,
+        outgoing: prevState.incoming ? prevState.incoming : null,
         incoming,
         maxVisibleTime,
       };
@@ -40,14 +43,17 @@ export function Text({ position, incomingDelay, onComplete }: Props) {
     <>
       {state.incoming && state.maxVisibleTime && (
         <Incoming
-          attributes={state.incoming}
+          key={`incoming-${state.key}`}
+          geometry={state.incoming}
           incomingDelay={incomingDelay}
           maxVisibleTime={state.maxVisibleTime}
           onComplete={onComplete}
         />
       )}
 
-      {state.outgoing && <Outgoing attributes={state.outgoing} />}
+      {state.outgoing && (
+        <Outgoing key={`outgoing-${state.key}`} geometry={state.outgoing} />
+      )}
     </>
   );
 }
