@@ -12,7 +12,7 @@ const INCLINATION = 0.47;
 const AZIMUTH = 0.25;
 const MAX_Y_POSITION = 0.4;
 const MIN_Y_POSITION = 0.05;
-const MAX_EXPOSURE = 0.75;
+const MAX_EXPOSURE = 0.5;
 const MIN_EXPOSURE = 0.01;
 
 const THETA = Math.PI * (INCLINATION - 0.5);
