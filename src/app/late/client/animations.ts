@@ -1,5 +1,5 @@
 import { useAnimation } from 'motion/react';
-import { useCallback, useMemo, useEffect } from 'react';
+import { useCallback, useMemo } from 'react';
 
 const LIGHTNING_ENTER_DURATION = 0.025;
 const LIGHTNING_EXIT_DURATION = 0.4;
@@ -49,7 +49,7 @@ export function useAnimations() {
     grayscaleFlashSequence();
     outdoorFlashSequence();
     indoorFlashSequence();
-  }, [grayscaleFlash, outdoorFlashSequence, indoorFlashSequence]);
+  }, [grayscaleFlashSequence, outdoorFlashSequence, indoorFlashSequence]);
 
   return useMemo(
     () => ({ grayscaleFlash, outdoorFlash, indoorFlash, flashSequence }),

@@ -136,12 +136,13 @@ export function PaleBlueDot() {
             <blockquote className="rounded-r-lg border-l-4 border-slate-900 bg-slate-900/50 p-4">
               To me, it underscores our responsibility to deal more kindly with
               one another, and to preserve and cherish the pale blue dot, the
-              only home we've ever known.
+              only home we&apos;ve ever known.
             </blockquote>
             <p>
-              This is a recreation of NASA's <em>Pale Blue Dot Revisited</em>{' '}
-              image in HTML and CSS, implemented with gradients and a keyframe
-              animation on an image texture to simulate film grain noise.
+              This is a recreation of NASA&apos;s{' '}
+              <em>Pale Blue Dot Revisited</em> image in HTML and CSS,
+              implemented with gradients and a keyframe animation on an image
+              texture to simulate film grain noise.
             </p>
           </Drawer>
         )}

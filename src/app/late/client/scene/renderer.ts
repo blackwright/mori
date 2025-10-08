@@ -22,5 +22,5 @@ export abstract class Renderer {
   }
 
   // for animation
-  tick(args: any): void {}
+  tick(): void {}
 }

@@ -1,11 +1,4 @@
-import {
-  useEffect,
-  type DependencyList,
-  type EffectCallback,
-  type MutableRefObject,
-  type Ref,
-} from 'react';
-import { debounced } from '@/utils';
+import { type MutableRefObject, type Ref } from 'react';
 
 export function mergeRefs<T>(
   refs: Array<Ref<T> | null | undefined>,
@@ -21,18 +14,4 @@ export function mergeRefs<T>(
         }
       });
   };
-}
-
-export function useDebouncedResize(fn: EffectCallback, deps?: DependencyList) {
-  useEffect(() => {
-    const cleanupFn = fn();
-    const debouncedFn = debounced(fn);
-
-    window.addEventListener('resize', debouncedFn);
-
-    return () => {
-      window.removeEventListener('resize', debouncedFn);
-      cleanupFn?.();
-    };
-  }, deps);
 }

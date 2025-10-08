@@ -6,7 +6,7 @@ export default function AboutPage() {
     <>
       <div className="mx-auto mt-12 flex [max-width:650px] flex-col items-start justify-center gap-6 p-4 text-xl leading-relaxed">
         <p>
-          I'm Jerry Gao, a front-end software engineer in New York. I enjoy
+          I&apos;m Jerry Gao, a front-end software engineer in New York. I enjoy
           building interactive UIs and the work that goes into maintaining a
           great developer experience.
         </p>

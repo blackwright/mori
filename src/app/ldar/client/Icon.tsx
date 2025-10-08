@@ -4,7 +4,10 @@ type Props = {
   children: string;
 };
 
-export const Icon = forwardRef<HTMLElement, Props>(({ children }, ref) => {
+export const Icon = forwardRef<HTMLElement, Props>(function Icon(
+  { children },
+  ref,
+) {
   return (
     <i
       ref={ref}

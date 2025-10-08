@@ -10,7 +10,7 @@ type Props = {
 export function Outgoing({ geometry }: Props) {
   const materialRef = useRef<ShaderMaterial | null>(null);
 
-  const shader = useMemo(() => createOutgoingShader(), [geometry]);
+  const shader = useMemo(() => createOutgoingShader(), []);
 
   useFrame((_, delta) => {
     if (materialRef.current) {

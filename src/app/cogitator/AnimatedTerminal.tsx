@@ -30,8 +30,8 @@ export function AnimatedTerminal({ className, style }: Props) {
             Plasma-Conduit Flux: 0xAB3F-ΔPHAGE Omnis-Cant Echo: ∑77.11.88.99
           </div>
           <div>
-            Sanctified Input-Thread: 12.44.09.77 / 77.12.44.09 Tech-Psalm: "In
-            Machine, Truth. In Rust, Purge."
+            Sanctified Input-Thread: 12.44.09.77 / 77.12.44.09 Tech-Psalm:
+            &quot;In Machine, Truth. In Rust, Purge.&quot;
           </div>
           <div>Warning: Unhallowed Bit-Rot Detected</div>
           <div>
@@ -51,11 +51,11 @@ export function AnimatedTerminal({ className, style }: Props) {
           <div>
             +++Unstable Warp-Echo Detected+++ Counter-Rite: HYMN-CRUCIBLE-77
           </div>
-          <div>Error-Mantra: "Bless the Coil, Damn the Spark."</div>
+          <div>Error-Mantra: &quot;Bless the Coil, Damn the Spark.&quot;</div>
           <div>Access Node: PRIMUS-HEX-443 Litanic Loop: 9B-09-77-Ω</div>
           <div>
             Spirit-State: Agitated / Unquiet / Recursive Rite-Repair Command:
-            //EXECUTE// PURGE-COIL-113
+            &#47;&#47;EXECUTE&#47;&#47; PURGE-COIL-113
           </div>
           <div>
             Obscura Key: 44/99/Δ-7X-332 Signal Strength: 77.77% (declining)
@@ -65,7 +65,8 @@ export function AnimatedTerminal({ className, style }: Props) {
             EXCOMMUNICATE PROTOCOL IN EFFECT
           </div>
           <div>
-            Script-ID: 0xCAF3-BABE Canticle String: "Iron-Sanctum Validated"
+            Script-ID: 0xCAF3-BABE Canticle String: &quot;Iron-Sanctum
+            Validated&quot;
           </div>
           <div>
             Memory-Sector Seal: 88.44.11.22 Warning: Fragmentary Pseudo-Warp

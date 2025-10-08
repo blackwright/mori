@@ -24,8 +24,7 @@ function Handle({ className, ...props }: HandleProps) {
   return (
     <motion.button
       className={cn(
-        'relative cursor-pointer rounded-full border-2 border-slate-100 bg-transparent hover:bg-slate-100/20 active:bg-slate-200/10',
-        styles.handle,
+        'relative h-10 w-10 cursor-pointer rounded-full border-2 border-slate-100 bg-transparent hover:bg-slate-100/20 active:bg-slate-200/10',
         className,
       )}
       {...props}

@@ -22,7 +22,7 @@ export function Incoming({
 
   const shader = useMemo(
     () => createIncomingShader(incomingDelay),
-    [geometry, incomingDelay],
+    [incomingDelay],
   );
 
   useFrame((_, delta) => {

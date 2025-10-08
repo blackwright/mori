@@ -7,7 +7,7 @@ export type ClampRanges = {
 
 export function clamp(value: number, [min, max]: Clamp): number {
   if (min > max) {
-    let temp = min;
+    const temp = min;
     min = max;
     max = temp;
   }

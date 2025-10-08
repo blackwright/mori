@@ -45,7 +45,10 @@ export function roundedRect(
 
   ctx.closePath();
   ctx.fill();
-  stroke && ctx.stroke();
+
+  if (stroke) {
+    ctx.stroke();
+  }
 }
 
 export function distanceBetween(

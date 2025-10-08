@@ -3,7 +3,6 @@
 import { useDetailsSearchParams } from '@/app/hooks';
 import { Drawer, FullScreenMain } from '@/components';
 import { cn } from '@/utils/cn';
-import { useDebouncedResize } from '@/utils/react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef } from 'react';
 import { useAnimations } from './animations';
@@ -22,7 +21,7 @@ export function Late() {
 
   const [areDetailsOpen] = useDetailsSearchParams();
 
-  useDebouncedResize(() => {
+  useEffect(() => {
     const createCity = () => {
       const cityCanvas = cityCanvasRef.current;
 
@@ -33,6 +32,7 @@ export function Late() {
         cityCanvas.height = innerHeight * devicePixelRatio;
 
         const ctx = cityCanvas.getContext('2d')!;
+
         const city = new City(ctx);
         cityRef.current = city;
         city.render();
@@ -40,12 +40,18 @@ export function Late() {
     };
 
     createCity();
+
+    window.addEventListener('resize', createCity);
+
+    return () => {
+      window.removeEventListener('resize', createCity);
+    };
   }, []);
 
   const rainCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const rainfallRef = useRef<Rainfall | null>(null);
 
-  useDebouncedResize(() => {
+  useEffect(() => {
     const createRain = () => {
       const rainCanvas = rainCanvasRef.current;
 
@@ -57,7 +63,7 @@ export function Late() {
 
         const ctx = rainCanvas.getContext('2d')!;
 
-        let rainfall = rainfallRef.current;
+        const rainfall = rainfallRef.current;
 
         if (rainfall) {
           rainfall.canvasWidth = innerWidth * devicePixelRatio;
@@ -66,32 +72,32 @@ export function Late() {
           rainfallRef.current = new Rainfall(ctx);
         }
       }
-
-      return () => {
-        if (rainfallRef.current) {
-          rainfallRef.current = null;
-        }
-      };
     };
 
-    return createRain();
+    createRain();
+
+    window.addEventListener('resize', createRain);
+
+    return () => {
+      window.removeEventListener('resize', createRain);
+    };
   }, []);
 
   const homeCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const homeRef = useRef<Home | null>(null);
   const clockIntervalRef = useRef<number | null>(null);
 
-  useDebouncedResize(() => {
-    const { innerWidth, innerHeight, devicePixelRatio } = window;
-
-    if (clockIntervalRef.current) {
-      window.clearInterval(clockIntervalRef.current);
-    }
-
+  useEffect(() => {
     const createHome = () => {
       const homeCanvas = homeCanvasRef.current;
 
+      if (clockIntervalRef.current) {
+        window.clearInterval(clockIntervalRef.current);
+      }
+
       if (homeCanvas) {
+        const { innerWidth, innerHeight, devicePixelRatio } = window;
+
         homeCanvas.width = innerWidth * devicePixelRatio;
         homeCanvas.height = innerHeight * devicePixelRatio;
 
@@ -109,18 +115,24 @@ export function Late() {
     };
 
     createHome();
+
+    window.addEventListener('resize', createHome);
+
+    return () => {
+      window.removeEventListener('resize', createHome);
+    };
   }, []);
 
   const catCanvasRef = useRef<HTMLCanvasElement>(null);
   const catRef = useRef<Cat | null>(null);
 
-  useDebouncedResize(() => {
-    const { innerWidth, innerHeight, devicePixelRatio } = window;
-
+  useEffect(() => {
     const adoptCat = () => {
       const catCanvas = catCanvasRef.current;
 
       if (catCanvas) {
+        const { innerWidth, innerHeight, devicePixelRatio } = window;
+
         catCanvas.width = innerWidth * devicePixelRatio;
         catCanvas.height = innerHeight * devicePixelRatio;
 
@@ -133,6 +145,12 @@ export function Late() {
     };
 
     adoptCat();
+
+    window.addEventListener('resize', adoptCat);
+
+    return () => {
+      window.removeEventListener('resize', adoptCat);
+    };
   }, []);
 
   const { grayscaleFlash, outdoorFlash, indoorFlash, flashSequence } =
@@ -176,7 +194,7 @@ export function Late() {
       outdoorFlash.stop();
       indoorFlash.stop();
     };
-  }, []);
+  }, [flashSequence, grayscaleFlash, indoorFlash, outdoorFlash]);
 
   return (
     <MotionBackground animate={grayscaleFlash} tw="cursor-pointer">

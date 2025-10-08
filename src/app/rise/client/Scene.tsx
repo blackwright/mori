@@ -1,19 +1,27 @@
-import { useFrame, useThree } from '@react-three/fiber';
-import { useLayoutEffect, useMemo, useRef } from 'react';
-import { Mesh, Vector3, type BoxGeometry, type ShaderMaterial } from 'three';
 import {
   clampNumberRange,
   type Clamp,
   type ClampRanges,
 } from '@/utils/numbers';
+import { useFrame, useThree } from '@react-three/fiber';
+import { useLayoutEffect, useRef } from 'react';
+import { Mesh, Vector3, type BoxGeometry, type ShaderMaterial } from 'three';
 import { shader } from './shaders';
 
 const INCLINATION = 0.47;
 const AZIMUTH = 0.25;
 const MAX_Y_POSITION = 0.4;
-const MIN_Y_POSITION = -MAX_Y_POSITION / 9;
-const MAX_EXPOSURE = 0.5;
+const MIN_Y_POSITION = 0.05;
+const MAX_EXPOSURE = 0.75;
 const MIN_EXPOSURE = 0.01;
+
+const THETA = Math.PI * (INCLINATION - 0.5);
+const PHI = 2 * Math.PI * (AZIMUTH - 0.5);
+const LIGHT_POSITION = new Vector3(
+  Math.cos(PHI),
+  MAX_Y_POSITION,
+  Math.sin(PHI) * Math.cos(THETA),
+);
 
 const sinRange: Clamp = [1, -1];
 
@@ -32,19 +40,8 @@ export function Scene() {
 
   const meshRef = useRef<Mesh<BoxGeometry, ShaderMaterial> | null>(null);
 
-  const lightPosition = useMemo(() => {
-    const theta = Math.PI * (INCLINATION - 0.5);
-    const phi = 2 * Math.PI * (AZIMUTH - 0.5);
-
-    return new Vector3(
-      Math.cos(phi),
-      MAX_Y_POSITION,
-      Math.sin(phi) * Math.cos(theta),
-    );
-  }, []);
-
   useLayoutEffect(() => {
-    meshRef.current?.material.uniforms.lightPosition.value.copy(lightPosition);
+    meshRef.current?.material.uniforms.lightPosition.value.copy(LIGHT_POSITION);
 
     meshRef.current?.scale.setScalar(450_000);
 
@@ -54,14 +51,14 @@ export function Scene() {
   useFrame((state) => {
     const sinValue = Math.sin(state.clock.getElapsedTime());
 
-    lightPosition.y = clampNumberRange(sinValue, cosToPositionYClamp);
+    LIGHT_POSITION.y = clampNumberRange(sinValue, cosToPositionYClamp);
 
     state.gl.toneMappingExposure = clampNumberRange(
       sinValue,
       cosToExposureClamp,
     );
 
-    meshRef.current?.material.uniforms.lightPosition.value.copy(lightPosition);
+    meshRef.current?.material.uniforms.lightPosition.value.copy(LIGHT_POSITION);
   });
 
   return (

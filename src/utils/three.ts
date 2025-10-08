@@ -16,5 +16,5 @@ export function usePauseOnHide(clock: Clock) {
     return () => {
       document.removeEventListener('visibilitychange', onVisibilityChange);
     };
-  }, [clock]);
+  }, [onVisibilityChange]);
 }

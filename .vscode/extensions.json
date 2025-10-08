@@ -2,6 +2,7 @@
   "recommendations": [
     "esbenp.prettier-vscode",
     "bradlc.vscode-tailwindcss",
-    "clinyong.vscode-css-modules"
+    "clinyong.vscode-css-modules",
+    "dbaeumer.vscode-eslint"
   ]
 }

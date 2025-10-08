@@ -142,9 +142,9 @@ export function DuneIpsum({ initialText }: Props) {
             </p>
             <p>
               Finally, particles are rendered by a vertex shader utilizing the
-              position values, while the "animation" is accomplished with a
-              fragment shader that either paints or discards pixels based on
-              elapsed time.
+              position values, while the &quot;animation&quot; is accomplished
+              with a fragment shader that either paints or discards pixels based
+              on elapsed time.
             </p>
           </Drawer>
         )}

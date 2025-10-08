@@ -85,7 +85,7 @@ export function zalgoize(text: string, intensity: number): string {
 
   for (let char of text) {
     if (Math.random() < intensity / 10) {
-      let marksCount = 1 + Math.floor((Math.random() * intensity) / 2);
+      const marksCount = 1 + Math.floor((Math.random() * intensity) / 2);
 
       for (let i = 0; i < marksCount; i++) {
         const set = [zalgoUp, zalgoDown, zalgoMiddle][

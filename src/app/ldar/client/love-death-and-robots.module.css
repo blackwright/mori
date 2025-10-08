@@ -10,17 +10,8 @@
   font-style: normal;
 }
 
-.root {
-  background-color: #010010;
-}
-
 .slotWindow {
   width: 300px;
   height: 100px;
   font-family: 'ldr-ofer-michael';
-}
-
-.handle {
-  width: 40px;
-  height: 40px;
 }

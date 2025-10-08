@@ -397,29 +397,30 @@ export default function Cogitator() {
         {areDetailsOpen && (
           <Drawer>
             <p>
-              A Chat GPT-style terminal interface that emulates an "imperial
-              cogitator" from Warhammer 40K.
+              A Chat GPT-style terminal interface that emulates an
+              &quot;imperial cogitator&quot; from Warhammer 40K.
             </p>
             <p>Ask it about itself, the setting, or lore about the universe.</p>
             <p>
-              Be warned — you're on a ship that was supposed to have been lost
-              centuries ago. Nudging this cogitator toward heresy may result in
-              non-standard behavior.
+              Be warned — you&apos;re on a ship that was supposed to have been
+              lost centuries ago. Nudging this cogitator toward heresy may
+              result in non-standard behavior.
             </p>
             <p>
               For example, you might upset it if you wrote something borderline
-              heretical like "Xenos aren't so bad." To really rile it up, you
-              could type something outright blasphemous, like "The emperor is a
-              rotting corpse," although that would be crazy-talk because
-              everyone knows he's the one true golden god.
+              heretical like &quot;Xenos aren&apos;t so bad.&quot; To really
+              rile it up, you could type something outright blasphemous, like
+              &quot;The emperor is a rotting corpse,&quot; although that would
+              be crazy-talk because everyone knows he&apos;s the one true golden
+              god.
             </p>
             <p>
               Uses gpt-4o with a prompt that provides backstory and restricts
               output to be lore-friendly. The model classifies messages based on
-              the user's (non-)adherence to imperial doctrine as a level between
-              0 and 9, returning each message with a control character at the
-              beginning of the response so that the UI can apply styles while
-              streaming.
+              the user&apos;s (non-)adherence to imperial doctrine as a level
+              between 0 and 9, returning each message with a control character
+              at the beginning of the response so that the UI can apply styles
+              while streaming.
             </p>
           </Drawer>
         )}

@@ -40,7 +40,7 @@ export class Writer {
     this.ctx = canvas.getContext('2d')!;
     this.options = { ...defaultOptions, ...options };
 
-    let scale = 1;
+    const scale = 1;
 
     this.ctx.scale(scale, scale);
     this.ctx.font = this.options.font;
@@ -60,7 +60,7 @@ export class Writer {
 
     const multiNewLineDelimiter = '\u200B';
     const fontSize = this.options.font.match(/\d+(px|em|%)/g)
-      ? +(this.options.font.match(/\d+(px|em|%)/g) as any)[0].match(/\d+/g)
+      ? +this.options.font.match(/\d+(px|em|%)/g)![0].match(/\d+/g)!
       : 18;
     const newLineIndexes: number[] = [];
     const textPos = { x: 0, y: 0 };
@@ -122,7 +122,7 @@ export class Writer {
     const drawText = () => {
       const skipLineOnMatch = multiNewLineDelimiter + ' ';
 
-      for (var i = 0; i < lines.length; i++) {
+      for (let i = 0; i < lines.length; i++) {
         textPos.y = parseInt(`${textPos.y}`) + lineHeight;
 
         if (lines[i] !== skipLineOnMatch) {
@@ -132,24 +132,27 @@ export class Writer {
     };
 
     const checkLength = (words: string[]) => {
-      var testString, tokenLen, sliced, leftover;
-
       words.forEach((word, index) => {
-        testString = '';
-        tokenLen = this.ctx.measureText(word).width;
+        let testString = '';
+        const tokenLen = this.ctx.measureText(word).width;
 
         if (tokenLen > MAX_TEXT_WIDTH) {
-          for (
-            var k = 0;
-            this.ctx.measureText(testString + word[k]).width <=
-              MAX_TEXT_WIDTH && k < word.length;
-            k++
-          ) {
-            testString += word[k];
-          }
+          // Find the maximum substring that fits within MAX_TEXT_WIDTH
+          const findFittingSubstring = () => {
+            let k = 0;
+            while (
+              k < word.length &&
+              this.ctx.measureText(testString + word[k]).width <= MAX_TEXT_WIDTH
+            ) {
+              testString += word[k];
+              k++;
+            }
+            return k;
+          };
 
-          sliced = word.slice(0, k);
-          leftover = word.slice(k);
+          const splitIndex = findFittingSubstring();
+          const sliced = word.slice(0, splitIndex);
+          const leftover = word.slice(splitIndex);
           words.splice(index, 1, sliced, leftover);
         }
       });
@@ -157,7 +160,7 @@ export class Writer {
 
     const breakText = (words: string[]) => {
       lines = [];
-      for (var i = 0, j = 0; i < words.length; j++) {
+      for (let i = 0, j = 0; i < words.length; j++) {
         lines[j] = '';
 
         if (this.options.lineBreak === 'auto') {
@@ -175,7 +178,7 @@ export class Writer {
               i++;
 
               if (this.options.allowNewLine) {
-                for (var k = 0; k < newLineIndexes.length; k++) {
+                for (let k = 0; k < newLineIndexes.length; k++) {
                   if (newLineIndexes[k] === i) {
                     j++;
                     lines[j] = '';
@@ -195,14 +198,14 @@ export class Writer {
 
     const wrap = () => {
       if (this.options.allowNewLine) {
-        var newLines = text.trim().split('\n');
-        for (var i = 0, idx = 0; i < newLines.length - 1; i++) {
+        const newLines = text.trim().split('\n');
+        for (let i = 0, idx = 0; i < newLines.length - 1; i++) {
           idx += newLines[i].trim().split(/\s+/).length;
           newLineIndexes.push(idx);
         }
       }
 
-      var words = text.trim().split(/\s+/);
+      const words = text.trim().split(/\s+/);
       checkLength(words);
       breakText(words);
 
@@ -217,7 +220,7 @@ export class Writer {
 
     const render = () => {
       if (this.options.sizeToFill) {
-        let wordsCount = text.trim().split(/\s+/).length;
+        const wordsCount = text.trim().split(/\s+/).length;
         let newFontSize = 0;
 
         do {
