@@ -13,7 +13,7 @@ export function Rise() {
     <FullScreenMain>
       <Canvas
         camera={{
-          position: [0, 0, 100],
+          position: [0, -20, 100],
           fov: 60,
           far: 200,
         }}

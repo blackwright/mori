@@ -3,7 +3,7 @@ import {
   type Clamp,
   type ClampRanges,
 } from '@/utils/numbers';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import { useLayoutEffect, useRef } from 'react';
 import { Mesh, Vector3, type BoxGeometry, type ShaderMaterial } from 'three';
 import { shader } from './shaders';
@@ -36,17 +36,13 @@ const cosToExposureClamp: ClampRanges = {
 };
 
 export function Scene() {
-  const { camera } = useThree();
-
   const meshRef = useRef<Mesh<BoxGeometry, ShaderMaterial> | null>(null);
 
   useLayoutEffect(() => {
     meshRef.current?.material.uniforms.lightPosition.value.copy(LIGHT_POSITION);
 
     meshRef.current?.scale.setScalar(450_000);
-
-    camera.lookAt(0, 20, 0);
-  }, [camera]);
+  }, []);
 
   useFrame((state) => {
     const sinValue = Math.sin(state.clock.getElapsedTime());
