@@ -1,4 +1,0 @@
-# https://github.com/vercel/next.js/issues/78813
-publicHoistPattern:
-  - '@next/eslint-plugin-next'
-  - 'eslint-plugin-react-hooks'
