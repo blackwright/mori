@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Drawer, FullScreenMain } from '@/components';
+import { Button, Drawer, FullScreenMain, LoadingIndicator } from '@/components';
 import { cn } from '@/utils/cn';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
@@ -22,7 +22,7 @@ const silkscreen = Silkscreen({
   weight: ['400'],
 });
 
-enum Status {
+enum UIStatus {
   VOX_CHANNELS,
   ASTROPATHIC_SIGNAL,
   WARP_INTERFERENCE,
@@ -42,33 +42,33 @@ export default function Cogitator() {
 
   const [areDetailsOpen] = useDetailsSearchParams();
 
-  const { messages, sendMessage, setMessages } = useChat({
+  const { messages, sendMessage, setMessages, status } = useChat({
     transport: new DefaultChatTransport({
       api: '/api/cogitator',
     }),
   });
 
-  const [status, setStatus] = useState<Status>(Status.VOX_CHANNELS);
+  const [uiStatus, setUIStatus] = useState<UIStatus>(UIStatus.VOX_CHANNELS);
 
-  const updateStatus = useCallback((newStatus: Status, ms = 88) => {
+  const updateStatus = useCallback((newStatus: UIStatus, ms = 88) => {
     setTimeout(() => {
-      setStatus(newStatus);
+      setUIStatus(newStatus);
     }, ms);
   }, []);
 
   const handleEnding = useCallback((endingState: 'streaming' | 'done') => {
     if (endingState === 'streaming') {
-      setStatus(Status.STREAMING_ENDING);
+      setUIStatus(UIStatus.STREAMING_ENDING);
     } else if (endingState === 'done') {
-      setStatus(Status.ENDING);
+      setUIStatus(UIStatus.ENDING);
     }
   }, []);
 
   useEffect(() => {
-    if (status === Status.RESTARTING_PROMPT) {
-      setStatus(Status.INITIAL_PROMPT);
+    if (uiStatus === UIStatus.RESTARTING_PROMPT) {
+      setUIStatus(UIStatus.INITIAL_PROMPT);
     }
-  }, [status]);
+  }, [uiStatus]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,7 +84,7 @@ export default function Cogitator() {
 
   const handleRestart = () => {
     setMessages([]);
-    setStatus(Status.RESTARTING_PROMPT);
+    setUIStatus(UIStatus.RESTARTING_PROMPT);
   };
 
   return (
@@ -184,34 +184,36 @@ export default function Cogitator() {
               <div className="text-sm text-green-500 md:text-lg">
                 <Typewriter
                   stagger={0.005}
-                  onComplete={() => updateStatus(Status.ASTROPATHIC_SIGNAL)}
+                  onComplete={() => updateStatus(UIStatus.ASTROPATHIC_SIGNAL)}
                 >
                   ++ Vox Channels Established ++
                 </Typewriter>
 
-                {status >= Status.ASTROPATHIC_SIGNAL && (
+                {uiStatus >= UIStatus.ASTROPATHIC_SIGNAL && (
                   <Typewriter
                     stagger={0.005}
                     onComplete={() =>
-                      updateStatus(Status.WARP_INTERFERENCE, 200)
+                      updateStatus(UIStatus.WARP_INTERFERENCE, 200)
                     }
                   >
                     ++ Astropathic Link Initialized ++
                   </Typewriter>
                 )}
 
-                {status >= Status.WARP_INTERFERENCE && (
+                {uiStatus >= UIStatus.WARP_INTERFERENCE && (
                   <Typewriter
-                    onComplete={() => updateStatus(Status.WARP_MONITORING)}
+                    onComplete={() => updateStatus(UIStatus.WARP_MONITORING)}
                     className="text-red-600/50"
                   >
                     -- Warp Interference Detected --
                   </Typewriter>
                 )}
 
-                {status >= Status.WARP_MONITORING && (
+                {uiStatus >= UIStatus.WARP_MONITORING && (
                   <Typewriter
-                    onComplete={() => updateStatus(Status.INITIAL_PROMPT, 200)}
+                    onComplete={() =>
+                      updateStatus(UIStatus.INITIAL_PROMPT, 200)
+                    }
                     className="text-red-600/50"
                   >
                     ::: Monitoring Data Exchange for Warp Contamination :::
@@ -223,10 +225,10 @@ export default function Cogitator() {
                 ref={scrollContainerRef}
                 className="flex flex-col gap-4 text-lg text-green-400"
               >
-                {status >= Status.INITIAL_PROMPT && (
+                {uiStatus >= UIStatus.INITIAL_PROMPT && (
                   <Typewriter
                     stagger={0.005}
-                    onComplete={() => updateStatus(Status.WAITING_FOR_USER)}
+                    onComplete={() => updateStatus(UIStatus.WAITING_FOR_USER)}
                     className="font-mono"
                   >
                     Awaiting Query...
@@ -240,16 +242,20 @@ export default function Cogitator() {
                     onEnd={handleEnding}
                   />
                 ))}
+
+                {status === 'submitted' && (
+                  <LoadingIndicator className="size-8" />
+                )}
               </div>
             </div>
 
-            {status >= Status.WAITING_FOR_USER && (
+            {uiStatus >= UIStatus.WAITING_FOR_USER && (
               <form
                 onSubmit={handleSubmit}
                 className="flex w-full shrink-0 items-center gap-4 border-2 border-white/25 bg-green-950 p-2 focus-within:outline-1 focus-within:outline-white/75"
               >
                 <span className="w-8 shrink-0 text-white">
-                  {status >= Status.STREAMING_ENDING ? (
+                  {uiStatus >= UIStatus.STREAMING_ENDING ? (
                     <Button
                       type="button"
                       onClick={handleRestart}
