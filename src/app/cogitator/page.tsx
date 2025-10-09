@@ -387,7 +387,7 @@ export default function Cogitator() {
 
         <div
           className={cn(
-            'pointer-events-none absolute top-0 left-0 z-20 h-screen w-screen select-none',
+            'pointer-events-none absolute top-0 left-0 z-20 h-dvh w-dvw select-none',
             styles.scanlines,
           )}
         />

@@ -68,7 +68,7 @@ export function PaleBlueDot() {
   }, [calculateDotPosition]);
 
   return (
-    <main className={cn('relative h-screen w-screen', styles.background)}>
+    <main className={cn('relative h-dvh w-dvw', styles.background)}>
       <Beam left="6%" width="13%" rotate="14deg" alpha={0.07} />
       <Beam left="22%" width="12%" rotate="12deg" alpha={0.08} />
       <Beam left="30%" width="12%" rotate="12deg" alpha={0.08} />

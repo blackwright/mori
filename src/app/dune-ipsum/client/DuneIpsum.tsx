@@ -22,6 +22,8 @@ type Props = {
 export function DuneIpsum({ initialText }: Props) {
   const [text, setText] = useState(initialText);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [isRendering, setIsRendering] = useState(true);
 
   const [incomingTextState, setIncomingTextState] = useState<TextState | null>(
@@ -76,11 +78,16 @@ export function DuneIpsum({ initialText }: Props) {
 
     setIsRendering(true);
 
-    setOutgoingTextState(incomingTextState);
-    setIncomingTextState(null);
+    try {
+      setOutgoingTextState(incomingTextState);
+      setIncomingTextState(null);
 
-    const newText = await write();
-    setText(newText);
+      setIsLoading(true);
+      const newText = await write();
+      setText(newText);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -116,7 +123,7 @@ export function DuneIpsum({ initialText }: Props) {
         <Controls
           text={text}
           onGenerate={handleGenerate}
-          disabled={isRendering}
+          isLoading={isLoading || isRendering}
         />
 
         <ImageData text={text} onChange={handleImageData} />

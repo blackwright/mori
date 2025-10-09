@@ -23,8 +23,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: calc(3rem - 1px);
-  height: calc(3rem - 1px);
-  background-color: var(--color-slate-900);
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+  background-color: var(--color-gray-950);
   border-radius: 9999px;
 }
