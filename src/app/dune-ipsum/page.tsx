@@ -7,7 +7,16 @@ export const metadata: Metadata = {
 };
 
 export default async function DuneIpsumPage() {
-  const initialText = await write();
+  let initialText = '';
+  let initialError = '';
 
-  return <DuneIpsum initialText={initialText} />;
+  try {
+    initialText = await write();
+  } catch (error) {
+    if (error instanceof Error) {
+      initialError = error.message;
+    }
+  }
+
+  return <DuneIpsum initialText={initialText} initialError={initialError} />;
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useDetailsSearchParams } from '@/app/hooks';
-import { Drawer, FullScreenMain } from '@/components';
+import { Drawer, ErrorMessage, FullScreenMain } from '@/components';
 import { Canvas } from '@react-three/fiber';
 import { AnimatePresence } from 'motion/react';
 import { Suspense, useCallback, useState } from 'react';
@@ -17,14 +17,17 @@ import { createIncomingTextGeometry } from './utils';
 
 type Props = {
   initialText: string;
+  initialError: string;
 };
 
-export function DuneIpsum({ initialText }: Props) {
+export function DuneIpsum({ initialText, initialError }: Props) {
   const [text, setText] = useState(initialText);
 
   const [isLoading, setIsLoading] = useState(false);
 
   const [isRendering, setIsRendering] = useState(true);
+
+  const [errorMessage, setErrorMessage] = useState(initialError);
 
   const [incomingTextState, setIncomingTextState] = useState<TextState | null>(
     null,
@@ -76,6 +79,7 @@ export function DuneIpsum({ initialText }: Props) {
       return;
     }
 
+    setErrorMessage('');
     setIsRendering(true);
 
     try {
@@ -85,6 +89,11 @@ export function DuneIpsum({ initialText }: Props) {
       setIsLoading(true);
       const newText = await write();
       setText(newText);
+    } catch (e) {
+      if (e instanceof Error) {
+        setErrorMessage(e.message);
+      }
+      setIsRendering(false);
     } finally {
       setIsLoading(false);
     }
@@ -129,8 +138,14 @@ export function DuneIpsum({ initialText }: Props) {
         <ImageData text={text} onChange={handleImageData} />
       </div>
 
+      {!!errorMessage && (
+        <ErrorMessage className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          {errorMessage}
+        </ErrorMessage>
+      )}
+
       <AnimatePresence>
-        {areDetailsOpen && (
+        {areDetailsOpen && !errorMessage && (
           <Drawer>
             <p>
               A Dune-themed lorem ipsum generator built with react-three-fiber.
