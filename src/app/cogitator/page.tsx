@@ -1,6 +1,12 @@
 'use client';
 
-import { Button, Drawer, FullScreenMain, LoadingIndicator } from '@/components';
+import {
+  Button,
+  Drawer,
+  ErrorMessage,
+  FullScreenMain,
+  LoadingIndicator,
+} from '@/components';
 import { cn } from '@/utils/cn';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
@@ -42,7 +48,7 @@ export default function Cogitator() {
 
   const [areDetailsOpen] = useDetailsSearchParams();
 
-  const { messages, sendMessage, setMessages, status } = useChat({
+  const { messages, sendMessage, setMessages, status, error } = useChat({
     transport: new DefaultChatTransport({
       api: '/api/cogitator',
     }),
@@ -92,7 +98,7 @@ export default function Cogitator() {
       <div
         className={cn(
           silkscreen.className,
-          'pt-12 text-xs tracking-wider text-white/85 select-none md:p-16 md:text-sm',
+          'pt-12 text-xs tracking-wider text-white/85 select-none md:p-8 md:text-sm lg:p-16',
           styles.cogitator,
           styles.crt,
         )}
@@ -179,8 +185,8 @@ export default function Cogitator() {
             </div>
           </div>
 
-          <div className="flex min-h-0 grow flex-col gap-4 p-4 md:p-8">
-            <div className="flex min-h-0 flex-col gap-4 overflow-auto md:ml-14">
+          <div className="flex min-h-0 grow flex-col gap-6 p-4 md:p-8">
+            <div className="flex min-h-0 flex-col gap-4 overflow-auto">
               <div className="text-sm text-green-500 md:text-lg">
                 <Typewriter
                   stagger={0.005}
@@ -243,9 +249,15 @@ export default function Cogitator() {
                   />
                 ))}
 
-                {status === 'submitted' && (
+                {status === 'submitted' ? (
                   <LoadingIndicator className="size-8" />
-                )}
+                ) : error ? (
+                  <ErrorMessage>
+                    By the Omnissiah&apos;s will, your request cannot be
+                    fulfilled. The machine spirits require appeasement:{' '}
+                    {error.message}
+                  </ErrorMessage>
+                ) : null}
               </div>
             </div>
 
@@ -416,9 +428,8 @@ export default function Cogitator() {
               For example, you might upset it if you wrote something borderline
               heretical like &quot;Xenos aren&apos;t so bad.&quot; To really
               rile it up, you could type something outright blasphemous, like
-              &quot;The emperor is a rotting corpse,&quot; although that would
-              be crazy-talk because everyone knows he&apos;s the one true golden
-              god.
+              &quot;The Emperor is a rotting corpse,&quot; even though everyone
+              knows He&apos;s the one true golden god.
             </p>
             <p>
               Uses gpt-4o with a prompt that provides backstory and restricts
