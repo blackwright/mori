@@ -4,13 +4,13 @@ import { useDetailsSearchParams } from '@/app/hooks';
 import { Drawer, ErrorMessage, FullScreenMain } from '@/components';
 import { Canvas } from '@react-three/fiber';
 import { AnimatePresence } from 'motion/react';
-import { Suspense, useCallback, useState } from 'react';
+import { Suspense, useCallback, useReducer } from 'react';
 import { MathUtils } from 'three';
 import { write } from '../actions';
+import { reducer } from './reducer';
 import { Incoming } from './scene/text/Incoming';
 import { Outgoing } from './scene/text/Outgoing';
 import { Wind } from './scene/wind';
-import { type TextState } from './types';
 import { Controls } from './ui/controls';
 import { ImageData } from './ui/image-data';
 import { createIncomingTextGeometry } from './utils';
@@ -21,21 +21,14 @@ type Props = {
 };
 
 export function DuneIpsum({ initialText, initialError }: Props) {
-  const [text, setText] = useState(initialText);
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [isRendering, setIsRendering] = useState(true);
-
-  const [errorMessage, setErrorMessage] = useState(initialError);
-
-  const [incomingTextState, setIncomingTextState] = useState<TextState | null>(
-    null,
-  );
-
-  const [outgoingTextState, setOutgoingTextState] = useState<TextState | null>(
-    null,
-  );
+  const [state, dispatch] = useReducer(reducer, {
+    text: initialText,
+    isLoading: false,
+    isRendering: true,
+    errorMessage: initialError,
+    incomingTextState: null,
+    outgoingTextState: null,
+  });
 
   const [areDetailsOpen] = useDetailsSearchParams();
 
@@ -61,41 +54,32 @@ export function DuneIpsum({ initialText, initialError }: Props) {
 
       const position = Float32Array.from(pointCoords);
 
-      setIncomingTextState((prev) => ({
-        key: prev?.key ?? 0 + 1,
-        ...createIncomingTextGeometry(position),
-      }));
+      dispatch({
+        type: 'SET_INCOMING_TEXT',
+        payload: createIncomingTextGeometry(position),
+      });
     },
     [],
   );
 
   const handleComplete = useCallback(() => {
-    setIsRendering(false);
-    setOutgoingTextState(null);
+    dispatch({ type: 'COMPLETE_RENDERING' });
   }, []);
 
   const handleGenerate = async () => {
-    if (isRendering) {
+    if (state.isRendering) {
       return;
     }
 
-    setErrorMessage('');
-    setIsRendering(true);
+    dispatch({ type: 'START_GENERATION' });
 
     try {
-      setOutgoingTextState(incomingTextState);
-      setIncomingTextState(null);
-
-      setIsLoading(true);
       const newText = await write();
-      setText(newText);
+      dispatch({ type: 'GENERATION_SUCCESS', payload: newText });
     } catch (e) {
       if (e instanceof Error) {
-        setErrorMessage(e.message);
+        dispatch({ type: 'GENERATION_ERROR', payload: e.message });
       }
-      setIsRendering(false);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -107,45 +91,45 @@ export function DuneIpsum({ initialText, initialError }: Props) {
         resize={{ scroll: true, debounce: { scroll: 50, resize: 0 } }}
       >
         <Suspense fallback={null}>
-          {incomingTextState && (
+          {state.incomingTextState && (
             <Incoming
-              key={`incoming-${incomingTextState.key}`}
-              geometry={incomingTextState.geometry}
+              key={`incoming-${state.incomingTextState.key}`}
+              geometry={state.incomingTextState.geometry}
               incomingDelay={2}
-              maxVisibleTime={incomingTextState.maxVisibleTime}
+              maxVisibleTime={state.incomingTextState.maxVisibleTime}
               onComplete={handleComplete}
             />
           )}
 
-          {outgoingTextState && (
+          {state.outgoingTextState && (
             <Outgoing
-              key={`outgoing-${outgoingTextState.key}`}
-              geometry={outgoingTextState.geometry}
+              key={`outgoing-${state.outgoingTextState.key}`}
+              geometry={state.outgoingTextState.geometry}
             />
           )}
 
-          <Wind isRendering={isRendering} />
+          <Wind isRendering={state.isRendering} />
         </Suspense>
       </Canvas>
 
       <div className="absolute top-0 left-0 flex h-full w-full flex-col pb-6">
         <Controls
-          text={text}
+          text={state.text}
           onGenerate={handleGenerate}
-          isLoading={isLoading || isRendering}
+          isLoading={state.isLoading || state.isRendering}
         />
 
-        <ImageData text={text} onChange={handleImageData} />
+        <ImageData text={state.text} onChange={handleImageData} />
       </div>
 
-      {!!errorMessage && (
+      {!!state.errorMessage && (
         <ErrorMessage className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          {errorMessage}
+          {state.errorMessage}
         </ErrorMessage>
       )}
 
       <AnimatePresence>
-        {areDetailsOpen && !errorMessage && (
+        {areDetailsOpen && !state.errorMessage && (
           <Drawer>
             <p>
               A Dune-themed lorem ipsum generator built with react-three-fiber.
