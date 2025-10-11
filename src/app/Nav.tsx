@@ -75,10 +75,10 @@ export function Nav() {
                   <Image
                     src={route.img}
                     alt={route.title}
-                    style={{ objectFit: 'cover' }}
                     priority
                     fill
                     sizes="(max-width: 1279px) 100vw, 50vw"
+                    className="object-cover"
                   />
                   <h2 className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded border border-slate-100 p-4 text-2xl text-white opacity-0 transition-all group-hover:bg-slate-950/75 group-hover:opacity-100">
                     {route.title}
