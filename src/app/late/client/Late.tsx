@@ -197,7 +197,7 @@ export function Late() {
   }, [flashSequence, grayscaleFlash, indoorFlash, outdoorFlash]);
 
   return (
-    <MotionBackground animate={grayscaleFlash} tw="cursor-pointer">
+    <MotionBackground animate={grayscaleFlash} className="cursor-pointer">
       <canvas
         className={cn(fullScreenStyle, '[filter:blur(2px)]')}
         ref={cityCanvasRef}
