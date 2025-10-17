@@ -1,4 +1,3 @@
-import { cn } from '@/utils/cn';
 import { interpolateColors } from '@/utils/colors';
 import { type UIMessage } from 'ai';
 import { Fragment, useEffect, useMemo, useRef } from 'react';
@@ -99,7 +98,7 @@ function ParsedText({
   }, [level, state, onEnd]);
 
   return (
-    <span className={cn('font-mono')} style={{ color }}>
+    <span className="font-mono" style={{ color }}>
       {outputText}
     </span>
   );
