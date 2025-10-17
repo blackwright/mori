@@ -3,18 +3,18 @@ import { MenuButton } from './MenuButton';
 
 export default function AboutPage() {
   return (
-    <>
-      <div className="mx-auto mt-12 flex [max-width:650px] flex-col items-start justify-center gap-6 p-4 text-xl leading-relaxed">
+    <div className="mx-auto h-dvh [max-width:650px] overflow-auto py-16">
+      <div className="mx-auto flex flex-col gap-6 p-4 text-xl leading-relaxed">
         <p>
           I&apos;m Jerry Gao, a front-end software engineer in New York. I enjoy
           building interactive UIs and the work that goes into maintaining a
           great developer experience.
         </p>
 
-        <div className="my-4 flex w-full rounded-lg bg-zinc-800 px-10 py-6">
+        <div className="my-4 flex w-full rounded-lg bg-zinc-800 px-4 py-6 lg:px-10">
           <div className="mx-auto">
             <p className="flex items-center gap-3">
-              <span>This site is a collection of code experiments</span>
+              <span>This site is a collection of code experiments:</span>
               <span>
                 <MenuButton />
               </span>
@@ -60,6 +60,6 @@ export default function AboutPage() {
       </div>
 
       <AboutDetails />
-    </>
+    </div>
   );
 }
