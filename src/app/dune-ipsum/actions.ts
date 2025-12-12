@@ -2,7 +2,7 @@
 
 import { openai } from '@ai-sdk/openai';
 import { generateText } from 'ai';
-import SYSTEM_PROMPT from 'raw-loader!./prompt.txt';
+import SYSTEM_PROMPT from './prompt.txt';
 
 const SUBJECTS = [
   'Abomination',
