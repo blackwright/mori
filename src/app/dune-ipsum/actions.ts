@@ -71,12 +71,12 @@ export async function write(): Promise<string> {
   const randomSubject = SUBJECTS[Math.floor(Math.random() * SUBJECTS.length)];
 
   const { text } = await generateText({
-    model: openai('gpt-4o'),
+    model: openai('gpt-4.1-mini'),
     system: SYSTEM_PROMPT.replace('{{subject}}', randomSubject),
     messages: [
       {
         role: 'user',
-        content: `Pick a subject randomly and write 1 sentence.`,
+        content: `Write 1 sentence`,
       },
     ],
     temperature: 1,
